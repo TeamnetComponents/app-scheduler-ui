@@ -1,0 +1,1 @@
+var schedulerConstants=angular.module('schedulerConstants',[]);

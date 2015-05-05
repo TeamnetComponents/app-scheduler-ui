@@ -1,0 +1,15 @@
+{
+    "moduleName": "scheduler",
+    "resources":[
+        "scheduler/styles/scheduler.css",
+        "scheduler/scripts/schedulerModule.js",
+        "scheduler/scripts/controllers/schedulerControllers.js",
+        "scheduler/scripts/controllers/schedulerMainController.js",
+        "scheduler/scripts/services/schedulerServices.js",
+        "scheduler/scripts/services/schedulerMainService.js",
+        "scheduler/scripts/directives/schedulerDirectives.js",
+        "scheduler/scripts/directives/schedulerMainDirective.js",
+        "scheduler/scripts/constants/schedulerConstants.js",
+        "scheduler/scripts/constants/SCHEDULER.js"
+    ]
+}

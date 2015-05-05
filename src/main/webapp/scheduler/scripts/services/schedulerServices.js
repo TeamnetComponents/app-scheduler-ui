@@ -1,0 +1,1 @@
+var schedulerServices=angular.module('schedulerServices',[]);
