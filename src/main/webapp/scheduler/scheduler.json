@@ -1,6 +1,6 @@
 {
     "moduleName": "scheduler",
-    "resources":[
+    "resources": [
         "scheduler/styles/scheduler.css",
         "scheduler/scripts/schedulerModule.js",
         "scheduler/scripts/controllers/schedulerControllers.js",
@@ -10,6 +10,26 @@
         "scheduler/scripts/directives/schedulerDirectives.js",
         "scheduler/scripts/directives/schedulerMainDirective.js",
         "scheduler/scripts/constants/schedulerConstants.js",
-        "scheduler/scripts/constants/SCHEDULER.js"
+        "scheduler/scripts/constants/SCHEDULER.js",
+        "scheduler/scripts/controllers/schedule/scheduleControllers.js",
+        "scheduler/scripts/services/schedule/scheduleService.js",
+        "scheduler/scripts/controllers/timeUnit/timeUnitControllers.js",
+        "scheduler/scripts/services/timeUnit/timeUnitService.js",
+        "scheduler/scripts/controllers/timeInterval/timeIntervalControllers.js",
+        "scheduler/scripts/services/timeInterval/timeIntervalService.js",
+        "scheduler/scripts/controllers/dayOfWeek/dayOfWeekControllers.js",
+        "scheduler/scripts/services/dayOfWeek/dayOfWeekService.js",
+        "scheduler/scripts/controllers/month/monthControllers.js",
+        "scheduler/scripts/services/month/monthService.js",
+        "scheduler/scripts/controllers/recurrentYear/recurrentYearControllers.js",
+        "scheduler/scripts/services/recurrentYear/recurrentYearService.js",
+        "scheduler/scripts/controllers/recurrentDay/recurrentDayControllers.js",
+        "scheduler/scripts/services/recurrentDay/recurrentDayService.js",
+        "scheduler/scripts/controllers/recurrentHour/recurrentHourControllers.js",
+        "scheduler/scripts/services/recurrentHour/recurrentHourService.js",
+        "scheduler/scripts/controllers/recurrentMinute/recurrentMinuteControllers.js",
+        "scheduler/scripts/services/recurrentMinute/recurrentMinuteService.js",
+        "scheduler/scripts/controllers/recurrentTimeUnit/recurrentTimeUnitControllers.js",
+        "scheduler/scripts/services/recurrentTimeUnit/recurrentTimeUnitService.js"
     ]
 }
