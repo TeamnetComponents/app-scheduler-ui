@@ -44,38 +44,6 @@ schedulerModule
               }
            });
     $routeProvider
-           .when('/recurrentYear', {
-              templateUrl: 'scheduler/views/recurrentYear/recurrentYearWrapper.html',
-              controller: 'RecurrentYearController',
-              access: {
-                  authorizedModules: [AUTH_BOOTSTRAP.all]
-              }
-           });
-    $routeProvider
-           .when('/recurrentDay', {
-              templateUrl: 'scheduler/views/recurrentDay/recurrentDayWrapper.html',
-              controller: 'RecurrentDayController',
-              access: {
-                  authorizedModules: [AUTH_BOOTSTRAP.all]
-              }
-           });
-    $routeProvider
-           .when('/recurrentHour', {
-              templateUrl: 'scheduler/views/recurrentHour/recurrentHourWrapper.html',
-              controller: 'RecurrentHourController',
-              access: {
-                  authorizedModules: [AUTH_BOOTSTRAP.all]
-              }
-           });
-    $routeProvider
-           .when('/recurrentMinute', {
-              templateUrl: 'scheduler/views/recurrentMinute/recurrentMinuteWrapper.html',
-              controller: 'RecurrentMinuteController',
-              access: {
-                  authorizedModules: [AUTH_BOOTSTRAP.all]
-              }
-           });
-    $routeProvider
            .when('/recurrentTimeUnit', {
               templateUrl: 'scheduler/views/recurrentTimeUnit/recurrentTimeUnitWrapper.html',
               controller: 'RecurrentTimeUnitController',

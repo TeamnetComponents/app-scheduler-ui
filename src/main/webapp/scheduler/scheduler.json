@@ -21,14 +21,6 @@
         "scheduler/scripts/services/dayOfWeek/dayOfWeekService.js",
         "scheduler/scripts/controllers/month/monthControllers.js",
         "scheduler/scripts/services/month/monthService.js",
-        "scheduler/scripts/controllers/recurrentYear/recurrentYearControllers.js",
-        "scheduler/scripts/services/recurrentYear/recurrentYearService.js",
-        "scheduler/scripts/controllers/recurrentDay/recurrentDayControllers.js",
-        "scheduler/scripts/services/recurrentDay/recurrentDayService.js",
-        "scheduler/scripts/controllers/recurrentHour/recurrentHourControllers.js",
-        "scheduler/scripts/services/recurrentHour/recurrentHourService.js",
-        "scheduler/scripts/controllers/recurrentMinute/recurrentMinuteControllers.js",
-        "scheduler/scripts/services/recurrentMinute/recurrentMinuteService.js",
         "scheduler/scripts/controllers/recurrentTimeUnit/recurrentTimeUnitControllers.js",
         "scheduler/scripts/services/recurrentTimeUnit/recurrentTimeUnitService.js"
     ]

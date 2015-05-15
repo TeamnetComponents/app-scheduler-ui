@@ -1,24 +1,16 @@
 'use strict';
 schedulerControllers
-    .controller('ScheduleController', function ($scope,AppGridConstants, Schedule, TimeInterval, Month, DayOfWeek, RecurrentYear, RecurrentDay, RecurrentHour, RecurrentMinute, RecurrentTimeUnit) {
+    .controller('ScheduleController', function ($scope,AppGridConstants, Schedule, TimeInterval, Month, DayOfWeek, RecurrentTimeUnit) {
 
         
         $scope.timeIntervals = TimeInterval.query();
         $scope.months = Month.query();
         $scope.dayOfWeeks = DayOfWeek.query();
-        $scope.recurrentYears = RecurrentYear.query();
-        $scope.recurrentDays = RecurrentDay.query();
-        $scope.recurrentHours = RecurrentHour.query();
-        $scope.recurrentMinutes = RecurrentMinute.query();
         $scope.recurrentTimeUnits = RecurrentTimeUnit.query();
         
         $scope.showTimeInterval = false;
         $scope.showMonth = false;
         $scope.showDayOfWeek = false;
-        $scope.showRecurrentYear = false;
-        $scope.showRecurrentDay = false;
-        $scope.showRecurrentHour = false;
-        $scope.showRecurrentMinute = false;
         $scope.showRecurrentTimeUnit = false;
         $scope.actionEvent="scheduleGrid";
         $scope.showEditBtn = true;
@@ -50,10 +42,6 @@ schedulerControllers
                 
                 $scope.showMonth = false;
                 $scope.showDayOfWeek = false;
-                $scope.showRecurrentYear = false;
-                $scope.showRecurrentDay = false;
-                $scope.showRecurrentHour = false;
-                $scope.showRecurrentMinute = false;
                 $scope.showRecurrentTimeUnit = false;
             }
             if(grid == 'month'){
@@ -61,10 +49,6 @@ schedulerControllers
                 
                 $scope.showTimeInterval = false;
                 $scope.showDayOfWeek = false;
-                $scope.showRecurrentYear = false;
-                $scope.showRecurrentDay = false;
-                $scope.showRecurrentHour = false;
-                $scope.showRecurrentMinute = false;
                 $scope.showRecurrentTimeUnit = false;
             }
             if(grid == 'dayOfWeek'){
@@ -72,54 +56,6 @@ schedulerControllers
                 
                 $scope.showTimeInterval = false;
                 $scope.showMonth = false;
-                $scope.showRecurrentYear = false;
-                $scope.showRecurrentDay = false;
-                $scope.showRecurrentHour = false;
-                $scope.showRecurrentMinute = false;
-                $scope.showRecurrentTimeUnit = false;
-            }
-            if(grid == 'recurrentYear'){
-                $scope.showRecurrentYear = true;
-                
-                $scope.showTimeInterval = false;
-                $scope.showMonth = false;
-                $scope.showDayOfWeek = false;
-                $scope.showRecurrentDay = false;
-                $scope.showRecurrentHour = false;
-                $scope.showRecurrentMinute = false;
-                $scope.showRecurrentTimeUnit = false;
-            }
-            if(grid == 'recurrentDay'){
-                $scope.showRecurrentDay = true;
-                
-                $scope.showTimeInterval = false;
-                $scope.showMonth = false;
-                $scope.showDayOfWeek = false;
-                $scope.showRecurrentYear = false;
-                $scope.showRecurrentHour = false;
-                $scope.showRecurrentMinute = false;
-                $scope.showRecurrentTimeUnit = false;
-            }
-            if(grid == 'recurrentHour'){
-                $scope.showRecurrentHour = true;
-                
-                $scope.showTimeInterval = false;
-                $scope.showMonth = false;
-                $scope.showDayOfWeek = false;
-                $scope.showRecurrentYear = false;
-                $scope.showRecurrentDay = false;
-                $scope.showRecurrentMinute = false;
-                $scope.showRecurrentTimeUnit = false;
-            }
-            if(grid == 'recurrentMinute'){
-                $scope.showRecurrentMinute = true;
-                
-                $scope.showTimeInterval = false;
-                $scope.showMonth = false;
-                $scope.showDayOfWeek = false;
-                $scope.showRecurrentYear = false;
-                $scope.showRecurrentDay = false;
-                $scope.showRecurrentHour = false;
                 $scope.showRecurrentTimeUnit = false;
             }
             if(grid == 'recurrentTimeUnit'){
@@ -128,10 +64,6 @@ schedulerControllers
                 $scope.showTimeInterval = false;
                 $scope.showMonth = false;
                 $scope.showDayOfWeek = false;
-                $scope.showRecurrentYear = false;
-                $scope.showRecurrentDay = false;
-                $scope.showRecurrentHour = false;
-                $scope.showRecurrentMinute = false;
             }
         };
 
@@ -146,7 +78,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.schedule = {active: null, recurrent: null, cron: null, startTime: null, endTime: null, repetitions: null, years: null, daysInMonth: null, hours: null, minutes: null, id: null};
+            $scope.schedule = {active: null, recurrent: null, cron: null, startTime: null, endTime: null, repetitions: null, id: null};
             $scope.searchTerms = [];
             $scope.showDetails=false;
         };
