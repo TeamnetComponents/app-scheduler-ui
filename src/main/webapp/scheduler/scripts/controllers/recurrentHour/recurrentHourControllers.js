@@ -35,6 +35,8 @@ schedulerControllers
 
         $scope.clear = function () {
             $scope.recurrentHour = {hour: null, id: null};
+            $scope.searchTerms = [];
+            $scope.showDetails=false;
         };
 
         $scope.showDelete = function (id) {
@@ -88,7 +90,10 @@ schedulerControllers
         $scope.showAdd = function(){
             $scope.clear();
             $scope.showCreateOrEdit = true;
-             $scope.showGrid = false;
+            $scope.showGrid = false;
+            if ($scope.schedule != null) {
+                $scope.recurrentHour.schedule = $scope.schedule;
+            }
         };
 
         $scope.showEdit = function(){

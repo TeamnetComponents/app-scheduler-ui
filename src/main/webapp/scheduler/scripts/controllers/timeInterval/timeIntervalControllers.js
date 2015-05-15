@@ -57,6 +57,8 @@ schedulerControllers
 
         $scope.clear = function () {
             $scope.timeInterval = {name: null, custom: null, intervalMillis: null, interval: null, id: null};
+            $scope.searchTerms = [];
+            $scope.showDetails=false;
         };
 
         $scope.showDelete = function (id) {
@@ -110,7 +112,10 @@ schedulerControllers
         $scope.showAdd = function(){
             $scope.clear();
             $scope.showCreateOrEdit = true;
-             $scope.showGrid = false;
+            $scope.showGrid = false;
+            if ($scope.timeUnit != null) {
+                $scope.timeInterval.timeUnit = $scope.timeUnit;
+            }
         };
 
         $scope.showEdit = function(){

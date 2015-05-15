@@ -147,6 +147,8 @@ schedulerControllers
 
         $scope.clear = function () {
             $scope.schedule = {active: null, recurrent: null, cron: null, startTime: null, endTime: null, repetitions: null, years: null, daysInMonth: null, hours: null, minutes: null, id: null};
+            $scope.searchTerms = [];
+            $scope.showDetails=false;
         };
 
         $scope.showDelete = function (id) {
@@ -200,7 +202,10 @@ schedulerControllers
         $scope.showAdd = function(){
             $scope.clear();
             $scope.showCreateOrEdit = true;
-             $scope.showGrid = false;
+            $scope.showGrid = false;
+            if ($scope.timeInterval != null) {
+                $scope.schedule.timeInterval = $scope.timeInterval;
+            }
         };
 
         $scope.showEdit = function(){

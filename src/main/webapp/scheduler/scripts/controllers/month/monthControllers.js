@@ -35,6 +35,8 @@ schedulerControllers
 
         $scope.clear = function () {
             $scope.month = {code: null, name: null, value: null, id: null};
+            $scope.searchTerms = [];
+            $scope.showDetails=false;
         };
 
         $scope.showDelete = function (id) {
@@ -88,7 +90,7 @@ schedulerControllers
         $scope.showAdd = function(){
             $scope.clear();
             $scope.showCreateOrEdit = true;
-             $scope.showGrid = false;
+            $scope.showGrid = false;
         };
 
         $scope.showEdit = function(){
