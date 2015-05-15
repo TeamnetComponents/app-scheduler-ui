@@ -1,0 +1,19 @@
+
+<div ng-if="showCreateOrEdit && showDetails">
+    <md-tabs md-selected="selectedIndex" flex>
+        
+        <md-tab label="schedule" md-on-select="redrawGrid('schedule')">
+             <div ng-if="showSchedule" include-static='scheduler/views/schedule/scheduleCrud.html'></div>
+        </md-tab>
+        
+    </md-tabs>
+</div>
+
+
+
+
+
+
+
+
+

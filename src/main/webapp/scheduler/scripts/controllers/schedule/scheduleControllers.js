@@ -1,17 +1,19 @@
 'use strict';
 schedulerControllers
-    .controller('ScheduleController', function ($scope,AppGridConstants, Schedule, TimeInterval, Month, DayOfWeek, RecurrentTimeUnit) {
+    .controller('ScheduleController', function ($scope,AppGridConstants, Schedule, TimeInterval, Month, DayOfWeek, RecurrentTimeUnit, SchedulableJob) {
 
         
         $scope.timeIntervals = TimeInterval.query();
         $scope.months = Month.query();
         $scope.dayOfWeeks = DayOfWeek.query();
         $scope.recurrentTimeUnits = RecurrentTimeUnit.query();
+        $scope.schedulableJobs = SchedulableJob.query();
         
         $scope.showTimeInterval = false;
         $scope.showMonth = false;
         $scope.showDayOfWeek = false;
         $scope.showRecurrentTimeUnit = false;
+        $scope.showSchedulableJob = false;
         $scope.actionEvent="scheduleGrid";
         $scope.showEditBtn = true;
         $scope.showCreateOrEdit = false;
@@ -43,6 +45,7 @@ schedulerControllers
                 $scope.showMonth = false;
                 $scope.showDayOfWeek = false;
                 $scope.showRecurrentTimeUnit = false;
+                $scope.showSchedulableJob = false;
             }
             if(grid == 'month'){
                 $scope.showMonth = true;
@@ -50,6 +53,7 @@ schedulerControllers
                 $scope.showTimeInterval = false;
                 $scope.showDayOfWeek = false;
                 $scope.showRecurrentTimeUnit = false;
+                $scope.showSchedulableJob = false;
             }
             if(grid == 'dayOfWeek'){
                 $scope.showDayOfWeek = true;
@@ -57,6 +61,7 @@ schedulerControllers
                 $scope.showTimeInterval = false;
                 $scope.showMonth = false;
                 $scope.showRecurrentTimeUnit = false;
+                $scope.showSchedulableJob = false;
             }
             if(grid == 'recurrentTimeUnit'){
                 $scope.showRecurrentTimeUnit = true;
@@ -64,6 +69,15 @@ schedulerControllers
                 $scope.showTimeInterval = false;
                 $scope.showMonth = false;
                 $scope.showDayOfWeek = false;
+                $scope.showSchedulableJob = false;
+            }
+            if(grid == 'schedulableJob'){
+                $scope.showSchedulableJob = true;
+                
+                $scope.showTimeInterval = false;
+                $scope.showMonth = false;
+                $scope.showDayOfWeek = false;
+                $scope.showRecurrentTimeUnit = false;
             }
         };
 
@@ -137,6 +151,9 @@ schedulerControllers
             $scope.showGrid = false;
             if ($scope.timeInterval != null) {
                 $scope.schedule.timeInterval = $scope.timeInterval;
+            }
+            if ($scope.schedulableJob != null) {
+                $scope.schedule.schedulableJob = $scope.schedulableJob;
             }
         };
 

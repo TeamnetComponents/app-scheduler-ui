@@ -22,6 +22,10 @@
         "scheduler/scripts/controllers/month/monthControllers.js",
         "scheduler/scripts/services/month/monthService.js",
         "scheduler/scripts/controllers/recurrentTimeUnit/recurrentTimeUnitControllers.js",
-        "scheduler/scripts/services/recurrentTimeUnit/recurrentTimeUnitService.js"
+        "scheduler/scripts/services/recurrentTimeUnit/recurrentTimeUnitService.js",
+        "scheduler/scripts/controllers/task/taskControllers.js",
+        "scheduler/scripts/services/task/taskService.js",
+        "scheduler/scripts/controllers/schedulableJob/schedulableJobControllers.js",
+        "scheduler/scripts/services/schedulableJob/schedulableJobService.js"
     ]
 }

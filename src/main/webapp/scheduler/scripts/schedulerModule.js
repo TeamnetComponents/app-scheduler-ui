@@ -52,6 +52,22 @@ schedulerModule
               }
            });
 
+    $routeProvider
+           .when('/task', {
+              templateUrl: 'scheduler/views/task/taskWrapper.html',
+              controller: 'TaskController',
+              access: {
+                  authorizedModules: [AUTH_BOOTSTRAP.all]
+              }
+           });
+    $routeProvider
+           .when('/schedulableJob', {
+              templateUrl: 'scheduler/views/schedulableJob/schedulableJobWrapper.html',
+              controller: 'SchedulableJobController',
+              access: {
+                  authorizedModules: [AUTH_BOOTSTRAP.all]
+              }
+           });
     //place some routes here
 
     });
