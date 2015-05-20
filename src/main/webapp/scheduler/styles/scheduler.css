@@ -31,3 +31,8 @@ section .md-button {
 md-tabs.md-default-theme md-tab {
     color: 	#000000;
 }
+
+/* Marian */
+.my-md-label {
+    margin-right : 20px;
+}

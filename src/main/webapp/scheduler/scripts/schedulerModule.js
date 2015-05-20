@@ -70,4 +70,12 @@ schedulerModule
            });
     //place some routes here
 
+        $routeProvider
+            .when('/scheduleOk', {
+                templateUrl: 'scheduler/views/scheduleOk/scheduleWrapper.html',
+                controller: 'ScheduleControllerOk',
+                access: {
+                    authorizedModules: [AUTH_BOOTSTRAP.all]
+                }
+            });
     });

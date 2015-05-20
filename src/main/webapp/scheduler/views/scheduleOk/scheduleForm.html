@@ -1,0 +1,188 @@
+<div ng-show="showCreateOrEdit">
+    <form name="formCreateOrEdit" role="form" ng-submit="createOrUpdate()">
+
+        <input type="hidden" name="id"
+               ng-model="schedule.id" readonly>
+
+        <div class="form-group">
+            <label class="my-md-label"> Select job : </label>
+            <md-select name="job_selector" ng-model="schedule.scheduledJob.id" placeholder="Job list" required>
+                <md-option ng-value="scheduledJob.id" ng-repeat="scheduledJob in scheduledJobs">
+                    {{ scheduledJob.id}}
+                </md-option>
+            </md-select>
+        </div>
+
+        <hr class="divider"/>
+
+        <div class="form-group">
+            <label class="my-md-label"> Job options : </label>
+
+            <md-input-container>
+                <md-checkbox class="md-primary" type="checkbox" name="schedule_active" ng-model="schedule.active"
+                             checked>
+                    Active
+                </md-checkbox>
+            </md-input-container>
+
+            <md-input-container>
+                <md-checkbox class="md-primary" type="checkbox" name="schedule_recurrent" ng-model="schedule.recurrent">
+                    Recurrent
+                </md-checkbox>
+            </md-input-container>
+        </div>
+
+        <hr class="divider"/>
+
+        <div class="form-group">
+            <div class="non-recurrent-job" ng-show="!schedule.recurrent">
+                <label class="my-md-label"> Execution options : </label>
+                <md-input-container style="width:30%">
+                    <label>StartTime</label>
+                    <input type="datetime-local" name="schedule_startTime"
+                           min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.startTime"
+                           ng-required="!schedule.recurrent">
+                </md-input-container>
+                <p ng-show="formCreateOrEdit.schedule_startTime.$invalid && !formCreateOrEdit.schedule_startTime.$pristine"
+                   class="alert-danger"> Execution date needs to be greater than current date!</p>
+
+            </div>
+
+            <div class="recurrent-job" ng-show="schedule.recurrent">
+                <label class="my-md-label"> Repetition options : </label>
+
+                <div layout="" layout-sm="column">
+
+                    <md-input-container style="width:33%; margin:5px;">
+                        <label>StartTime</label>
+                        <input type="datetime-local" name="schedule_startTime_rec"
+                               ng-model="schedule.startTime" ng-required="schedule.recurrent">
+                    </md-input-container>
+
+                    <md-input-container style="width:33%; margin:5px;">
+                        <label>EndTime(optional) </label>
+                        <input type="datetime-local" name="schedule_endTime"
+                               min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.endTime">
+                    </md-input-container>
+
+                    <md-input-container style="width:33%; margin:5px;">
+                        <label>Number of repetitions(optional)</label>
+                        <input type="number" name="schedule_repetitions" min="0" ng-model="schedule.repetitions">
+                    </md-input-container>
+                </div>
+
+                <p ng-show="formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine"
+                   class="alert-danger"> End date date needs to be greater than current date!</p>
+
+                <span class="my-md-label"> Select repetition type : </span>
+                <md-select name="job_selector" ng-model="selectedRepetitionType" placeholder="Repetition type"
+                           ng-change="changeRepetitionType()" ng-required="schedule.recurrent">
+                    <md-option ng-selected="repetitionType.id == 1" ng-value="repetitionType.id"
+                               ng-repeat="repetitionType in repetitionTypes">
+                        {{ repetitionType.name }}
+                    </md-option>
+                </md-select>
+            </div>
+        </div>
+        <hr class="divider"/>
+
+        <div class="form-group" ng-show="schedule.recurrent">
+            <div class="regular-intervals" ng-show="schedule.regularIntervals">
+                <label class="my-md-label"> Regular intervals options : </label>
+                <br>
+
+                <md-radio-group ng-model="selectedIntervalType" ng-change="changeIntervalType()"
+                                style="display : -webkit-inline-box">
+                    <md-radio-button class="md-primary" ng-value="intervalType.id"
+                                     ng-repeat="intervalType in intervalTypes">
+                        {{intervalType.name}}
+                    </md-radio-button>
+                </md-radio-group>
+
+                <br>
+
+                <div class="predefined_intervals" ng-show="schedule.predefinedIntervals">
+                    <span class="my-md-label"> Select interval : </span>
+                    <md-select ng-model="schedule.timeInterval.id" placeholder="Time interval list">
+                        <md-option ng-value="timeInterval.id" ng-repeat="timeInterval in timeIntervals">
+                            {{ timeInterval.name}}
+                        </md-option>
+                    </md-select>
+                </div>
+
+
+                <div class="custom_intervals" ng-include="'scheduler/views/timeInterval/timeIntervalForm.html'"
+                     ng-show="!schedule.predefinedIntervals"></div>
+            </div>
+
+
+            <div class="custom-fire-times" ng-show="!schedule.regularIntervals">
+                <label class="my-md-label"> Custom fire times options : </label>
+
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>month</label>
+                        <select size="12" class="form-control" multiple ng-model="schedule.months"
+                                ng-options="month as month.name for month in months track by month.id">
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <label>dayOfWeek</label>
+                        <select size="12" class="form-control" multiple ng-model="schedule.dayOfWeeks"
+                                ng-options="dayOfWeek as dayOfWeek.name for dayOfWeek in dayOfWeeks track by dayOfWeek.id">
+                        </select>
+                    </div>
+                    <div class="col-sm-2">.col-sm-4</div>
+                    <div class="col-sm-2">.col-sm-4</div>
+                    <div class="col-sm-2">.col-sm-4</div>
+                    <div class="col-sm-2">.col-sm-4</div>
+                </div>
+
+            </div>
+
+            <!--<md-input-container>
+                <label>Cron</label>
+                <input type="text" name="schedule_cron"
+                       ng-model="schedule.cron">
+            </md-input-container>-->
+        </div>
+
+
+        <br/><br/>
+        <br/><br/>
+
+        <button type="button" class="btn btn-default" ng-click="back()">
+            <span class="md-raised"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="formCreateOrEdit.$invalid" class="btn btn-default">
+            <span class="md-raised"></span>&nbsp;<span>Save</span>
+        </button>
+    </form>
+</div>
+
+<div>
+    <div class="modal fade" id="deleteScheduleConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="form" ng-submit="confirmDelete()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this row ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <section layout="row" layout-sm="column" layout-align="right">
+                            <md-button class="md-raised" data-dismiss="modal" ng-click="back()">Cancel
+                            </md-button>
+                            <md-button type="submit" class="md-raised" ng-disabled="form.$invalid">Delete
+                            </md-button>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

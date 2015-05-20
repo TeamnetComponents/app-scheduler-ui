@@ -1,0 +1,19 @@
+
+<div ng-if="showCreateOrEdit && showDetails">
+    <md-tabs md-selected="selectedIndex" flex>
+        
+        <md-tab label="recurrentTimeUnit" md-on-select="redrawGrid('recurrentTimeUnit')">
+             <div ng-if="showRecurrentTimeUnit" include-static='scheduler/views/recurrentTimeUnit/recurrentTimeUnitCrud.html'></div>
+        </md-tab>
+        
+    </md-tabs>
+</div>
+
+
+
+
+
+
+
+
+
