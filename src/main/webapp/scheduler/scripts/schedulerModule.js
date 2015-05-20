@@ -61,9 +61,9 @@ schedulerModule
               }
            });
     $routeProvider
-           .when('/schedulableJob', {
-              templateUrl: 'scheduler/views/schedulableJob/schedulableJobWrapper.html',
-              controller: 'SchedulableJobController',
+           .when('/scheduledJob', {
+              templateUrl: 'scheduler/views/scheduledJob/scheduledJobWrapper.html',
+              controller: 'ScheduledJobController',
               access: {
                   authorizedModules: [AUTH_BOOTSTRAP.all]
               }

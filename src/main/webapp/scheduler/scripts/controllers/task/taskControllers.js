@@ -1,11 +1,11 @@
 'use strict';
 schedulerControllers
-    .controller('TaskController', function ($scope,AppGridConstants, Task, SchedulableJob) {
+    .controller('TaskController', function ($scope,AppGridConstants, Task, ScheduledJob) {
 
         
-        $scope.schedulableJobs = SchedulableJob.query();
+        $scope.scheduledJobs = ScheduledJob.query();
         
-        $scope.showSchedulableJob = false;
+        $scope.showScheduledJob = false;
         $scope.actionEvent="taskGrid";
         $scope.showEditBtn = true;
         $scope.showCreateOrEdit = false;
@@ -91,6 +91,9 @@ schedulerControllers
             $scope.clear();
             $scope.showCreateOrEdit = true;
             $scope.showGrid = false;
+            if ($scope.scheduledJob != null) {
+                $scope.task.scheduledJob = $scope.scheduledJob;
+            }
         };
 
         $scope.showEdit = function(){

@@ -33,6 +33,15 @@
 
 
         
+        <md-select ng-model="task.scheduledJob.id"
+                   placeholder="scheduledJob">
+            <md-option ng-value="scheduledJob.id"
+                       ng-repeat="scheduledJob in scheduledJobs">
+                {{ scheduledJob.id}}
+            </md-option>
+        </md-select>
+
+        <br/><br/>
 
         <button type="button" class="btn btn-default" ng-click="back()">
             <span class="md-raised"></span>&nbsp;<span>Cancel</span>

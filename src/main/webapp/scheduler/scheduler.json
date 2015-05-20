@@ -25,7 +25,9 @@
         "scheduler/scripts/services/recurrentTimeUnit/recurrentTimeUnitService.js",
         "scheduler/scripts/controllers/task/taskControllers.js",
         "scheduler/scripts/services/task/taskService.js",
-        "scheduler/scripts/controllers/schedulableJob/schedulableJobControllers.js",
-        "scheduler/scripts/services/schedulableJob/schedulableJobService.js"
+        "scheduler/scripts/controllers/scheduledJob/scheduledJobControllers.js",
+        "scheduler/scripts/services/scheduledJob/scheduledJobService.js",
+        "scheduler/scripts/controllers/scheduledJob/scheduledJobControllers.js",
+        "scheduler/scripts/services/scheduledJob/scheduledJobService.js"
     ]
 }
