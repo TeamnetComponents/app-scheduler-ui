@@ -34,7 +34,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.task = {code: null, type: null, command: null, options: null, id: null};
+            $scope.task = {type: null, quartzJobClassName: null, options: null, id: null};
             $scope.searchTerms = [];
             $scope.showDetails=false;
         };
