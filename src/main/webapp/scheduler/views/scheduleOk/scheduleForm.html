@@ -6,9 +6,10 @@
 
         <div class="form-group">
             <label class="my-md-label"> Select job : </label>
-            <md-select name="job_selector" ng-model="schedule.scheduledJob.id" placeholder="Job list" required>
-                <md-option ng-value="scheduledJob.id" ng-repeat="scheduledJob in scheduledJobs">
-                    {{ scheduledJob.id}}
+            <md-select name="job_selector" ng-model="schedule.scheduledJob" placeholder="Job list" required>
+                <md-option ng-value="{id: scheduledJob.id, version: scheduledJob.version}"
+                           ng-repeat="scheduledJob in scheduledJobs">
+                    {{ scheduledJob.name}}
                 </md-option>
             </md-select>
         </div>
