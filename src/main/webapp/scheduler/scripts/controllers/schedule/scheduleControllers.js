@@ -117,9 +117,8 @@ schedulerControllers
 
         $scope.appGrid = {
             url:'app/rest/schedule/list',
-            id : 'schedule',
-            title :  'Lista schedule'
-            };
+            id : 'schedule'
+        };
 
         $scope.functionality='Schedule';
 
@@ -322,8 +321,7 @@ schedulerControllers
 
         $scope.appGrid = {
             url:'app/rest/schedule/list',
-            id : 'schedule',
-            title :  'Lista schedule'
+            id : 'schedule'
         };
 
         $scope.functionality='Schedule';

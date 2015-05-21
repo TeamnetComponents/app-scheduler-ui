@@ -81,9 +81,8 @@ schedulerControllers
 
         $scope.appGrid = {
             url:'app/rest/scheduledJob/list',
-            id : 'scheduledJob',
-            title :  'Lista scheduledJob'
-            };
+            id : 'scheduledJob'
+        };
 
         $scope.functionality='ScheduledJob';
 

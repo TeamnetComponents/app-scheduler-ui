@@ -59,9 +59,8 @@ schedulerControllers
 
         $scope.appGrid = {
             url:'app/rest/dayOfWeek/list',
-            id : 'dayOfWeek',
-            title :  'Lista dayOfWeek'
-            };
+            id : 'dayOfWeek'
+        };
 
         $scope.functionality='DayOfWeek';
 

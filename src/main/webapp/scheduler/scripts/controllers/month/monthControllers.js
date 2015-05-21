@@ -59,9 +59,8 @@ schedulerControllers
 
         $scope.appGrid = {
             url:'app/rest/month/list',
-            id : 'month',
-            title :  'Lista month'
-            };
+            id : 'month'
+        };
 
         $scope.functionality='Month';
 

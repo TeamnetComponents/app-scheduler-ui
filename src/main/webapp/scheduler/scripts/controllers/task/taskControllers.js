@@ -60,8 +60,7 @@ schedulerControllers
         $scope.appGrid = {
             url:'app/rest/task/list',
             id : 'task',
-            title :  'Lista task'
-            };
+        };
 
         $scope.functionality='Task';
 

@@ -18,22 +18,25 @@
                    ng-model="scheduledJob.description">
         </md-input-container>
         
-        <md-input-container>
+        <md-input-container ng-show="scheduledJob.nextScheduledExecution != null">
             <label>NextScheduledExecution</label>
             <input type="datetime-local" name="scheduledJob_nextScheduledExecution"
-                   ng-model="scheduledJob.nextScheduledExecution">
+                   ng-model="scheduledJob.nextScheduledExecution"
+                   readonly>
         </md-input-container>
         
-        <md-input-container>
+        <md-input-container ng-show="scheduledJob.lastExecutionTime != null">
             <label>LastExecutionTime</label>
             <input type="datetime-local" name="scheduledJob_lastExecutionTime"
-                   ng-model="scheduledJob.lastExecutionTime">
+                   ng-model="scheduledJob.lastExecutionTime"
+                   readonly>
         </md-input-container>
         
-        <md-input-container>
+        <md-input-container ng-show="scheduledJob.lastExecutionState != null">
             <label>LastExecutionState</label>
             <input type="text" name="scheduledJob_lastExecutionState"
-                   ng-model="scheduledJob.lastExecutionState">
+                   ng-model="scheduledJob.lastExecutionState"
+                   readonly>
         </md-input-container>
         
 
