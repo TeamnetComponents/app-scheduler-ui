@@ -24,9 +24,9 @@
         </md-select>
 
         <br/><br/>
-        <md-select ng-model="recurrentTimeUnit.schedule.id"
+        <md-select ng-model="recurrentTimeUnit.schedule"
                    placeholder="schedule">
-            <md-option ng-value="schedule.id"
+            <md-option ng-value="{id: schedule.id, version: schedule.version}"
                        ng-repeat="schedule in schedules">
                 {{ schedule.id}}
             </md-option>

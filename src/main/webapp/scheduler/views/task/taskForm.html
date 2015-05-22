@@ -27,9 +27,9 @@
 
 
         
-        <md-select ng-model="task.scheduledJob.id"
+        <md-select ng-model="task.scheduledJob"
                    placeholder="scheduledJob">
-            <md-option ng-value="scheduledJob.id"
+            <md-option ng-value="{id: scheduledJob.id, version: scheduledJob.version}"
                        ng-repeat="scheduledJob in scheduledJobs">
                 {{ scheduledJob.id}}
             </md-option>

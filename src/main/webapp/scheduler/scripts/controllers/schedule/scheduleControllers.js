@@ -45,13 +45,10 @@
  if(grid == 'timeInterval'){
  $scope.showTimeInterval = true;
 
- $scope.showMonth = false;
- $scope.showDayOfWeek = false;
- $scope.showRecurrentTimeUnit = false;
- $scope.showScheduledJob = false;
- }
- if(grid == 'month'){
- $scope.showMonth = true;
+        $scope.appGrid = {
+            url:'app/rest/schedule/list',
+            id : 'schedule'
+        };
 
  $scope.showTimeInterval = false;
  $scope.showDayOfWeek = false;
@@ -464,9 +461,8 @@ schedulerControllers
         $scope.refreshFunction;
 
         $scope.appGrid = {
-            url: 'app/rest/schedule/list',
-            id: 'schedule',
-            title: 'Lista schedule'
+            url:'app/rest/schedule/list',
+            id : 'schedule'
         };
 
         $scope.functionality = 'Schedule';

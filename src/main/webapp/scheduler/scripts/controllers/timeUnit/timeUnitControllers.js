@@ -82,8 +82,7 @@ schedulerControllers
         $scope.appGrid = {
             url:'app/rest/timeUnit/list',
             id : 'timeUnit',
-            title :  'Lista timeUnit'
-            };
+        };
 
         $scope.functionality='TimeUnit';
 

@@ -8,10 +8,11 @@
 
         <div class="form-inline">
             <label class="my-md-label"> Select job : </label>
-            <select name="job_selector" class="form-control" ng-model="schedule.scheduledJob.id" placeholder="Job list"
+
+            <select name="job_selector" class="form-control" ng-model="schedule.scheduledJob" placeholder="Job list"
                     required>
-                <option ng-value="scheduledJob.id" ng-repeat="scheduledJob in scheduledJobs">
-                    {{ scheduledJob.id}}
+                <option ng-value="{id: scheduledJob.id, version: scheduledJob.version}" ng-repeat="scheduledJob in scheduledJobs">
+                    {{ scheduledJob.name}}
                 </option>
             </select>
         </div>
