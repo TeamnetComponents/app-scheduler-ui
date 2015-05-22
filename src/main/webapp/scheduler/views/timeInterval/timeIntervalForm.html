@@ -13,9 +13,10 @@
         </md-input-container>
         
         <md-input-container>
-            <label>Custom</label>
-            <input type="checkbox" name="timeInterval_custom"
+            <md-checkbox class="md-primary" name="timeInterval_custom"
                    ng-model="timeInterval.custom">
+                Custom time interval
+            </md-checkbox>
         </md-input-container>
         
         <md-input-container>
@@ -29,9 +30,6 @@
             <input type="number" name="timeInterval_interval"
                    ng-model="timeInterval.interval">
         </md-input-container>
-        
-
-
         
         <md-select ng-model="timeInterval.timeUnit.id"
                    placeholder="timeUnit">
@@ -47,7 +45,7 @@
             <span class="md-raised"></span>&nbsp;<span>Cancel</span>
         </button>
         <button type="submit" ng-disabled="formCreateOrEdit.$invalid" class="btn btn-default">
-            <span class="md-raised"></span>&nbsp;<span>Save</span>
+            <span class="md-raised"></span>&nbsp;<span>Add</span>
         </button>
     </form>
 </div>

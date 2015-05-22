@@ -1,19 +1,26 @@
 <div ng-show="showCreateOrEdit">
-    <form name="formCreateOrEdit" role="form" ng-submit="createOrUpdate()">
+    <form name="formCreateOrEdit" role="form" ng-submit="createOrUpdate()" novalidate>
 
         <input type="hidden" name="id"
                ng-model="schedule.id" readonly>
 
-        <div class="form-group">
+        <br>
+
+        <div class="form-inline">
             <label class="my-md-label"> Select job : </label>
-            <md-select name="job_selector" ng-model="schedule.scheduledJob.id" placeholder="Job list" required>
-                <md-option ng-value="scheduledJob.id" ng-repeat="scheduledJob in scheduledJobs">
+            <select name="job_selector" class="form-control" ng-model="schedule.scheduledJob.id" placeholder="Job list"
+                    required>
+                <option ng-value="scheduledJob.id" ng-repeat="scheduledJob in scheduledJobs">
                     {{ scheduledJob.id}}
-                </md-option>
-            </md-select>
+                </option>
+            </select>
         </div>
 
+        <br>
+
         <hr class="divider"/>
+
+        <br>
 
         <div class="form-group">
             <label class="my-md-label"> Job options : </label>
@@ -34,6 +41,8 @@
 
         <hr class="divider"/>
 
+        <br>
+
         <div class="form-group">
             <div class="non-recurrent-job" ng-show="!schedule.recurrent">
                 <label class="my-md-label"> Execution options : </label>
@@ -53,19 +62,19 @@
 
                 <div layout="" layout-sm="column">
 
-                    <md-input-container style="width:33%; margin:5px;">
+                    <md-input-container style="width:33%; margin:10px;">
                         <label>StartTime</label>
                         <input type="datetime-local" name="schedule_startTime_rec"
                                ng-model="schedule.startTime" ng-required="schedule.recurrent">
                     </md-input-container>
 
-                    <md-input-container style="width:33%; margin:5px;">
+                    <md-input-container style="width:33%; margin:10px;">
                         <label>EndTime(optional) </label>
                         <input type="datetime-local" name="schedule_endTime"
                                min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.endTime">
                     </md-input-container>
 
-                    <md-input-container style="width:33%; margin:5px;">
+                    <md-input-container style="width:33%; margin:10px;">
                         <label>Number of repetitions(optional)</label>
                         <input type="number" name="schedule_repetitions" min="0" ng-model="schedule.repetitions">
                     </md-input-container>
@@ -74,70 +83,69 @@
                 <p ng-show="formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine"
                    class="alert-danger"> End date date needs to be greater than current date!</p>
 
-                <span class="my-md-label"> Select repetition type : </span>
-                <md-select name="job_selector" ng-model="selectedRepetitionType" placeholder="Repetition type"
-                           ng-change="changeRepetitionType()" ng-required="schedule.recurrent">
-                    <md-option ng-selected="repetitionType.id == 1" ng-value="repetitionType.id"
-                               ng-repeat="repetitionType in repetitionTypes">
-                        {{ repetitionType.name }}
-                    </md-option>
-                </md-select>
+                <div class="form-inline">
+                    <span class="my-md-label"> Select repetition type : </span>
+                    <select name="job_selector" class="form-control" ng-model="selectedRepetitionType"
+                            placeholder="Repetition type"
+                            ng-change="changeRepetitionType()" ng-required="schedule.recurrent">
+                        <option ng-selected="repetitionType.id == 1" ng-value="repetitionType.id"
+                                ng-repeat="repetitionType in repetitionTypes">
+                            {{ repetitionType.name }}
+                        </option>
+                    </select>
+                </div>
             </div>
         </div>
+
         <hr class="divider"/>
 
+        <br>
+
         <div class="form-group" ng-show="schedule.recurrent">
-            <div class="regular-intervals" ng-show="schedule.regularIntervals">
+
+            <div class="regular-intervals" ng-show="regularIntervals">
                 <label class="my-md-label"> Regular intervals options : </label>
-                <br>
+                <br><br>
 
-                <md-radio-group ng-model="selectedIntervalType" ng-change="changeIntervalType()"
-                                style="display : -webkit-inline-box">
-                    <md-radio-button class="md-primary" ng-value="intervalType.id"
-                                     ng-repeat="intervalType in intervalTypes">
-                        {{intervalType.name}}
-                    </md-radio-button>
-                </md-radio-group>
-
-                <br>
-
-                <div class="predefined_intervals" ng-show="schedule.predefinedIntervals">
+                <div class="form-inline">
                     <span class="my-md-label"> Select interval : </span>
-                    <md-select ng-model="schedule.timeInterval.id" placeholder="Time interval list">
-                        <md-option ng-value="timeInterval.id" ng-repeat="timeInterval in timeIntervals">
-                            {{ timeInterval.name}}
-                        </md-option>
-                    </md-select>
+                    <select ng-model="schedule.timeInterval.id" class="form-control" style="width:auto"
+                            placeholder="Time interval list">
+                        <optgroup label="Predefined">
+                            <option ng-value="timeInterval.id" ng-repeat="timeInterval in timeIntervals | filter:{'custom':false}">
+                                {{ timeInterval.name}}
+                            </option>
+                        </optgroup>
+                        <optgroup label="Custom">
+                            <option ng-value="timeInterval.id" ng-repeat="timeInterval in timeIntervals | filter:{'custom':true}">
+                                {{ timeInterval.name}}
+                            </option>
+                        </optgroup>
+                    </select>
                 </div>
 
+                <md-switch class="md-primary" md-no-ink="" ng-model="customDefinedIntervals">
+                    Create custom time interval
+                </md-switch>
 
-                <div class="custom_intervals" ng-include="'scheduler/views/timeInterval/timeIntervalForm.html'"
-                     ng-show="!schedule.predefinedIntervals"></div>
+                <br>
+
+                <div class="row" ng-show="customDefinedIntervals">
+                    <div class="col-lg-4">
+                        <md-whiteframe class="md-whiteframe-z2" layout="" layout-align="center center">
+                                {{createdNewEvent}}
+                                <div ng-controller="TimeIntervalController" class="custom_intervals" ng-include="'scheduler/views/timeInterval/timeIntervalForm.html'"></div>
+                        </md-whiteframe>
+                    </div>
+                </div>
             </div>
 
 
-            <div class="custom-fire-times" ng-show="!schedule.regularIntervals">
+            <div class="custom-fire-times" ng-show="!regularIntervals">
                 <label class="my-md-label"> Custom fire times options : </label>
+                <br><br>
 
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label>month</label>
-                        <select size="12" class="form-control" multiple ng-model="schedule.months"
-                                ng-options="month as month.name for month in months track by month.id">
-                        </select>
-                    </div>
-                    <div class="col-sm-2">
-                        <label>dayOfWeek</label>
-                        <select size="12" class="form-control" multiple ng-model="schedule.dayOfWeeks"
-                                ng-options="dayOfWeek as dayOfWeek.name for dayOfWeek in dayOfWeeks track by dayOfWeek.id">
-                        </select>
-                    </div>
-                    <div class="col-sm-2">.col-sm-4</div>
-                    <div class="col-sm-2">.col-sm-4</div>
-                    <div class="col-sm-2">.col-sm-4</div>
-                    <div class="col-sm-2">.col-sm-4</div>
-                </div>
-
+                <div class="custom_fire_times" ng-include="'scheduler/views/scheduleOk/customFireTimes.html'"></div>
             </div>
 
             <!--<md-input-container>
@@ -151,12 +159,16 @@
         <br/><br/>
         <br/><br/>
 
-        <button type="button" class="btn btn-default" ng-click="back()">
-            <span class="md-raised"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="formCreateOrEdit.$invalid" class="btn btn-default">
-            <span class="md-raised"></span>&nbsp;<span>Save</span>
-        </button>
+        <div class="row" style="text-align: center">
+            <button type="button" class="btn btn-default" ng-click="back()">
+                <span class="md-raised"></span>&nbsp;<span>Cancel</span>
+            </button>
+            <button type="submit"
+                    ng-disabled="formCreateOrEdit.$invalid || (!formCreateOrEdit.$invalid && schedule.recurrent && !regularIntervals &&  (nrSelectedCustom <= 0))"
+                    class="btn btn-default">
+                <span class="md-raised"></span>&nbsp;<span>Save</span>
+            </button>
+        </div>
     </form>
 </div>
 

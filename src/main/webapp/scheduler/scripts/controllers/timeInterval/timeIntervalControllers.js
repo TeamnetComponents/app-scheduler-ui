@@ -47,6 +47,7 @@ schedulerControllers
 
 
         $scope.createOrUpdate = function () {
+            $scope.createdNewEvent = 'IT WORRRRRRRRRRRRRRRKSSSS';
             $scope.showGrid = true;
             TimeInterval.save($scope.timeInterval,
                 function () {

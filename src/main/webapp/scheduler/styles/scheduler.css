@@ -36,3 +36,12 @@ md-tabs.md-default-theme md-tab {
 .my-md-label {
     margin-right : 20px;
 }
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}

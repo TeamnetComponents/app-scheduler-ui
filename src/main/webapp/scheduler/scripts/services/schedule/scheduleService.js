@@ -15,3 +15,21 @@ schedulerServices
             }
         });
     });
+
+schedulerServices.factory('CustomFireTimes', ['$http', function($http) {
+    var list = {};
+
+    list.getMonths = function() {
+        return $http( {
+            url: "scheduler/data/months_ro.json",
+            method: "GET"});
+    }
+
+    list.getWeekDays = function() {
+        return $http( {
+            url: "scheduler/data/weekDays_ro.json",
+            method: "GET"});
+    }
+
+    return list;
+} ]);
