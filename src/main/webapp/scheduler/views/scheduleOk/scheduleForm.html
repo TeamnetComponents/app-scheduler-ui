@@ -110,19 +110,7 @@
 
                 <div class="form-inline">
                     <span class="my-md-label"> Select interval : </span>
-                    <select ng-model="schedule.timeInterval.id" class="form-control" style="width:auto"
-                            placeholder="Time interval list">
-                        <optgroup label="Predefined">
-                            <option ng-value="timeInterval.id" ng-repeat="timeInterval in timeIntervals | filter:{'custom':false}">
-                                {{ timeInterval.name}}
-                            </option>
-                        </optgroup>
-                        <optgroup label="Custom">
-                            <option ng-value="timeInterval.id" ng-repeat="timeInterval in timeIntervals | filter:{'custom':true}">
-                                {{ timeInterval.name}}
-                            </option>
-                        </optgroup>
-                    </select>
+                    <select ng-model="schedule.timeInterval" class="form-control" ng-options="timeInterval.name group by timeInterval.custom for timeInterval in timeIntervals track by timeInterval.id"></select>
                 </div>
 
                 <md-switch class="md-primary" md-no-ink="" ng-model="customDefinedIntervals">
@@ -134,8 +122,7 @@
                 <div class="row" ng-show="customDefinedIntervals">
                     <div class="col-lg-4">
                         <md-whiteframe class="md-whiteframe-z2" layout="" layout-align="center center">
-                                {{createdNewEvent}}
-                                <div ng-controller="TimeIntervalController" class="custom_intervals" ng-include="'scheduler/views/timeInterval/timeIntervalForm.html'"></div>
+                                <div ng-include="'scheduler/views/scheduleOk/createIntervalForm.html'"></div>;
                         </md-whiteframe>
                     </div>
                 </div>

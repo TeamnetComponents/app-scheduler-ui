@@ -1,0 +1,41 @@
+<div>
+    <form name="createIntervalForm" novalidate>
+
+        <input type="hidden" name="id"
+               ng-model="newTimeInterval.id" readonly>
+
+        <md-input-container>
+            <label>Name</label>
+            <input type="text" name="newTimeInterval_name"
+                   ng-model="newTimeInterval.name" required>
+        </md-input-container>
+
+        <md-input-container>
+            <label>IntervalMillis</label>
+            <input type="number" name="newTimeInterval_intervalMillis"
+                   ng-model="newTimeInterval.intervalMillis" required>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Interval</label>
+            <input type="number" name="newTimeInterval_interval"
+                   ng-model="newTimeInterval.interval" required>
+        </md-input-container>
+
+        <select class="form-control" ng-model="newTimeInterval.timeUnit.id"
+                   placeholder="timeUnit" required>
+            <option ng-value="timeUnit.id"
+                       ng-repeat="timeUnit in timeUnits">
+                {{ timeUnit.name}}
+            </option>
+        </select>
+
+        <br/><br/>
+
+        <div class="row" style="text-align: center">
+            <button type="button" ng-click="addCustomInterval()" ng-disabled="createIntervalForm.$invalid" class="btn btn-default">
+                <span class="md-raised"></span>&nbsp;<span>Add</span>
+            </button>
+        </div>
+    </form>
+</div>

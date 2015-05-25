@@ -8,6 +8,7 @@
         "scheduler/scripts/services/schedulerServices.js",
         "scheduler/scripts/services/schedulerMainService.js",
         "scheduler/scripts/directives/schedulerDirectives.js",
+        "scheduler/scripts/directives/timeInterval/timeIntervalDirective.js",
         "scheduler/scripts/directives/schedulerMainDirective.js",
         "scheduler/scripts/constants/schedulerConstants.js",
         "scheduler/scripts/constants/SCHEDULER.js",

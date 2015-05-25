@@ -173,7 +173,7 @@
  */
 
 schedulerControllers
-    .controller('ScheduleControllerOk', function ($scope, AppGridConstants, Schedule, TimeInterval, Month, DayOfWeek, RecurrentTimeUnit, ScheduledJob, CustomFireTimes) {
+    .controller('ScheduleControllerOk', function ($scope, AppGridConstants, Schedule, TimeInterval, Month, DayOfWeek, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit) {
 
         $scope.timeIntervals = TimeInterval.query();
         $scope.months = Month.query();
@@ -198,8 +198,6 @@ schedulerControllers
             {id: "1", name: "Regular intervals"},
             {id: "2", name: "Custom fire times"}
         ];
-
-        $scope.createdNewEvent = 'test';
 
         $scope.customDefinedIntervals = false;
         $scope.regularIntervals = true;
@@ -307,7 +305,7 @@ schedulerControllers
             if ($scope.schedule != undefined) {
                 if ($scope.selectedRepetitionType == 1) {
                     /* Setez prima valoare ca cea activa in selectorul de regular times */
-                   // $scope.schedule.timeInterval.id = $scope.timeIntervals[0].id;
+                    $scope.schedule.timeInterval = $scope.timeIntervals[0];
                     $scope.regularIntervals = true;
                 }
                 else if ($scope.selectedRepetitionType == 2) {
@@ -421,6 +419,24 @@ schedulerControllers
 
             return recurrentTimeUnits;
         }
+
+        /*Add custom interval */
+        $scope.timeUnits = TimeUnit.query();
+        $scope.newTimeInterval = {name: null, custom: true, intervalMillis: null, interval: null, id: null};
+        $scope.addCustomInterval = function () {
+        TimeInterval.save($scope.newTimeInterval,function(data){
+            $scope.timeIntervals = TimeInterval.query(function(data) {
+                for (var i=0; i<$scope.timeIntervals.length; i++) {
+                    if ($scope.timeIntervals[i].name == $scope.newTimeInterval.name) {
+                        $scope.schedule.timeInterval = $scope.timeIntervals[i];
+                        break;
+                    }
+                }
+            });
+        });
+
+        };
+        /* ------------------ */
 
         $scope.createOrUpdate = function () {
             $scope.showGrid = true;

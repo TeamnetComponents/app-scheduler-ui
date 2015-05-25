@@ -82,7 +82,7 @@ schedulerControllers
 
         $scope.appGrid = {
             url:'app/rest/timeInterval/list',
-            id : 'timeInterval',
+            id : 'timeInterval'
         };
 
         $scope.functionality='TimeInterval';
