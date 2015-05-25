@@ -17,7 +17,19 @@
             <input type="text" name="scheduledJob_description"
                    ng-model="scheduledJob.description">
         </md-input-container>
-        
+
+        <md-input-container>
+            <label>Type</label>
+            <input type="text" name="scheduledJob_type"
+                   ng-model="scheduledJob.type">
+        </md-input-container>
+
+        <md-input-container>
+            <label>QuartzJobClassName</label>
+            <input type="text" name="scheduledJob_quartzJobClassName"
+                   ng-model="scheduledJob.quartzJobClassName">
+        </md-input-container>
+
         <md-input-container ng-show="scheduledJob.nextScheduledExecution != null">
             <label>NextScheduledExecution</label>
             <input type="datetime-local" name="scheduledJob_nextScheduledExecution"
@@ -38,10 +50,10 @@
                    ng-model="scheduledJob.lastExecutionState"
                    readonly>
         </md-input-container>
-        
 
 
-        
+
+
 
         <button type="button" class="btn btn-default" ng-click="back()">
             <span class="md-raised"></span>&nbsp;<span>Cancel</span>

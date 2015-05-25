@@ -34,7 +34,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.task = {type: null, quartzJobClassName: null, options: null, id: null};
+            $scope.task = {queuePosition: null, options: null, id: null};
             $scope.searchTerms = [];
             $scope.showDetails=false;
         };
@@ -59,7 +59,7 @@ schedulerControllers
 
         $scope.appGrid = {
             url:'app/rest/task/list',
-            id : 'task',
+            id : 'task'
         };
 
         $scope.functionality='Task';

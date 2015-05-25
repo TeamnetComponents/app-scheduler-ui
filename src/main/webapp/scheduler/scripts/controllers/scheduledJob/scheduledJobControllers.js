@@ -56,7 +56,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.scheduledJob = {name: null, description: null, nextScheduledExecution: null, lastExecutionTime: null, lastExecutionState: null, id: null};
+            $scope.scheduledJob = {name: null, description: null, type: null, quartzJobClassName: null, nextScheduledExecution: null, lastExecutionTime: null, lastExecutionState: null, id: null};
             $scope.searchTerms = [];
             $scope.showDetails=false;
         };
