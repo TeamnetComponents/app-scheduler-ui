@@ -487,54 +487,92 @@ schedulerControllers
         function buildRecurrentTimeUnits() {
             var recurrentTimeUnits = [];
 
-            /* Adaugare luni */
-            for (var i = 0; i < $scope.monthsButtons.length; i++) {
-                if ($scope.monthsButtons[i].pushed == true) {
-                    var obj = {};
-                    obj.value = $scope.monthsButtons[i].id;
-                    obj.timeunit_id = 7; //7 = MONTH
-                    obj.schedule_id = $scope.schedule.scheduledJob.id;
-                    recurrentTimeUnits.push(obj);
+            if ($scope.allMonthsButton.pushed == false) {
+                /* Adaugare luni */
+                for (var i = 0; i < $scope.monthsButtons.length; i++) {
+                    if ($scope.monthsButtons[i].pushed == true) {
+                        var obj = {};
+                        obj.value = $scope.monthsButtons[i].id;
+                        obj.timeunit_id = 7; //7 = MONTH
+                        obj.schedule_id = $scope.schedule.scheduledJob.id;
+                        recurrentTimeUnits.push(obj);
+                    }
                 }
             }
-
-            /* Adaugare zile luna */
-            for (var i = 0; i < $scope.monthDaysButtons.length; i++) {
-                if ($scope.monthDaysButtons[i].pushed == true) {
-                    var obj = {};
-                    obj.value = $scope.monthDaysButtons[i].id;
-                    obj.timeunit_id = 4; //4 = DAY
-                    obj.schedule_id = $scope.schedule.scheduledJob.id;
-                    recurrentTimeUnits.push(obj);
-                }
+            else {
+                var obj = {};
+                obj.value = -1;
+                obj.timeunit_id = 7; //7 = MONTH
+                obj.schedule_id = $scope.schedule.scheduledJob.id;
+                recurrentTimeUnits.push(obj);
             }
 
-            /* Adaugare zile saptamana*/
-            for (var i = 0; i < $scope.weekDaysButtons.length; i++) {
-                if ($scope.weekDaysButtons[i].pushed == true) {
-                    var obj = {};
-                    obj.value = $scope.weekDaysButtons[i].id;
-                    obj.timeunit_id = 8; //8 = WEEK DAY
-                    obj.schedule_id = $scope.schedule.scheduledJob.id;
-                    recurrentTimeUnits.push(obj);
+
+            if ($scope.allMonthDaysButton.pushed == false) {
+                /* Adaugare zile luna */
+                for (var i = 0; i < $scope.monthDaysButtons.length; i++) {
+                    if ($scope.monthDaysButtons[i].pushed == true) {
+                        var obj = {};
+                        obj.value = $scope.monthDaysButtons[i].id;
+                        obj.timeunit_id = 4; //4 = DAY
+                        obj.schedule_id = $scope.schedule.scheduledJob.id;
+                        recurrentTimeUnits.push(obj);
+                    }
                 }
             }
+            else {
+                var obj = {};
+                obj.value = -1;
+                obj.timeunit_id = 4; //4 = DAY
+                obj.schedule_id = $scope.schedule.scheduledJob.id;
+                recurrentTimeUnits.push(obj);
+            }
 
-            /* Adaugare zile saptamana*/
-            for (var i = 0; i < $scope.hoursButtons.length; i++) {
-                if ($scope.hoursButtons[i].pushed == true) {
-                    var obj = {};
-                    obj.value = $scope.hoursButtons[i].id;
-                    obj.timeunit_id = 3; //3 = HOUR
-                    obj.schedule_id = $scope.schedule.scheduledJob.id;
-                    recurrentTimeUnits.push(obj);
+            if ($scope.allWeekDaysButton.pushed == false) {
+                /* Adaugare zile saptamana*/
+                for (var i = 0; i < $scope.weekDaysButtons.length; i++) {
+                    if ($scope.weekDaysButtons[i].pushed == true) {
+                        var obj = {};
+                        obj.value = $scope.weekDaysButtons[i].id;
+                        obj.timeunit_id = 8; //8 = WEEK DAY
+                        obj.schedule_id = $scope.schedule.scheduledJob.id;
+                        recurrentTimeUnits.push(obj);
+                    }
                 }
+            }
+            else {
+                var obj = {};
+                obj.value = -1;
+                obj.timeunit_id = 8; //8 = WEEK DAY
+                obj.schedule_id = $scope.schedule.scheduledJob.id;
+                recurrentTimeUnits.push(obj);
+            }
+
+            if ($scope.allHoursButton.pushed == false) {
+                /* Adaugare zile saptamana*/
+                for (var i = 0; i < $scope.hoursButtons.length; i++) {
+                    if ($scope.hoursButtons[i].pushed == true) {
+                        var obj = {};
+                        obj.value = $scope.hoursButtons[i].id;
+                        obj.timeunit_id = 3; //3 = HOUR
+                        obj.schedule_id = $scope.schedule.scheduledJob.id;
+                        recurrentTimeUnits.push(obj);
+                    }
+                }
+            }
+            else {
+                var obj = {};
+                obj.value = -1;
+                obj.timeunit_id = 3; //3 = HOUR
+                obj.schedule_id = $scope.schedule.scheduledJob.id;
+                recurrentTimeUnits.push(obj);
             }
 
             return recurrentTimeUnits;
         }
+        /* -------------------------------------------------------------------*/
 
-        /*Add custom interval */
+        /* -------------------- Add custom interval --------------------------*/
         $scope.timeUnits = TimeUnit.query();
         $scope.newTimeInterval = {name: null, custom: true, intervalMillis: null, interval: null, id: null};
         $scope.addCustomInterval = function () {
@@ -550,7 +588,7 @@ schedulerControllers
         });
 
         };
-        /* ------------------ */
+        /* -------------------------------------------------------------------- */
 
         $scope.createOrUpdate = function () {
             $scope.showGrid = true;

@@ -82,14 +82,6 @@
 
                 <div class="form-inline">
                     <span class="my-md-label"> Select repetition type : </span>
-                    <!--<select name="repetition_selector" class="form-control" ng-model="selectedRepetitionType"
-                            placeholder="Repetition type"
-                            ng-change="changeRepetitionType()" ng-required="schedule.recurrent">
-                        <option ng-selected="repetitionType.id == 1" ng-value="repetitionType.id"
-                                ng-repeat="repetitionType in repetitionTypes">
-                            {{ repetitionType.name }}
-                        </option>
-                    </select>-->
 
                     <select name="repetition_selector" ng-change="changeRepetitionType()" ng-model="selectedRepetitionType" class="form-control"
                             ng-options="repetitionType.name for repetitionType in repetitionTypes track by repetitionType.id">
@@ -137,12 +129,6 @@
 
                 <div class="custom_fire_times" ng-include="'scheduler/views/scheduleOk/customFireTimes.html'"></div>
             </div>
-
-            <!--<md-input-container>
-                <label>Cron</label>
-                <input type="text" name="schedule_cron"
-                       ng-model="schedule.cron">
-            </md-input-container>-->
         </div>
 
 
