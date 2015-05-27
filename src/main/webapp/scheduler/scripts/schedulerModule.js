@@ -28,22 +28,6 @@ schedulerModule
               }
            });
     $routeProvider
-           .when('/dayOfWeek', {
-              templateUrl: 'scheduler/views/dayOfWeek/dayOfWeekWrapper.html',
-              controller: 'DayOfWeekController',
-              access: {
-                  authorizedModules: [AUTH_BOOTSTRAP.all]
-              }
-           });
-    $routeProvider
-           .when('/month', {
-              templateUrl: 'scheduler/views/month/monthWrapper.html',
-              controller: 'MonthController',
-              access: {
-                  authorizedModules: [AUTH_BOOTSTRAP.all]
-              }
-           });
-    $routeProvider
            .when('/recurrentTimeUnit', {
               templateUrl: 'scheduler/views/recurrentTimeUnit/recurrentTimeUnitWrapper.html',
               controller: 'RecurrentTimeUnitController',

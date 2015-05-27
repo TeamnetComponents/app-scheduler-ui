@@ -54,20 +54,7 @@
         </md-select>
 
         <br/><br/>
-        <div class="form-group">
-            <label>month</label>
-            <select class="form-control" multiple ng-model="schedule.months"
-                    ng-options="month as month.name for month in months track by month.id">
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label>dayOfWeek</label>
-            <select class="form-control" multiple ng-model="schedule.dayOfWeeks"
-                    ng-options="dayOfWeek as dayOfWeek.name for dayOfWeek in dayOfWeeks track by dayOfWeek.id">
-            </select>
-        </div>
-        
+
         <md-select ng-model="schedule.scheduledJob"
                    placeholder="scheduledJob">
             <md-option ng-value="{id: scheduledJob.id, version: scheduledJob.version}"
