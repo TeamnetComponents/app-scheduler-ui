@@ -1,4 +1,4 @@
-[{"id":1, "text":"Luni", "pushed":false},{"id":2, "text":"Marti", "pushed":false},
+[   {"id":1, "text":"Luni", "pushed":false},{"id":2, "text":"Marti", "pushed":false},
     {"id":3, "text":"Miercuri", "pushed":false},{"id":4, "text":"Joi", "pushed":false},
     {"id":5, "text":"Vineri", "pushed":false},{"id":6, "text":"Sambata", "pushed":false},
     {"id":7, "text":"Duminica", "pushed":false}]

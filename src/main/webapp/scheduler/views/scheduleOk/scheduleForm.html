@@ -5,15 +5,11 @@
                ng-model="schedule.id" readonly>
 
         <br>
-
         <div class="form-inline">
             <label class="my-md-label"> Select job : </label>
 
-            <select name="job_selector" class="form-control" ng-model="schedule.scheduledJob" placeholder="Job list"
-                    required>
-                <option ng-value="{id: scheduledJob.id, version: scheduledJob.version}" ng-repeat="scheduledJob in scheduledJobs">
-                    {{ scheduledJob.name}}
-                </option>
+            <select name="job_selector" ng-model="schedule.scheduledJob" class="form-control"
+                    ng-options="scheduledJob.name for scheduledJob in scheduledJobs" required>
             </select>
         </div>
 
@@ -34,7 +30,7 @@
             </md-input-container>
 
             <md-input-container>
-                <md-checkbox class="md-primary" type="checkbox" name="schedule_recurrent" ng-model="schedule.recurrent">
+                <md-checkbox class="md-primary" type="checkbox" name="schedule_recurrent" ng-click="toggleRecurrent()" ng-model="schedule.recurrent">
                     Recurrent
                 </md-checkbox>
             </md-input-container>
@@ -86,13 +82,17 @@
 
                 <div class="form-inline">
                     <span class="my-md-label"> Select repetition type : </span>
-                    <select name="job_selector" class="form-control" ng-model="selectedRepetitionType"
+                    <!--<select name="repetition_selector" class="form-control" ng-model="selectedRepetitionType"
                             placeholder="Repetition type"
                             ng-change="changeRepetitionType()" ng-required="schedule.recurrent">
                         <option ng-selected="repetitionType.id == 1" ng-value="repetitionType.id"
                                 ng-repeat="repetitionType in repetitionTypes">
                             {{ repetitionType.name }}
                         </option>
+                    </select>-->
+
+                    <select name="repetition_selector" ng-change="changeRepetitionType()" ng-model="selectedRepetitionType" class="form-control"
+                            ng-options="repetitionType.name for repetitionType in repetitionTypes track by repetitionType.id">
                     </select>
                 </div>
             </div>
@@ -110,7 +110,9 @@
 
                 <div class="form-inline">
                     <span class="my-md-label"> Select interval : </span>
-                    <select ng-model="schedule.timeInterval" class="form-control" ng-options="timeInterval.name group by timeInterval.custom for timeInterval in timeIntervals track by timeInterval.id"></select>
+                    <select ng-model="schedule.timeInterval" class="form-control"
+                            ng-options="timeInterval.name group by timeInterval.custom for timeInterval in timeIntervals track by timeInterval.id">
+                    </select>
                 </div>
 
                 <md-switch class="md-primary" md-no-ink="" ng-model="customDefinedIntervals">
@@ -122,7 +124,7 @@
                 <div class="row" ng-show="customDefinedIntervals">
                     <div class="col-lg-4">
                         <md-whiteframe class="md-whiteframe-z2" layout="" layout-align="center center">
-                                <div ng-include="'scheduler/views/scheduleOk/createIntervalForm.html'"></div>;
+                                <div ng-include="'scheduler/views/scheduleOk/createIntervalForm.html'"></div>
                         </md-whiteframe>
                     </div>
                 </div>

@@ -193,17 +193,54 @@ schedulerControllers
         $scope.showDetails = false;
         $scope.showGrid = true;
 
-        $scope.selectedRepetitionType = 1;
         $scope.repetitionTypes = [
-            {id: "1", name: "Regular intervals"},
-            {id: "2", name: "Custom fire times"}
+            {id: "0", name: "Regular intervals"},
+            {id: "1", name: "Custom fire times"}
         ];
+        $scope.selectedRepetitionType = $scope.repetitionTypes[0];
 
+
+        $scope.toggleRecurrent = function() {
+            resetRegularIntervals();
+        }
+
+        $scope.changeRepetitionType = function () {
+            if ($scope.schedule != undefined) {
+                //Toggle Regular intervals
+                if ($scope.selectedRepetitionType == $scope.repetitionTypes[0]) {
+                    /* Setez prima valoare ca cea activa in selectorul de regular times */
+                    if ($scope.timeIntervals !=null && $scope.timeIntervals != undefined) {
+                        $scope.schedule.timeInterval = $scope.timeIntervals[0];
+                    }
+                    $scope.regularIntervals = true;
+                }
+                //Toggle Custom fire times
+                else if ($scope.selectedRepetitionType == $scope.repetitionTypes[1]) {
+                    $scope.regularIntervals = false;
+                    resetCustomFiresIntervals();
+                }
+            }
+
+        };
+
+        /* ------------- Regular intervals ----------------- */
         $scope.customDefinedIntervals = false;
         $scope.regularIntervals = true;
 
+        function resetRegularIntervals() {
+            $scope.selectedRepetitionType = $scope.repetitionTypes[0];
+            $scope.customDefinedIntervals = false;
+            $scope.regularIntervals = true;
+            $scope.changeRepetitionType();
+        }
+        /* ------------------------------------------------- */
+
         /* ------------- Custom fire intervals ------------- */
-        function resetCustomFiresIntervals() {
+        function createCustomFiresIntervals() {
+            $scope.allMonthsButton = {pushed: false};
+            $scope.allMonthDaysButton = {pushed: false};
+            $scope.allWeekDaysButton = {pushed: false};
+            $scope.allHoursButton = {pushed: false};
             $scope.nrSelectedCustom = 0;
             $scope.monthsButtons = [];
             $scope.monthDaysButtons = null;
@@ -255,8 +292,35 @@ schedulerControllers
                     console.log(data);
                 });
         }
+        function resetCustomFiresIntervals() {
+            /* Resetare luni */
+            $scope.allMonthsButton.pushed = false;
+            for (var i = 0; i < $scope.monthsButtons.length; i++) {
+                $scope.monthsButtons[i].pushed = false;
+            }
 
-        resetCustomFiresIntervals();
+            /* Resetare zile luna */
+            $scope.allMonthDaysButton.pushed = false;
+            for (var i = 0; i < $scope.monthDaysButtons.length; i++) {
+                $scope.monthDaysButtons[i].pushed = false;
+            }
+
+            /* Resetare zile saptamana*/
+            $scope.allWeekDaysButton.pushed = false;
+            for (var i = 0; i < $scope.weekDaysButtons.length; i++) {
+                $scope.weekDaysButtons[i].pushed = false;
+            }
+
+            /* Resetare ore*/
+            $scope.allHoursButton.pushed = false;
+            for (var i = 0; i < $scope.hoursButtons.length; i++) {
+                $scope.hoursButtons[i].pushed = false;
+            }
+
+            $scope.nrSelectedCustom = 0;
+        }
+
+        createCustomFiresIntervals();
 
         /* Numar cate butoane au fost apasate */
         function countSelected(pushed) {
@@ -288,6 +352,96 @@ schedulerControllers
             countSelected($scope.hoursButtons[id].pushed);
         }
 
+        $scope.selectAllMonths = function() {
+            if ($scope.allMonthsButton.pushed == false) {
+                for (var i = 0; i < $scope.monthsButtons.length; i++) {
+                    if ($scope.monthsButtons[i].pushed == false) {
+                        $scope.monthsButtons[i].pushed = true;
+                        countSelected($scope.monthsButtons[i].pushed);
+                    }
+                }
+                $scope.allMonthsButton.pushed = true;
+            }
+
+            else if ($scope.allMonthsButton.pushed == true) {
+                for (var i = 0; i < $scope.monthsButtons.length; i++) {
+                    if ($scope.monthsButtons[i].pushed == true) {
+                        $scope.monthsButtons[i].pushed = false;
+                        countSelected($scope.monthsButtons[i].pushed);
+                    }
+                }
+                $scope.allMonthsButton.pushed = false;
+            }
+        }
+
+        $scope.selectAllMonthDays = function () {
+            if ($scope.allMonthDaysButton.pushed == false) {
+                for (var i = 0; i < $scope.monthDaysButtons.length; i++) {
+                    if ($scope.monthDaysButtons[i].pushed == false) {
+                        $scope.monthDaysButtons[i].pushed = true;
+                        countSelected($scope.monthDaysButtons[i].pushed);
+                    }
+                }
+                $scope.allMonthDaysButton.pushed = true;
+            }
+
+            else if ($scope.allMonthDaysButton.pushed == true) {
+                for (var i = 0; i < $scope.monthDaysButtons.length; i++) {
+                    if ($scope.monthDaysButtons[i].pushed == true) {
+                        $scope.monthDaysButtons[i].pushed = false;
+                        countSelected($scope.monthDaysButtons[i].pushed);
+                    }
+                }
+                $scope.allMonthDaysButton.pushed = false;
+            }
+        }
+
+
+        $scope.selectAllWeekDays = function () {
+            if ($scope.allWeekDaysButton.pushed == false) {
+                for (var i = 0; i < $scope.weekDaysButtons.length; i++) {
+                    if ($scope.weekDaysButtons[i].pushed == false) {
+                        $scope.weekDaysButtons[i].pushed = true;
+                        countSelected($scope.weekDaysButtons[i].pushed);
+                    }
+                }
+                $scope.allWeekDaysButton.pushed = true;
+            }
+
+            else if ($scope.allWeekDaysButton.pushed == true) {
+                for (var i = 0; i < $scope.weekDaysButtons.length; i++) {
+                    if ($scope.weekDaysButtons[i].pushed == true) {
+                        $scope.weekDaysButtons[i].pushed = false;
+                        countSelected($scope.weekDaysButtons[i].pushed);
+                    }
+                }
+                $scope.allWeekDaysButton.pushed = false;
+            }
+        }
+
+
+        $scope.selectAllHours = function () {
+            if ($scope.allHoursButton.pushed == false) {
+                for (var i = 0; i < $scope.hoursButtons.length; i++) {
+                    if ($scope.hoursButtons[i].pushed == false) {
+                        $scope.hoursButtons[i].pushed = true;
+                        countSelected($scope.hoursButtons[i].pushed);
+                    }
+                }
+                $scope.allHoursButton.pushed = true;
+            }
+
+            else if ($scope.allHoursButton.pushed == true) {
+                for (var i = 0; i < $scope.hoursButtons.length; i++) {
+                    if ($scope.hoursButtons[i].pushed == true) {
+                        $scope.hoursButtons[i].pushed = false;
+                        countSelected($scope.hoursButtons[i].pushed);
+                    }
+                }
+                $scope.allHoursButton.pushed = false;
+            }
+        }
+
         /* --------------------------------------------------- */
 
         $scope.selected = function () {
@@ -299,20 +453,6 @@ schedulerControllers
 
         $scope.getCurrentDate = function () {
             return new Date();
-        };
-
-        $scope.changeRepetitionType = function () {
-            if ($scope.schedule != undefined) {
-                if ($scope.selectedRepetitionType == 1) {
-                    /* Setez prima valoare ca cea activa in selectorul de regular times */
-                    $scope.schedule.timeInterval = $scope.timeIntervals[0];
-                    $scope.regularIntervals = true;
-                }
-                else if ($scope.selectedRepetitionType == 2) {
-                    $scope.regularIntervals = false;
-                }
-            }
-
         };
 
         $scope.redrawGrid = function (grid) {

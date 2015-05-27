@@ -3,24 +3,46 @@
         <p> Select months </p>
         <md-button type="button" ng-class="{'md-raised':true, 'md-primary': monthButton.pushed}" style="width:100px"
                    ng-click="selectMonth(monthButton.id-1)"
-                   ng-repeat="monthButton in monthsButtons">{{monthButton.text}}</md-button>
+                   ng-repeat="monthButton in monthsButtons">{{monthButton.text}}
+        </md-button>
+        <md-button type="button" ng-class="{'md-raised':true, 'md-primary': allMonthsButton.pushed}"
+                   style="width:100px"
+                   ng-click="selectAllMonths()">Select all
+        </md-button>
     </div>
     <div class="col-sm-3">
         <p> Select month days </p>
         <md-button type="button" ng-class="{'md-raised':true, 'md-primary': monthDayButton.pushed}" style="width:30px"
                    ng-click="selectMonthDay(monthDayButton.id-1)"
-                   ng-repeat="monthDayButton in monthDaysButtons">{{monthDayButton.id}}</md-button>
+                   ng-repeat="monthDayButton in monthDaysButtons">{{monthDayButton.id}}
+        </md-button>
+
+        <md-button type="button" ng-class="{'md-raised':true, 'md-primary': allMonthDaysButton.pushed}"
+                   style="width:100px"
+                   ng-click="selectAllMonthDays()">Select all
+        </md-button>
     </div>
     <div class="col-sm-3">
         <p> Select week days </p>
         <md-button type="button" ng-class="{'md-raised':true, 'md-primary': weekDayButton.pushed}" style="width:100px"
                    ng-click="selectWeekDay(weekDayButton.id-1)"
-                   ng-repeat="weekDayButton in weekDaysButtons">{{weekDayButton.text}}</md-button>
+                   ng-repeat="weekDayButton in weekDaysButtons">{{weekDayButton.text}}
+        </md-button>
+
+        <md-button type="button" ng-class="{'md-raised':true, 'md-primary': allWeekDaysButton.pushed}"
+                   style="width:100px"
+                   ng-click="selectAllWeekDays()">Select all
+        </md-button>
     </div>
     <div class="col-sm-3">
         <p> Select hours </p>
         <md-button type="button" ng-class="{'md-raised':true, 'md-primary': hourButton.pushed}" style="width:30px"
                    ng-click="selectHour(hourButton.id)"
-                   ng-repeat="hourButton in hoursButtons">{{hourButton.id}}</md-button>
+                   ng-repeat="hourButton in hoursButtons">{{hourButton.id}}
+        </md-button>
+
+        <md-button type="button" ng-class="{'md-raised':true, 'md-primary': allHoursButton.pushed}" style="width:100px"
+                   ng-click="selectAllHours()">Select all
+        </md-button>
     </div>
 </div>
