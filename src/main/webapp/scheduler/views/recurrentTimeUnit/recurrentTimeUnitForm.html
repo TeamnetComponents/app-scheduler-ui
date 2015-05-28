@@ -12,25 +12,35 @@
                    ng-model="recurrentTimeUnit.value">
         </md-input-container>
         
-
-
         
-        <md-select ng-model="recurrentTimeUnit.timeUnit.id"
-                   placeholder="timeUnit">
-            <md-option ng-value="timeUnit.id"
-                       ng-repeat="timeUnit in timeUnits">
-                {{ timeUnit.name}}
-            </md-option>
-        </md-select>
+        <ui-select ng-model="recurrentTimeUnit.timeUnit"
+                   theme="selectize"
+                   style="width: 300px;" >
+
+            <ui-select-match placeholder="timeUnit">
+                {{$select.selected.name}}
+            </ui-select-match>
+
+            <ui-select-choices repeat="timeUnit in timeUnits  | filter: $select.search">
+                <div ng-bind-html="timeUnit.name | highlight: $select.search"></div>
+            </ui-select-choices>
+
+        </ui-select>
 
         <br/><br/>
-        <md-select ng-model="recurrentTimeUnit.schedule"
-                   placeholder="schedule">
-            <md-option ng-value="{id: schedule.id, version: schedule.version}"
-                       ng-repeat="schedule in schedules">
-                {{ schedule.id}}
-            </md-option>
-        </md-select>
+        <ui-select ng-model="recurrentTimeUnit.schedule"
+                   theme="selectize"
+                   style="width: 300px;" >
+
+            <ui-select-match placeholder="schedule">
+                {{$select.selected.id}}
+            </ui-select-match>
+
+            <ui-select-choices repeat="schedule in schedules  | filter: $select.search">
+                <div ng-bind-html="schedule.id | highlight: $select.search"></div>
+            </ui-select-choices>
+
+        </ui-select>
 
         <br/><br/>
 

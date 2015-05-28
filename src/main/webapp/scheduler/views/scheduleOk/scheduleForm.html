@@ -8,9 +8,20 @@
         <div class="form-inline">
             <label class="my-md-label"> Select job : </label>
 
-            <select name="job_selector" ng-model="schedule.scheduledJob" class="form-control"
-                    ng-options="scheduledJob.name for scheduledJob in scheduledJobs" required>
-            </select>
+            <ui-select name="job_selector"
+                       ng-model="schedule.scheduledJob"
+                       theme="selectize"
+                       style="width: 300px;" >
+
+                <ui-select-match placeholder="scheduledJob">
+                    {{$select.selected.name}}
+                </ui-select-match>
+
+                <ui-select-choices repeat="scheduledJob in scheduledJobs  | filter: $select.search">
+                    <div ng-bind-html="scheduledJob.name | highlight: $select.search"></div>
+                </ui-select-choices>
+
+            </ui-select>
         </div>
 
         <br>

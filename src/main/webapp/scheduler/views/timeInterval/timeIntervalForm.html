@@ -31,13 +31,20 @@
                    ng-model="timeInterval.interval">
         </md-input-container>
         
-        <md-select ng-model="timeInterval.timeUnit.id"
-                   placeholder="timeUnit">
-            <md-option ng-value="timeUnit.id"
-                       ng-repeat="timeUnit in timeUnits">
-                {{ timeUnit.name}}
-            </md-option>
-        </md-select>
+        
+        <ui-select ng-model="timeInterval.timeUnit"
+                   theme="selectize"
+                   style="width: 300px;" >
+
+            <ui-select-match placeholder="timeUnit">
+                {{$select.selected.name}}
+            </ui-select-match>
+
+            <ui-select-choices repeat="timeUnit in timeUnits  | filter: $select.search">
+                <div ng-bind-html="timeUnit.name | highlight: $select.search"></div>
+            </ui-select-choices>
+
+        </ui-select>
 
         <br/><br/>
 
