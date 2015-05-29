@@ -10,6 +10,14 @@ schedulerServices
                     data = angular.fromJson(data);
                     return data;
                 }
+            },
+            'findByCode': {
+                url: 'app/rest/timeUnit/findByCode/:code',
+                method: 'GET',
+                transformResponse: function(data) {
+                    data = angular.fromJson(data);
+                    return data;
+                }
             }
         });
     });

@@ -175,6 +175,7 @@
 schedulerControllers
     .controller('ScheduleControllerOk', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit) {
 
+        $scope.timeUnits = TimeUnit.query();
         $scope.timeIntervals = TimeInterval.query();
         $scope.recurrentTimeUnits = RecurrentTimeUnit.query();
         $scope.scheduledJobs = ScheduledJob.query();
@@ -213,6 +214,7 @@ schedulerControllers
                 //Toggle Custom fire times
                 else if ($scope.selectedRepetitionType == $scope.repetitionTypes[1]) {
                     $scope.regularIntervals = false;
+                    $scope.schedule.timeInterval = null;
                     resetCustomFiresIntervals();
                 }
             }
@@ -483,6 +485,17 @@ schedulerControllers
             }
         };
 
+        function getTimeUnitIdByCode(code) {
+            if($scope.timeUnits != null && $scope.timeUnits != undefined) {
+                for (var i=0; i<$scope.timeUnits.length; i++) {
+                    if ($scope.timeUnits[i].code == code) {
+                        return $scope.timeUnits[i];
+                    }
+                }
+            }
+            return null;
+        }
+
         /* Construire date pentru custom fire intervals */
         function buildRecurrentTimeUnits() {
             var recurrentTimeUnits = [];
@@ -493,8 +506,8 @@ schedulerControllers
                     if ($scope.monthsButtons[i].pushed == true) {
                         var obj = {};
                         obj.value = $scope.monthsButtons[i].id;
-                        obj.timeunit_id = 7; //7 = MONTH
-                        obj.schedule_id = $scope.schedule.scheduledJob.id;
+                        obj.timeUnit = getTimeUnitIdByCode("MON");
+                        obj.schedule = {};
                         recurrentTimeUnits.push(obj);
                     }
                 }
@@ -502,8 +515,7 @@ schedulerControllers
             else {
                 var obj = {};
                 obj.value = -1;
-                obj.timeunit_id = 7; //7 = MONTH
-                obj.schedule_id = $scope.schedule.scheduledJob.id;
+                obj.timeunit = getTimeUnitIdByCode("MON"); //7 = MONTH
                 recurrentTimeUnits.push(obj);
             }
 
@@ -514,8 +526,7 @@ schedulerControllers
                     if ($scope.monthDaysButtons[i].pushed == true) {
                         var obj = {};
                         obj.value = $scope.monthDaysButtons[i].id;
-                        obj.timeunit_id = 4; //4 = DAY
-                        obj.schedule_id = $scope.schedule.scheduledJob.id;
+                        obj.timeunit_id = getTimeUnitIdByCode("D"); //4 = DAY
                         recurrentTimeUnits.push(obj);
                     }
                 }
@@ -523,8 +534,7 @@ schedulerControllers
             else {
                 var obj = {};
                 obj.value = -1;
-                obj.timeunit_id = 4; //4 = DAY
-                obj.schedule_id = $scope.schedule.scheduledJob.id;
+                obj.timeunit_id = getTimeUnitIdByCode("D"); //4 = DAY
                 recurrentTimeUnits.push(obj);
             }
 
@@ -534,8 +544,8 @@ schedulerControllers
                     if ($scope.weekDaysButtons[i].pushed == true) {
                         var obj = {};
                         obj.value = $scope.weekDaysButtons[i].id;
-                        obj.timeunit_id = 8; //8 = WEEK DAY
-                        obj.schedule_id = $scope.schedule.scheduledJob.id;
+                        obj.timeUnit = getTimeUnitIdByCode("W"); //8 = WEEK DAY
+                        obj.schedule = $scope.schedule;
                         recurrentTimeUnits.push(obj);
                     }
                 }
@@ -543,8 +553,8 @@ schedulerControllers
             else {
                 var obj = {};
                 obj.value = -1;
-                obj.timeunit_id = 8; //8 = WEEK DAY
-                obj.schedule_id = $scope.schedule.scheduledJob.id;
+                obj.timeUnit =  getTimeUnitIdByCode("W"); //8 = WEEK DAY
+//                obj.schedule = $scope.schedule;
                 recurrentTimeUnits.push(obj);
             }
 
@@ -554,8 +564,7 @@ schedulerControllers
                     if ($scope.hoursButtons[i].pushed == true) {
                         var obj = {};
                         obj.value = $scope.hoursButtons[i].id;
-                        obj.timeunit_id = 3; //3 = HOUR
-                        obj.schedule_id = $scope.schedule.scheduledJob.id;
+                        obj.timeunit_id =  getTimeUnitIdByCode("H"); //3 = HOUR
                         recurrentTimeUnits.push(obj);
                     }
                 }
@@ -563,8 +572,7 @@ schedulerControllers
             else {
                 var obj = {};
                 obj.value = -1;
-                obj.timeunit_id = 3; //3 = HOUR
-                obj.schedule_id = $scope.schedule.scheduledJob.id;
+                obj.timeunit_id = getTimeUnitIdByCode("H"); //3 = HOUR
                 recurrentTimeUnits.push(obj);
             }
 
@@ -573,7 +581,6 @@ schedulerControllers
         /* -------------------------------------------------------------------*/
 
         /* -------------------- Add custom interval --------------------------*/
-        $scope.timeUnits = TimeUnit.query();
         $scope.newTimeInterval = {name: null, custom: true, intervalMillis: null, interval: null, id: null};
         $scope.addCustomInterval = function () {
         TimeInterval.save($scope.newTimeInterval,function(data){
