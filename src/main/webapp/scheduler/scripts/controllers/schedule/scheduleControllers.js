@@ -173,7 +173,7 @@
  */
 
 schedulerControllers
-    .controller('ScheduleControllerOk', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit) {
+    .controller('ScheduleController', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit) {
 
         $scope.timeUnits = TimeUnit.query();
         $scope.timeIntervals = TimeInterval.query();
