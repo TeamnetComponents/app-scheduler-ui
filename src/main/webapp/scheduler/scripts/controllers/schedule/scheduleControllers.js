@@ -374,7 +374,7 @@ schedulerControllers
             else {
                 var obj = {};
                 obj.value = -1;
-                obj.timeunit = getTimeUnitIdByCode("MON"); //7 = MONTH
+                obj.timeUnit = getTimeUnitIdByCode("MON"); //7 = MONTH
                 recurrentTimeUnits.push(obj);
             }
 
@@ -385,7 +385,7 @@ schedulerControllers
                     if ($scope.monthDaysButtons[i].pushed == true) {
                         var obj = {};
                         obj.value = $scope.monthDaysButtons[i].id;
-                        obj.timeunit_id = getTimeUnitIdByCode("D"); //4 = DAY
+                        obj.timeUnit = getTimeUnitIdByCode("D"); //4 = DAY
                         recurrentTimeUnits.push(obj);
                     }
                 }
@@ -393,7 +393,7 @@ schedulerControllers
             else {
                 var obj = {};
                 obj.value = -1;
-                obj.timeunit_id = getTimeUnitIdByCode("D"); //4 = DAY
+                obj.timeUnit = getTimeUnitIdByCode("D"); //4 = DAY
                 recurrentTimeUnits.push(obj);
             }
 
@@ -404,7 +404,6 @@ schedulerControllers
                         var obj = {};
                         obj.value = $scope.weekDaysButtons[i].id;
                         obj.timeUnit = getTimeUnitIdByCode("W"); //8 = WEEK DAY
-                        obj.schedule = $scope.schedule;
                         recurrentTimeUnits.push(obj);
                     }
                 }
@@ -413,7 +412,6 @@ schedulerControllers
                 var obj = {};
                 obj.value = -1;
                 obj.timeUnit =  getTimeUnitIdByCode("W"); //8 = WEEK DAY
-//                obj.schedule = $scope.schedule;
                 recurrentTimeUnits.push(obj);
             }
 
@@ -423,7 +421,7 @@ schedulerControllers
                     if ($scope.hoursButtons[i].pushed == true) {
                         var obj = {};
                         obj.value = $scope.hoursButtons[i].id;
-                        obj.timeunit_id =  getTimeUnitIdByCode("H"); //3 = HOUR
+                        obj.timeUnit =  getTimeUnitIdByCode("H"); //3 = HOUR
                         recurrentTimeUnits.push(obj);
                     }
                 }
@@ -431,7 +429,7 @@ schedulerControllers
             else {
                 var obj = {};
                 obj.value = -1;
-                obj.timeunit_id = getTimeUnitIdByCode("H"); //3 = HOUR
+                obj.timeUnit = getTimeUnitIdByCode("H"); //3 = HOUR
                 recurrentTimeUnits.push(obj);
             }
 
