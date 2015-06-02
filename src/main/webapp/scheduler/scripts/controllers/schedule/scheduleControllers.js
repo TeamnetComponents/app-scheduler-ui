@@ -455,7 +455,6 @@ schedulerControllers
         /* -------------------------------------------------------------------- */
 
         $scope.createOrUpdate = function () {
-            $scope.schedule.recurrentTimeUnits = {};
             console.log($scope.schedule.startTime);
             $scope.showGrid = true;
 
@@ -471,7 +470,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.schedule = {active: true, recurrent: false, cron: null, startTime: null, endTime: null, repetitions: null, id: null};
+            $scope.schedule = {active: true, recurrent: false, cron: null, startTime: null, endTime: null, repetitions: null, recurrentTimeUnits: [], id: null};
             $scope.searchTerms = [];
             $scope.showDetails = false;
         };
