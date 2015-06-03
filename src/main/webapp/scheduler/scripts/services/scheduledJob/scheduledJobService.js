@@ -1,7 +1,7 @@
 'use strict';
 
 schedulerServices
-    .factory('ScheduledJob', function ($resource) {
+    .factory('ScheduledJob', ['$resource', function ($resource) {
         return $resource('app/rest/scheduledJob/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
@@ -18,4 +18,4 @@ schedulerServices
                 }
             }
         });
-    });
+    }]);

@@ -52,6 +52,14 @@ schedulerModule
                   authorizedModules: [AUTH_BOOTSTRAP.all]
               }
            });
+    $routeProvider
+           .when('/scheduledJobExecution', {
+              templateUrl: 'scheduler/views/scheduledJobExecution/scheduledJobExecutionWrapper.html',
+              controller: 'ScheduledJobExecutionController',
+              access: {
+                  authorizedModules: [AUTH_BOOTSTRAP.all]
+              }
+           });
     //place some routes here
 
     });

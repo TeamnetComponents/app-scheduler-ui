@@ -25,6 +25,8 @@
         "scheduler/scripts/controllers/scheduledJob/scheduledJobControllers.js",
         "scheduler/scripts/services/scheduledJob/scheduledJobService.js",
         "scheduler/scripts/controllers/scheduledJob/scheduledJobControllers.js",
-        "scheduler/scripts/services/scheduledJob/scheduledJobService.js"
+        "scheduler/scripts/services/scheduledJob/scheduledJobService.js",
+        "scheduler/scripts/controllers/scheduledJobExecution/scheduledJobExecutionControllers.js",
+        "scheduler/scripts/services/scheduledJobExecution/scheduledJobExecutionService.js"
     ]
 }

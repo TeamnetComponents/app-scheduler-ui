@@ -1,13 +1,15 @@
 'use strict';
 schedulerControllers
-    .controller('ScheduledJobController', function ($scope,AppGridConstants, ScheduledJob, Schedule, Task) {
+    .controller('ScheduledJobController', ['$scope','AppGridConstants', 'ScheduledJob', 'Schedule' ,'Task' ,'ScheduledJobExecution' ,function ($scope,AppGridConstants, ScheduledJob, Schedule, Task, ScheduledJobExecution) {
 
         
         $scope.schedules = Schedule.query();
         $scope.tasks = Task.query();
+        $scope.scheduledJobExecutions = ScheduledJobExecution.query();
         
         $scope.showSchedule = false;
         $scope.showTask = false;
+        $scope.showScheduledJobExecution = false;
         $scope.actionEvent="scheduledJobGrid";
         $scope.showEditBtn = true;
         $scope.showCreateOrEdit = false;
@@ -37,11 +39,19 @@ schedulerControllers
                 $scope.showSchedule = true;
                 
                 $scope.showTask = false;
+                $scope.showScheduledJobExecution = false;
             }
             if(grid == 'task'){
                 $scope.showTask = true;
                 
                 $scope.showSchedule = false;
+                $scope.showScheduledJobExecution = false;
+            }
+            if(grid == 'scheduledJobExecution'){
+                $scope.showScheduledJobExecution = true;
+                
+                $scope.showSchedule = false;
+                $scope.showTask = false;
             }
         };
 
@@ -56,7 +66,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.scheduledJob = {name: null, description: null, type: null, quartzJobClassName: null, nextScheduledExecution: null, lastExecutionTime: null, lastExecutionState: null, id: null};
+            $scope.scheduledJob = {name: null, description: null, type: null, quartzJobClassName: null, nextScheduledExecution: null, lastExecutionTime: null, lastExecutionState: null, version: null, created: null, lastUpdated: null, deleted: null, id: null};
             $scope.searchTerms = [];
             $scope.showDetails=false;
         };
@@ -127,4 +137,4 @@ schedulerControllers
         };
 
 
-    });
+    }]);
