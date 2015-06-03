@@ -151,22 +151,39 @@ schedulerControllers
             resetCustomFiresIntervals();
             if ($scope.schedule != null && $scope.schedule.recurrentTimeUnits != null) {
                 for (var i = 0; i < $scope.schedule.recurrentTimeUnits.length; i++) {
-                    console.log($scope.schedule.recurrentTimeUnits[i].timeUnit.code);
-                    if ($scope.schedule.recurrentTimeUnits[i].timeUnit.code == "MON") {
-                        $scope.monthsButtons[$scope.schedule.recurrentTimeUnits[i].value-1].pushed = true;
-                        $scope.nrSelectedCustom++;
+                    var recurrentTimeUnit = $scope.schedule.recurrentTimeUnits[i];
+                    console.log(recurrentTimeUnit.timeUnit.code + '=' + recurrentTimeUnit.value);
+                    if (recurrentTimeUnit.timeUnit.code == "MON") {
+                        if (recurrentTimeUnit.value == -1) {
+                            $scope.allMonthsButton.pushed = true;
+                        } else {
+                            $scope.monthsButtons[recurrentTimeUnit.value - 1].pushed = true;
+                            $scope.nrSelectedCustom++;
+                        }
                     }
-                    else if ($scope.schedule.recurrentTimeUnits[i].timeUnit.code == "D") {
-                        $scope.monthDaysButtons[$scope.schedule.recurrentTimeUnits[i].value-1].pushed = true;
-                        $scope.nrSelectedCustom++;
+                    else if (recurrentTimeUnit.timeUnit.code == "D") {
+                        if (recurrentTimeUnit.value == -1) {
+                            $scope.allMonthDaysButton.pushed = true;
+                        } else {
+                            $scope.monthDaysButtons[recurrentTimeUnit.value - 1].pushed = true;
+                            $scope.nrSelectedCustom++;
+                        }
                     }
-                    else if ($scope.schedule.recurrentTimeUnits[i].timeUnit.code == "W") {
-                        $scope.weekDaysButtons[$scope.schedule.recurrentTimeUnits[i].value-1].pushed = true;
-                        $scope.nrSelectedCustom++;
+                    else if (recurrentTimeUnit.timeUnit.code == "W") {
+                        if (recurrentTimeUnit.value == -1) {
+                            $scope.allWeekDaysButton.pushed = true;
+                        } else {
+                            $scope.weekDaysButtons[recurrentTimeUnit.value - 1].pushed = true;
+                            $scope.nrSelectedCustom++;
+                        }
                     }
-                    else if ($scope.schedule.recurrentTimeUnits[i].timeUnit.code == "H") {
-                        $scope.hoursButtons[$scope.schedule.recurrentTimeUnits[i].value-1].pushed = true;
-                        $scope.nrSelectedCustom++;
+                    else if (recurrentTimeUnit.timeUnit.code == "H") {
+                        if (recurrentTimeUnit.value == -1) {
+                            $scope.allHoursButton.pushed = true;
+                        } else {
+                            $scope.hoursButtons[recurrentTimeUnit.value].pushed = true;
+                            $scope.nrSelectedCustom++;
+                        }
                     }
                 }
             }
@@ -455,13 +472,14 @@ schedulerControllers
         /* -------------------------------------------------------------------- */
 
         $scope.createOrUpdate = function () {
-            $scope.schedule.recurrentTimeUnits = {};
             console.log($scope.schedule.startTime);
             $scope.showGrid = true;
 
+            console.log("before: " + $scope.schedule.recurrentTimeUnits);
             /* Daca este pe custom fire intervals, contruiesc arrayul */
             if ($scope.schedule.recurrent && !$scope.regularIntervals) {
                 $scope.schedule.recurrentTimeUnits = buildRecurrentTimeUnits();
+                console.log("after: " + $scope.schedule.recurrentTimeUnits);
             }
             Schedule.save($scope.schedule,
                 function () {
@@ -471,7 +489,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.schedule = {active: true, recurrent: false, cron: null, startTime: null, endTime: null, repetitions: null, id: null};
+            $scope.schedule = {active: true, recurrent: false, cron: null, startTime: null, endTime: null, repetitions: null, recurrentTimeUnits: [], id: null};
             $scope.searchTerms = [];
             $scope.showDetails = false;
         };
