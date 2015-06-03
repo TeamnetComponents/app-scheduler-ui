@@ -191,7 +191,7 @@ schedulerControllers
 
         createCustomFiresIntervals();
 
-        setCustomFiresFromCTU();
+        //setCustomFiresFromCTU();
 
         /* Numar cate butoane au fost apasate */
         function countSelected(pushed) {
