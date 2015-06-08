@@ -1,13 +1,14 @@
 <div ng-show="showGrid">
     <app-grid
-            id="appGrid.id"
-            url="appGrid.url"
-            refresh-event="refreshEvent"
-            refresh-function="refreshFunction"
-            search-terms="searchTerms"
-            custom-options="customOptions"
-            action-event="actionEvent"
-            get-selected="selected">
+        url="appGrid.url"
+        column-metadata="appGrid.columnMetadata"
+        title="appGrid.title"
+        refresh-event="refreshEvent"
+        refresh-function="refreshFunction"
+        search-terms="searchTerms"
+        custom-options="customOptions"
+        action-event="actionEvent"
+        get-selected="selected">
     </app-grid>
     <section layout="row" layout-sm="column" layout-align="right">
         <md-button class="md-raised" ng-click="showAdd()">Adauga</md-button>

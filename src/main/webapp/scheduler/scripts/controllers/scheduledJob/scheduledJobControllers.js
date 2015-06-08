@@ -1,6 +1,7 @@
 'use strict';
 schedulerControllers
-    .controller('ScheduledJobController', ['$scope','AppGridConstants', 'ScheduledJob', 'Schedule' ,'Task' ,'ScheduledJobExecution' ,function ($scope,AppGridConstants, ScheduledJob, Schedule, Task, ScheduledJobExecution) {
+    .controller('ScheduledJobController', ['$scope', 'AppGridConstants', 'ScheduledJob', 'Schedule' ,'Task' ,'ScheduledJobExecution', 'AppGridMetadataBuilder' ,
+        function ($scope, AppGridConstants, ScheduledJob, Schedule, Task, ScheduledJobExecution, AppGridMetadataBuilder) {
 
         
         $scope.schedules = Schedule.query();
@@ -89,10 +90,6 @@ schedulerControllers
         $scope.selected;
         $scope.refreshFunction;
 
-        $scope.appGrid = {
-            url:'app/rest/scheduledJob/list',
-            id : 'scheduledJob'
-        };
 
         $scope.functionality='ScheduledJob';
 
@@ -108,8 +105,6 @@ schedulerControllers
 
         $scope.refresh = function(){
             $scope.$broadcast($scope.refreshEvent);
-
-
         };
 
         $scope.back = function(){
@@ -136,5 +131,35 @@ schedulerControllers
             }
         };
 
+            var newGridId = 'newScheduledJob';
+            var metadataBuilder = new AppGridMetadataBuilder(newGridId);
+            metadataBuilder.resetGridMetadata();
+            if (!metadataBuilder.gridExists()) {
+                metadataBuilder.addColumnFilter('id', AppGridConstants.searchFilterTypes.EQUAL, true, '!==');
+                metadataBuilder.enableColumnSorting('id', false);
+                metadataBuilder.addColumn('name');
+                metadataBuilder.addColumn('scheduledJobExecution.nextFireTime');
+                metadataBuilder.addColumn('scheduledJobExecution.lastFireTime');
+                metadataBuilder.addColumn('scheduledJobExecution.state');
+                metadataBuilder.addColumn('scheduledJobExecution.status');
+                metadataBuilder.addColumn('ownerId');
+                metadataBuilder.addColumn('roles');
+            }
 
+            metadataBuilder.setColumnLabelKey('id', 'Id');
+            metadataBuilder.setColumnLabelKey('name', 'Name');
+            metadataBuilder.setColumnLabelKey('scheduledJobExecution.nextFireTime', 'Next fire time');
+            metadataBuilder.setColumnLabelKey('scheduledJobExecution.lastFireTime', 'Last fire time');
+            metadataBuilder.setColumnLabelKey('scheduledJobExecution.state', 'Execution state');
+            metadataBuilder.setColumnLabelKey('scheduledJobExecution.status', 'Status');
+            metadataBuilder.setColumnLabelKey('ownerId', 'Owner');
+            metadataBuilder.setColumnLabelKey('roles', 'Roles');
+
+            $scope.appGrid = {
+                url:'app/rest/scheduledJob/list',
+                title:'Schedule job',
+                columnMetadata:metadataBuilder.getColumnMetadata()
+            };
+
+            $scope.$root.locale = 'ro';
     }]);

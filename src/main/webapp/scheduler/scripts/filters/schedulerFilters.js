@@ -1,0 +1,1 @@
+var schedulerFilters = angular.module('schedulerFilters', []);
