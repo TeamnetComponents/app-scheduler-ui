@@ -131,7 +131,7 @@ schedulerControllers
             }
         };
 
-            var newGridId = 'newScheduledJob';
+            var newGridId = 'scheduledJobGrid';
             var metadataBuilder = new AppGridMetadataBuilder(newGridId);
             metadataBuilder.resetGridMetadata();
             if (!metadataBuilder.gridExists()) {
@@ -152,9 +152,12 @@ schedulerControllers
             metadataBuilder.setColumnLabelKey('ownerId', 'Owner');
             metadataBuilder.setColumnLabelKey('roles', 'Roles');
 
+            $scope.columnMetadata = metadataBuilder.getColumnMetadata();
+
             $scope.appGrid = {
+                id:'scheduledJobGrid',
                 url:'app/rest/scheduledJob/list',
                 title:'Schedule job',
-                columnMetadata:metadataBuilder.getColumnMetadata()
+                columnMetadata: $scope.columnMetadata
             };
     }]);

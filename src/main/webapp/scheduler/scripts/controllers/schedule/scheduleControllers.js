@@ -3,8 +3,8 @@
 schedulerControllers
     .filter('booleanCellFormatter', function(){
         var boolValues = {
-            true: "DA",
-            false: "NU"
+            true: "Da",
+            false: "Nu"
         };
         return function(boolCell) {
             return boolValues[boolCell];
@@ -591,7 +591,7 @@ schedulerControllers
         if (!metadataBuilder.gridExists()) {
             metadataBuilder.addColumn('active');
             metadataBuilder.formatCells('active', 'booleanCellFormatter');
-            metadataBuilder.addColumn('recurrent');
+            metadataBuilder.addColumn('recurrent', 'booleanCellFormatter');
             metadataBuilder.addColumn('startTime');
             metadataBuilder.addColumn('endTime');
             metadataBuilder.addColumn('repetitions');
