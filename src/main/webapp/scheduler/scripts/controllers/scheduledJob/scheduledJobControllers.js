@@ -7,7 +7,6 @@ schedulerControllers
         $scope.schedules = Schedule.query();
         $scope.tasks = Task.query();
         $scope.scheduledJobExecutions = ScheduledJobExecution.query();
-        
         $scope.showSchedule = false;
         $scope.showTask = false;
         $scope.showScheduledJobExecution = false;
@@ -17,6 +16,9 @@ schedulerControllers
         $scope.showBtns = false;
         $scope.showDetails = false;
         $scope.showGrid = true;
+
+        $scope.showScheduledJobDetails = false;
+            $scope.readOnlyData = true;
 
         $scope.selected = function(){};
 
@@ -37,6 +39,7 @@ schedulerControllers
             );
             
             if(grid == 'schedule'){
+                $scope.showScheduledJobDetails = true;
                 $scope.showSchedule = true;
                 
                 $scope.showTask = false;
@@ -44,13 +47,15 @@ schedulerControllers
             }
             if(grid == 'task'){
                 $scope.showTask = true;
-                
+
+                $scope.showScheduledJobDetails = false;
                 $scope.showSchedule = false;
                 $scope.showScheduledJobExecution = false;
             }
             if(grid == 'scheduledJobExecution'){
                 $scope.showScheduledJobExecution = true;
-                
+
+                $scope.showScheduledJobDetails = false;
                 $scope.showSchedule = false;
                 $scope.showTask = false;
             }

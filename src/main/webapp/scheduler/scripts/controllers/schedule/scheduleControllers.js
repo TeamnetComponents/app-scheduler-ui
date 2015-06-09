@@ -467,6 +467,7 @@ schedulerControllers
         $scope.newTimeInterval = {name: null, custom: true, intervalMillis: null, interval: null, id: null};
         $scope.addCustomInterval = function () {
         TimeInterval.save($scope.newTimeInterval,function(data){
+            //$scope.timeIntervals = [];
             $scope.timeIntervals = TimeInterval.query(function(data) {
                 for (var i=0; i<$scope.timeIntervals.length; i++) {
                     if ($scope.timeIntervals[i].name == $scope.newTimeInterval.name) {
@@ -520,11 +521,6 @@ schedulerControllers
         $scope.refreshEvent = "refreshEvent";
         $scope.selected;
         $scope.refreshFunction;
-
-        /*$scope.appGrid = {
-            url:'app/rest/schedule/list',
-            id : 'schedule'
-        };*/
 
         $scope.functionality = 'Schedule';
 
@@ -604,6 +600,7 @@ schedulerControllers
         metadataBuilder.setColumnLabelKey('repetitions', 'Repetitii');
 
         $scope.appGrid = {
+            id: 'schedule',
             url:'app/rest/schedule/list',
             title:'Schedule',
             columnMetadata:metadataBuilder.getColumnMetadata()

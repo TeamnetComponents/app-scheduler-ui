@@ -5,7 +5,6 @@
         <input type="hidden" name="id"
                ng-model="scheduledJob.id" readonly>
 
-        
         <md-input-container>
             <label>Name</label>
             <input type="text" name="scheduledJob_name"
@@ -29,6 +28,44 @@
             <input type="text" name="scheduledJob_quartzJobClassName"
                    ng-model="scheduledJob.quartzJobClassName">
         </md-input-container>
+
+        <div ng-show="showScheduledJobDetails">
+            <md-input-container>
+                <label>Next fire time</label>
+                <input type="text" name="scheduledJob_active"
+                       ng-model="scheduledJob.scheduledJobExecution.nextFireTime" ng-readonly="readOnlyData">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Last fire time</label>
+                <input type="text" name="scheduledJob_startTime"
+                       ng-model="scheduledJob.scheduledJobExecution.lastFireTime" ng-readonly="readOnlyData">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Execution state</label>
+                <input type="text" name="scheduledJob_endTime"
+                       ng-model="scheduledJob.scheduledJobExecution.state" ng-readonly="readOnlyData">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Status</label>
+                <input type="text" name="scheduledJob_endTime"
+                       ng-model="scheduledJob.scheduledJobExecution.status" ng-readonly="readOnlyData">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Owner</label>
+                <input type="text" name="scheduledJob_endTime"
+                       ng-model="scheduledJob.ownerId" ng-readonly="readOnlyData">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Roles</label>
+                <input type="text" name="scheduledJob_endTime"
+                       ng-model="scheduledJob.roles" ng-readonly="readOnlyData">
+            </md-input-container>
+        </div>
 
         <button type="button" class="btn btn-default" ng-click="back()">
             <span class="md-raised"></span>&nbsp;<span>Cancel</span>

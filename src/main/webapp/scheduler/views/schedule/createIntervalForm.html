@@ -1,7 +1,6 @@
 <div>
-<!--
-    <form name="createIntervalForm" novalidate>
--->
+
+    <!--<form name="createIntervalForm" novalidate>-->
 
         <input type="hidden" name="id"
                ng-model="newTimeInterval.id" readonly>
@@ -9,23 +8,18 @@
         <md-input-container>
             <label>Nume</label>
             <input type="text" name="newTimeInterval_name"
-                   ng-model="newTimeInterval.name">
+                   ng-model="newTimeInterval.name" ng-required>
         </md-input-container>
 
         <md-input-container>
-            <label>Interval in milisecunde</label>
-            <input type="number" name="newTimeInterval_intervalMillis"
-                   ng-model="newTimeInterval.intervalMillis">
-        </md-input-container>
-
-        <md-input-container>
-            <label>Interval</label>
+            <label>Durata</label>
             <input type="number" name="newTimeInterval_interval"
-                   ng-model="newTimeInterval.interval">
+                   ng-model="newTimeInterval.interval" ng-required>
         </md-input-container>
 
         <select class="form-control" ng-model="newTimeInterval.timeUnit.id"
                    placeholder="timeUnit">
+            <option value="" disabled selected>Unitate de masura</option>
             <option ng-value="timeUnit.id"
                        ng-repeat="timeUnit in timeUnits">
                 {{ timeUnit.name}}
@@ -35,11 +29,11 @@
         <br/><br/>
 
         <div class="row" style="text-align: center">
-            <button type="button" ng-click="addCustomInterval()" ng-disabled="createIntervalForm.$invalid" class="btn btn-default">
+            <button type="button" ng-click="addCustomInterval()" ng-disabled="newTimeInterval.interval == null || newTimeInterval.name == null || newTimeInterval.timeUnit === undefined" class="btn btn-default">
                 <span class="md-raised"></span>&nbsp;<span>Adauga</span>
             </button>
         </div>
-<!--
-    </form>
--->
+
+    <!--</form>-->
+
 </div>
