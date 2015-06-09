@@ -114,7 +114,7 @@
                 <div class="form-inline">
                     <span class="my-md-label"> Selecteaza interval : </span>
                     <select ng-model="schedule.timeInterval" class="form-control"
-                            ng-options="timeInterval.name group by timeInterval.custom for timeInterval in timeIntervals track by timeInterval.id">
+                            ng-options="timeInterval.name group by (timeInterval.custom ? 'Intervale personalizate' : false) for timeInterval in timeIntervals track by timeInterval.id">
                     </select>
                 </div>
 
