@@ -1,7 +1,16 @@
 'use strict';
 
 schedulerControllers
-    .controller('ScheduleController', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit, AppGridMetadataBuilder, friendlyFormatFilter) {
+    .filter('booleanCellFormatter', function(){
+        var boolValues = {
+            true: "DA",
+            false: "NU"
+        };
+        return function(boolCell) {
+            return boolValues[boolCell];
+        };
+    })
+    .controller('ScheduleController', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit, AppGridMetadataBuilder) {
 
         $scope.timeUnits = TimeUnit.query();
         $scope.timeIntervals = TimeInterval.query();
@@ -19,15 +28,15 @@ schedulerControllers
         $scope.showGrid = true;
 
         $scope.repetitionTypes = [
-            {id: "0", name: "Regular intervals"},
-            {id: "1", name: "Custom fire times"}
+            {id: "0", name: "Intervale regulate"}
+            //{id: "1", name: "Custom fire times"}
         ];
         $scope.selectedRepetitionType = $scope.repetitionTypes[0];
 
 
         $scope.toggleRecurrent = function() {
             resetRegularIntervals();
-        }
+        };
 
         $scope.changeRepetitionType = function () {
             if ($scope.schedule != undefined) {
@@ -576,26 +585,23 @@ schedulerControllers
             }
         };
 
-
-
-
         var newGridId = 'schedule';
         var metadataBuilder = new AppGridMetadataBuilder(newGridId);
         metadataBuilder.resetGridMetadata();
         if (!metadataBuilder.gridExists()) {
-            //metadataBuilder.addColumn('active');
-            metadataBuilder.formatCells('active', friendlyFormatFilter);
+            metadataBuilder.addColumn('active');
+            metadataBuilder.formatCells('active', 'booleanCellFormatter');
             metadataBuilder.addColumn('recurrent');
             metadataBuilder.addColumn('startTime');
             metadataBuilder.addColumn('endTime');
             metadataBuilder.addColumn('repetitions');
         }
 
-        metadataBuilder.setColumnLabelKey('active', 'Active');
-        metadataBuilder.setColumnLabelKey('recurrent', 'Recurrent');
-        metadataBuilder.setColumnLabelKey('startTime', 'Start time');
-        metadataBuilder.setColumnLabelKey('endTime', 'End time');
-        metadataBuilder.setColumnLabelKey('repetitions', 'Repetitions');
+        metadataBuilder.setColumnLabelKey('active', 'Activ');
+        metadataBuilder.setColumnLabelKey('recurrent', 'Recurent');
+        metadataBuilder.setColumnLabelKey('startTime', 'Timpul de inceput');
+        metadataBuilder.setColumnLabelKey('endTime', 'Timpul de incheiere');
+        metadataBuilder.setColumnLabelKey('repetitions', 'Repetitii');
 
         $scope.appGrid = {
             url:'app/rest/schedule/list',

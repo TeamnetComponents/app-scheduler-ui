@@ -7,13 +7,13 @@
                ng-model="newTimeInterval.id" readonly>
 
         <md-input-container>
-            <label>Name</label>
+            <label>Nume</label>
             <input type="text" name="newTimeInterval_name"
                    ng-model="newTimeInterval.name">
         </md-input-container>
 
         <md-input-container>
-            <label>IntervalMillis</label>
+            <label>Interval in milisecunde</label>
             <input type="number" name="newTimeInterval_intervalMillis"
                    ng-model="newTimeInterval.intervalMillis">
         </md-input-container>
@@ -36,7 +36,7 @@
 
         <div class="row" style="text-align: center">
             <button type="button" ng-click="addCustomInterval()" ng-disabled="createIntervalForm.$invalid" class="btn btn-default">
-                <span class="md-raised"></span>&nbsp;<span>Add</span>
+                <span class="md-raised"></span>&nbsp;<span>Adauga</span>
             </button>
         </div>
 <!--

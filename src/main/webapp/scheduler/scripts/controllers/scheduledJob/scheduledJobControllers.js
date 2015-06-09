@@ -135,8 +135,6 @@ schedulerControllers
             var metadataBuilder = new AppGridMetadataBuilder(newGridId);
             metadataBuilder.resetGridMetadata();
             if (!metadataBuilder.gridExists()) {
-                metadataBuilder.addColumnFilter('id', AppGridConstants.searchFilterTypes.EQUAL, true, '!==');
-                metadataBuilder.enableColumnSorting('id', false);
                 metadataBuilder.addColumn('name');
                 metadataBuilder.addColumn('scheduledJobExecution.nextFireTime');
                 metadataBuilder.addColumn('scheduledJobExecution.lastFireTime');
@@ -146,7 +144,6 @@ schedulerControllers
                 metadataBuilder.addColumn('roles');
             }
 
-            metadataBuilder.setColumnLabelKey('id', 'Id');
             metadataBuilder.setColumnLabelKey('name', 'Name');
             metadataBuilder.setColumnLabelKey('scheduledJobExecution.nextFireTime', 'Next fire time');
             metadataBuilder.setColumnLabelKey('scheduledJobExecution.lastFireTime', 'Last fire time');
@@ -160,6 +157,4 @@ schedulerControllers
                 title:'Schedule job',
                 columnMetadata:metadataBuilder.getColumnMetadata()
             };
-
-            $scope.$root.locale = 'ro';
     }]);

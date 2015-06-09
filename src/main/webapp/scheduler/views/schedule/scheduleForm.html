@@ -6,14 +6,14 @@
 
         <br>
         <div class="form-inline">
-            <label class="my-md-label"> Select job : </label>
+            <label class="my-md-label"> Selecteaza job : </label>
 
             <ui-select name="job_selector"
                        ng-model="schedule.scheduledJob"
                        theme="selectize"
                        style="width: 300px;" >
 
-                <ui-select-match placeholder="scheduledJob">
+                <ui-select-match placeholder="Job selectat">
                     {{$select.selected.name}}
                 </ui-select-match>
 
@@ -31,18 +31,18 @@
         <br>
 
         <div class="form-group">
-            <label class="my-md-label"> Job options : </label>
+            <label class="my-md-label"> Optiuni job : </label>
 
             <md-input-container>
                 <md-checkbox class="md-primary" type="checkbox" name="schedule_active" ng-model="schedule.active"
                              checked>
-                    Active
+                    Activ
                 </md-checkbox>
             </md-input-container>
 
             <md-input-container>
                 <md-checkbox class="md-primary" type="checkbox" name="schedule_recurrent" ng-click="toggleRecurrent()" ng-model="schedule.recurrent">
-                    Recurrent
+                    Recurent
                 </md-checkbox>
             </md-input-container>
         </div>
@@ -53,46 +53,46 @@
 
         <div class="form-group">
             <div class="non-recurrent-job" ng-if="!schedule.recurrent">
-                <label class="my-md-label"> Execution options : </label>
+                <label class="my-md-label"> Optiuni de executie : </label>
                 <md-input-container style="width:30%">
-                    <label>ExecutionTime</label>
+                    <label>Timpul de inceput al executie</label>
                     <input type="datetime-local" name="schedule_startTime"
                            min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.startTime"
                            ng-required="!schedule.recurrent">
                 </md-input-container>
                 <p ng-show="formCreateOrEdit.schedule_startTime.$invalid && !formCreateOrEdit.schedule_startTime.$pristine"
-                   class="alert-danger"> Execution date needs to be greater than current date!</p>
+                   class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat data curenta!</p>
 
             </div>
 
             <div class="recurrent-job" ng-if="schedule.recurrent">
-                <label class="my-md-label"> Repetition options : </label>
+                <label class="my-md-label"> Optiuni de repetitie : </label>
 
                 <div layout="" layout-sm="column">
 
                     <md-input-container style="width:33%; margin:10px;">
-                        <label>StartTime</label>
+                        <label>Timpul de inceput al executiei</label>
                         <input type="datetime-local" name="schedule_startTime"
                                ng-model="schedule.startTime" ng-required="schedule.recurrent">
                     </md-input-container>
 
                     <md-input-container style="width:33%; margin:10px;">
-                        <label>EndTime(optional) </label>
+                        <label>Timpul de incheiere(optional) </label>
                         <input type="datetime-local" name="schedule_endTime"
                                min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.endTime">
                     </md-input-container>
 
                     <md-input-container style="width:33%; margin:10px;">
-                        <label>Number of repetitions(optional)</label>
+                        <label>Numar de repetitii(optional)</label>
                         <input type="number" name="schedule_repetitions" min="0" ng-model="schedule.repetitions">
                     </md-input-container>
                 </div>
 
                 <p ng-show="formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine"
-                   class="alert-danger"> End date date needs to be greater than current date!</p>
+                   class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data curenta!</p>
 
                 <div class="form-inline">
-                    <span class="my-md-label"> Select repetition type : </span>
+                    <span class="my-md-label"> Selecteaza tipul de repetitie : </span>
 
                     <select name="repetition_selector" ng-change="changeRepetitionType()" ng-model="selectedRepetitionType" class="form-control"
                             ng-options="repetitionType.name for repetitionType in repetitionTypes track by repetitionType.id">
@@ -108,18 +108,18 @@
         <div class="form-group" ng-show="schedule.recurrent">
 
             <div class="regular-intervals" ng-show="regularIntervals">
-                <label class="my-md-label"> Regular intervals options : </label>
+                <label class="my-md-label"> Optiuni intervale regulate : </label>
                 <br><br>
 
                 <div class="form-inline">
-                    <span class="my-md-label"> Select interval : </span>
+                    <span class="my-md-label"> Selecteaza interval : </span>
                     <select ng-model="schedule.timeInterval" class="form-control"
                             ng-options="timeInterval.name group by timeInterval.custom for timeInterval in timeIntervals track by timeInterval.id">
                     </select>
                 </div>
 
                 <md-switch class="md-primary" md-no-ink="" ng-model="customDefinedIntervals">
-                    Create custom time interval
+                    Creaza interval de timp personalizat
                 </md-switch>
 
                 <br>
@@ -148,12 +148,12 @@
 
         <div class="row" style="text-align: center">
             <button type="button" class="btn btn-default" ng-click="back()">
-                <span class="md-raised"></span>&nbsp;<span>Cancel</span>
+                <span class="md-raised"></span>&nbsp;<span>Anuleaza</span>
             </button>
             <button type="submit"
                     ng-disabled="formCreateOrEdit.$invalid || (!formCreateOrEdit.$invalid && schedule.recurrent && !regularIntervals &&  (nrSelectedCustom <= 0))"
                     class="btn btn-default">
-                <span class="md-raised"></span>&nbsp;<span>Save</span>
+                <span class="md-raised"></span>&nbsp;<span>Salveaza</span>
             </button>
         </div>
     </form>
@@ -167,16 +167,16 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
-                        <h4 class="modal-title">Confirm delete operation</h4>
+                        <h4 class="modal-title">Confirma operatia de stergere</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete this row ?</p>
+                        <p>Esti sigur ca vrei sa stergi aceasta intrare ?</p>
                     </div>
                     <div class="modal-footer">
                         <section layout="row" layout-sm="column" layout-align="right">
-                            <md-button class="md-raised" data-dismiss="modal" ng-click="back()">Cancel
+                            <md-button class="md-raised" data-dismiss="modal" ng-click="back()">Anuleaza
                             </md-button>
-                            <md-button type="submit" class="md-raised" ng-disabled="form.$invalid">Delete
+                            <md-button type="submit" class="md-raised" ng-disabled="form.$invalid">Sterge
                             </md-button>
                         </section>
                     </div>
