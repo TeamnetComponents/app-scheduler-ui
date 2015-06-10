@@ -28,8 +28,8 @@ schedulerControllers
         $scope.showGrid = true;
 
         $scope.repetitionTypes = [
-            {id: "0", name: "Intervale regulate"}
-            //{id: "1", name: "Custom fire times"}
+            {id: "0", name: "Intervale regulate"},
+            {id: "1", name: "Custom fire times"}
         ];
         $scope.selectedRepetitionType = $scope.repetitionTypes[0];
 

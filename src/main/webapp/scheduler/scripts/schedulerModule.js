@@ -63,4 +63,3 @@ schedulerModule
     //place some routes here
 
     });
-
