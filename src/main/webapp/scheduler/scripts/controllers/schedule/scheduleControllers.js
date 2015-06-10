@@ -41,7 +41,7 @@ schedulerControllers
         $scope.changeRepetitionType = function () {
             if ($scope.schedule != undefined) {
                 //Toggle Regular intervals
-                if ($scope.selectedRepetitionType == $scope.repetitionTypes[0]) {
+                if ($scope.selectedRepetitionType.id == "0") {
                     /* Setez prima valoare ca cea activa in selectorul de regular times */
                     if ($scope.timeIntervals !=null && $scope.timeIntervals != undefined) {
                         $scope.schedule.timeInterval = $scope.timeIntervals[0];
@@ -49,7 +49,7 @@ schedulerControllers
                     $scope.regularIntervals = true;
                 }
                 //Toggle Custom fire times
-                else if ($scope.selectedRepetitionType == $scope.repetitionTypes[1]) {
+                else if ($scope.selectedRepetitionType.id == "1") {
                     $scope.regularIntervals = false;
                     $scope.schedule.timeInterval = null;
                     setCustomFiresFromCTU();
@@ -585,9 +585,9 @@ schedulerControllers
         var metadataBuilder = new AppGridMetadataBuilder(newGridId);
         metadataBuilder.resetGridMetadata();
         if (!metadataBuilder.gridExists()) {
-            metadataBuilder.addColumn('active');
+            //metadataBuilder.addColumn('active');
             metadataBuilder.formatCells('active', 'booleanCellFormatter');
-            metadataBuilder.addColumn('recurrent', 'booleanCellFormatter');
+            metadataBuilder.formatCells('recurrent', 'booleanCellFormatter');
             metadataBuilder.addColumn('startTime');
             metadataBuilder.addColumn('endTime');
             metadataBuilder.addColumn('repetitions');

@@ -52,9 +52,9 @@
         <br>
 
         <div class="form-group">
-            <div class="non-recurrent-job" ng-if="!schedule.recurrent">
+            <div class="non-recurrent-job" ng-show="!schedule.recurrent">
                 <label class="my-md-label"> Optiuni de executie : </label>
-                <md-input-container style="width:30%">
+                <md-input-container style="width:30%" ng-if="!schedule.recurrent">
                     <label>Timpul de inceput al executie</label>
                     <input type="datetime-local" name="schedule_startTime"
                            min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.startTime"
@@ -65,12 +65,12 @@
 
             </div>
 
-            <div class="recurrent-job" ng-if="schedule.recurrent">
+            <div class="recurrent-job" ng-show="schedule.recurrent">
                 <label class="my-md-label"> Optiuni de repetitie : </label>
 
                 <div layout="" layout-sm="column">
 
-                    <md-input-container style="width:33%; margin:10px;">
+                    <md-input-container style="width:33%; margin:10px;" ng-if="schedule.recurrent">
                         <label>Timpul de inceput al executiei</label>
                         <input type="datetime-local" name="schedule_startTime"
                                ng-model="schedule.startTime" ng-required="schedule.recurrent">
