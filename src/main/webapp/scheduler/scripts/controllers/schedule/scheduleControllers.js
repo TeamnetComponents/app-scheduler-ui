@@ -179,7 +179,11 @@ schedulerControllers
                     if (recurrentTimeUnit.timeUnit.code == "MON") {
                         if (recurrentTimeUnit.value == -1) {
                             $scope.allMonthsButton.pushed = true;
-                            //$scope.nrSelectedMonths = 12;
+                            $scope.nrSelectedMonths = 12;
+                            $scope.nrSelectedCustom += 12;
+                            for (var j = 0; j < $scope.monthsButtons.length; j++) {
+                                $scope.monthsButtons[j].pushed = true;
+                            }
                         } else {
                             $scope.monthsButtons[recurrentTimeUnit.value - 1].pushed = true;
                             $scope.nrSelectedCustom++;
@@ -189,7 +193,11 @@ schedulerControllers
                     else if (recurrentTimeUnit.timeUnit.code == "D") {
                         if (recurrentTimeUnit.value == -1) {
                             $scope.allMonthDaysButton.pushed = true;
-                            //$scope.nrSelectedMonthsDays = 31;
+                            $scope.nrSelectedMonthsDays = 31;
+                            $scope.nrSelectedCustom += 31;
+                            for (var j = 0; j < $scope.monthDaysButtons.length; j++) {
+                                $scope.monthDaysButtons[j].pushed = true;
+                            }
                         } else {
                             $scope.monthDaysButtons[recurrentTimeUnit.value - 1].pushed = true;
                             $scope.nrSelectedCustom++;
@@ -199,7 +207,11 @@ schedulerControllers
                     else if (recurrentTimeUnit.timeUnit.code == "W") {
                         if (recurrentTimeUnit.value == -1) {
                             $scope.allWeekDaysButton.pushed = true;
-                            //$scope.nrSelectedWeekDays = 7;
+                            $scope.nrSelectedWeekDays = 7;
+                            $scope.nrSelectedCustom += 7;
+                            for (var j = 0; j < $scope.weekDaysButtons.length; j++) {
+                                $scope.weekDaysButtons[j].pushed = true;
+                            }
                         } else {
                             $scope.weekDaysButtons[recurrentTimeUnit.value - 1].pushed = true;
                             $scope.nrSelectedCustom++;
@@ -209,7 +221,11 @@ schedulerControllers
                     else if (recurrentTimeUnit.timeUnit.code == "H") {
                         if (recurrentTimeUnit.value == -1) {
                             $scope.allHoursButton.pushed = true;
-                            //$scope.nrSelectedHours = 24;
+                            $scope.nrSelectedHours = 24;
+                            $scope.nrSelectedCustom += 24;
+                            for (var j = 0; j < $scope.hoursButtons.length; j++) {
+                                $scope.hoursButtons[j].pushed = true;
+                            }
                         } else {
                             $scope.hoursButtons[recurrentTimeUnit.value].pushed = true;
                             $scope.nrSelectedCustom++;
@@ -308,7 +324,7 @@ schedulerControllers
                         countSelectedMonths($scope.monthsButtons[i].pushed);
                     }
                 }
-                $scope.allMonthsButton.pushed = true;//select all - fara culoare
+                $scope.allMonthsButton.pushed = true;
             }
 
             else if ($scope.allMonthsButton.pushed == true) {
