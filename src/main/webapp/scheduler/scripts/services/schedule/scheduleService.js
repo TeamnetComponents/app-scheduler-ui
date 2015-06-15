@@ -9,10 +9,12 @@ schedulerServices
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
                     if (data.startTime !== null && data.startTime !== undefined) {
-                        data.startTime = new Date(data.startTime);
+                        //data.startTime = new Date(data.startTime);
+                        data.startTime = moment(data.startTime).toDate();
                     }
                     if (data.endTime !== null && data.endTime !== undefined) {
-                        data.endTime = new Date(data.endTime);
+                        //data.endTime = new Date(data.endTime);
+                        data.endTime = moment(data.endTime).toDate();
                     }
                     return data;
                 }

@@ -77,6 +77,12 @@ schedulerControllers
             $scope.allWeekDaysButton = {pushed: false};
             $scope.allHoursButton = {pushed: false};
             $scope.nrSelectedCustom = 0;
+            /* ------------------------------------------------- */
+            $scope.nrSelectedMonths = 0;
+            $scope.nrSelectedMonthsDays = 0;
+            $scope.nrSelectedWeekDays = 0;
+            $scope.nrSelectedHours = 0;
+            /* ------------------------------------------------- */
             $scope.monthsButtons = [];
             $scope.monthDaysButtons = null;
             $scope.weekDaysButtons = [];
@@ -154,6 +160,14 @@ schedulerControllers
             }
 
             $scope.nrSelectedCustom = 0;
+            /* ------------------------------------------------- */
+            /* ------------------------------------------------- */
+            $scope.nrSelectedMonths = 0;
+            $scope.nrSelectedMonthsDays = 0;
+            $scope.nrSelectedWeekDays = 0;
+            $scope.nrSelectedHours = 0;
+            /* ------------------------------------------------- */
+            /* ------------------------------------------------- */
         }
 
         function setCustomFiresFromCTU() {
@@ -165,33 +179,41 @@ schedulerControllers
                     if (recurrentTimeUnit.timeUnit.code == "MON") {
                         if (recurrentTimeUnit.value == -1) {
                             $scope.allMonthsButton.pushed = true;
+                            //$scope.nrSelectedMonths = 12;
                         } else {
                             $scope.monthsButtons[recurrentTimeUnit.value - 1].pushed = true;
                             $scope.nrSelectedCustom++;
+                            $scope.nrSelectedMonths++;
                         }
                     }
                     else if (recurrentTimeUnit.timeUnit.code == "D") {
                         if (recurrentTimeUnit.value == -1) {
                             $scope.allMonthDaysButton.pushed = true;
+                            //$scope.nrSelectedMonthsDays = 31;
                         } else {
                             $scope.monthDaysButtons[recurrentTimeUnit.value - 1].pushed = true;
                             $scope.nrSelectedCustom++;
+                            $scope.nrSelectedMonthsDays++;
                         }
                     }
                     else if (recurrentTimeUnit.timeUnit.code == "W") {
                         if (recurrentTimeUnit.value == -1) {
                             $scope.allWeekDaysButton.pushed = true;
+                            //$scope.nrSelectedWeekDays = 7;
                         } else {
                             $scope.weekDaysButtons[recurrentTimeUnit.value - 1].pushed = true;
                             $scope.nrSelectedCustom++;
+                            $scope.nrSelectedWeekDays++;
                         }
                     }
                     else if (recurrentTimeUnit.timeUnit.code == "H") {
                         if (recurrentTimeUnit.value == -1) {
                             $scope.allHoursButton.pushed = true;
+                            //$scope.nrSelectedHours = 24;
                         } else {
                             $scope.hoursButtons[recurrentTimeUnit.value].pushed = true;
                             $scope.nrSelectedCustom++;
+                            $scope.nrSelectedHours++;
                         }
                     }
                 }
@@ -202,6 +224,7 @@ schedulerControllers
 
         //setCustomFiresFromCTU();
 
+
         /* Numar cate butoane au fost apasate */
         function countSelected(pushed) {
             if (pushed == true) {
@@ -211,26 +234,70 @@ schedulerControllers
                 $scope.nrSelectedCustom--;
             }
         }
+        function countSelectedMonths(pushed) {
+            if (pushed == true) {
+                $scope.nrSelectedMonths++;
+            }
+            else {
+                $scope.nrSelectedMonths--;
+            }
+        }
+        function countSelectedMonthsDays(pushed) {
+            if (pushed == true) {
+                $scope.nrSelectedMonthsDays++;
+            }
+            else {
+                $scope.nrSelectedMonthsDays--;
+            }
+        }
+        function countSelectedWeekDays(pushed) {
+            if (pushed == true) {
+                $scope.nrSelectedWeekDays++;
+            }
+            else {
+                $scope.nrSelectedWeekDays--;
+            }
+        }
+        function countSelectedHours(pushed) {
+            if (pushed == true) {
+                $scope.nrSelectedHours++;
+            }
+            else {
+                $scope.nrSelectedHours--;
+            }
+        }
+
+        $scope.checkInputsByGroup = function() {
+
+            return $scope.nrSelectedWeekDays <= 0    ||
+                   $scope.nrSelectedMonths <= 0      ||
+                   $scope.nrSelectedMonthsDays <= 0  ||
+                   $scope.nrSelectedHours <= 0 ;
+        };
 
         $scope.selectWeekDay = function (id) {
             $scope.weekDaysButtons[id].pushed = !$scope.weekDaysButtons[id].pushed;
             countSelected($scope.weekDaysButtons[id].pushed);
-        }
+            countSelectedWeekDays($scope.weekDaysButtons[id].pushed);
+        };
 
         $scope.selectMonth = function (id) {
             $scope.monthsButtons[id].pushed = !$scope.monthsButtons[id].pushed;
             countSelected($scope.monthsButtons[id].pushed);
-        }
+            countSelectedMonths($scope.monthsButtons[id].pushed);
+        };
 
         $scope.selectMonthDay = function (id) {
             $scope.monthDaysButtons[id].pushed = !$scope.monthDaysButtons[id].pushed;
             countSelected($scope.monthDaysButtons[id].pushed);
-        }
+            countSelectedMonthsDays($scope.monthDaysButtons[id].pushed);
+        };
 
         $scope.selectHour = function (id) {
             $scope.hoursButtons[id].pushed = !$scope.hoursButtons[id].pushed;
             countSelected($scope.hoursButtons[id].pushed);
-        }
+            countSelectedHours($scope.hoursButtons[id].pushed);
+        };
 
         $scope.selectAllMonths = function() {
             if ($scope.allMonthsButton.pushed == false) {
@@ -238,9 +305,10 @@ schedulerControllers
                     if ($scope.monthsButtons[i].pushed == false) {
                         $scope.monthsButtons[i].pushed = true;
                         countSelected($scope.monthsButtons[i].pushed);
+                        countSelectedMonths($scope.monthsButtons[i].pushed);
                     }
                 }
-                $scope.allMonthsButton.pushed = true;
+                $scope.allMonthsButton.pushed = true;//select all - fara culoare
             }
 
             else if ($scope.allMonthsButton.pushed == true) {
@@ -248,11 +316,12 @@ schedulerControllers
                     if ($scope.monthsButtons[i].pushed == true) {
                         $scope.monthsButtons[i].pushed = false;
                         countSelected($scope.monthsButtons[i].pushed);
+                        countSelectedMonths($scope.monthsButtons[i].pushed);
                     }
                 }
                 $scope.allMonthsButton.pushed = false;
             }
-        }
+        };
 
         $scope.selectAllMonthDays = function () {
             if ($scope.allMonthDaysButton.pushed == false) {
@@ -260,6 +329,7 @@ schedulerControllers
                     if ($scope.monthDaysButtons[i].pushed == false) {
                         $scope.monthDaysButtons[i].pushed = true;
                         countSelected($scope.monthDaysButtons[i].pushed);
+                        countSelectedMonthsDays($scope.monthDaysButtons[i].pushed);
                     }
                 }
                 $scope.allMonthDaysButton.pushed = true;
@@ -270,11 +340,12 @@ schedulerControllers
                     if ($scope.monthDaysButtons[i].pushed == true) {
                         $scope.monthDaysButtons[i].pushed = false;
                         countSelected($scope.monthDaysButtons[i].pushed);
+                        countSelectedMonthsDays($scope.monthDaysButtons[i].pushed);
                     }
                 }
                 $scope.allMonthDaysButton.pushed = false;
             }
-        }
+        };
 
 
         $scope.selectAllWeekDays = function () {
@@ -283,6 +354,7 @@ schedulerControllers
                     if ($scope.weekDaysButtons[i].pushed == false) {
                         $scope.weekDaysButtons[i].pushed = true;
                         countSelected($scope.weekDaysButtons[i].pushed);
+                        countSelectedWeekDays($scope.weekDaysButtons[i].pushed);
                     }
                 }
                 $scope.allWeekDaysButton.pushed = true;
@@ -293,11 +365,12 @@ schedulerControllers
                     if ($scope.weekDaysButtons[i].pushed == true) {
                         $scope.weekDaysButtons[i].pushed = false;
                         countSelected($scope.weekDaysButtons[i].pushed);
+                        countSelectedWeekDays($scope.weekDaysButtons[i].pushed);
                     }
                 }
                 $scope.allWeekDaysButton.pushed = false;
             }
-        }
+        };
 
 
         $scope.selectAllHours = function () {
@@ -306,6 +379,7 @@ schedulerControllers
                     if ($scope.hoursButtons[i].pushed == false) {
                         $scope.hoursButtons[i].pushed = true;
                         countSelected($scope.hoursButtons[i].pushed);
+                        countSelectedHours($scope.hoursButtons[i].pushed);
                     }
                 }
                 $scope.allHoursButton.pushed = true;
@@ -316,11 +390,12 @@ schedulerControllers
                     if ($scope.hoursButtons[i].pushed == true) {
                         $scope.hoursButtons[i].pushed = false;
                         countSelected($scope.hoursButtons[i].pushed);
+                        countSelectedHours($scope.hoursButtons[i].pushed);
                     }
                 }
                 $scope.allHoursButton.pushed = false;
             }
-        }
+        };
 
         /* --------------------------------------------------- */
 
@@ -332,7 +407,8 @@ schedulerControllers
         });
 
         $scope.getCurrentDate = function () {
-            return new Date();
+            //return new Date();
+            return moment().toDate();
         };
 
         $scope.redrawGrid = function (grid) {
