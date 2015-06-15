@@ -240,7 +240,6 @@ schedulerControllers
 
         //setCustomFiresFromCTU();
 
-
         /* Numar cate butoane au fost apasate */
         function countSelected(pushed) {
             if (pushed == true) {
@@ -293,26 +292,66 @@ schedulerControllers
 
         $scope.selectWeekDay = function (id) {
             $scope.weekDaysButtons[id].pushed = !$scope.weekDaysButtons[id].pushed;
+            $scope.allWeekDaysButton.pushed = false;
             countSelected($scope.weekDaysButtons[id].pushed);
             countSelectedWeekDays($scope.weekDaysButtons[id].pushed);
+            var checkWeekDay = 0;
+            for (var i = 0; i < $scope.weekDaysButtons.length; i++) {
+                if ($scope.weekDaysButtons[i].pushed == true) {
+                    checkWeekDay++;
+                }
+            }
+            if(checkWeekDay == 7) {
+                $scope.allWeekDaysButton.pushed = true;
+            }
         };
 
         $scope.selectMonth = function (id) {
             $scope.monthsButtons[id].pushed = !$scope.monthsButtons[id].pushed;
+            $scope.allMonthsButton.pushed = false;
             countSelected($scope.monthsButtons[id].pushed);
             countSelectedMonths($scope.monthsButtons[id].pushed);
+            var checkMonths = 0;
+            for (var i = 0; i < $scope.monthsButtons.length; i++) {
+                if ($scope.monthsButtons[i].pushed == true) {
+                    checkMonths++;
+                }
+            }
+            if(checkMonths == 12) {
+                $scope.allMonthsButton.pushed = true;
+            }
         };
 
         $scope.selectMonthDay = function (id) {
             $scope.monthDaysButtons[id].pushed = !$scope.monthDaysButtons[id].pushed;
+            $scope.allMonthDaysButton.pushed = false;
             countSelected($scope.monthDaysButtons[id].pushed);
             countSelectedMonthsDays($scope.monthDaysButtons[id].pushed);
+            var checkMonthDays = 0;
+            for (var i = 0; i < $scope.monthDaysButtons.length; i++) {
+                if ($scope.monthDaysButtons[i].pushed == true) {
+                    checkMonthDays++;
+                }
+            }
+            if(checkMonthDays == 31) {
+                $scope.allMonthDaysButton.pushed = true;
+            }
         };
 
         $scope.selectHour = function (id) {
             $scope.hoursButtons[id].pushed = !$scope.hoursButtons[id].pushed;
+            $scope.allHoursButton.pushed = false;
             countSelected($scope.hoursButtons[id].pushed);
             countSelectedHours($scope.hoursButtons[id].pushed);
+            var checkHours = 0;
+            for (var i = 0; i < $scope.hoursButtons.length; i++) {
+                if ($scope.hoursButtons[i].pushed == true) {
+                    checkHours++;
+                }
+            }
+            if(checkHours == 24) {
+                $scope.allHoursButton.pushed = true;
+            }
         };
 
         $scope.selectAllMonths = function() {
@@ -697,4 +736,6 @@ schedulerControllers
             title:'Schedule',
             columnMetadata:metadataBuilder.getColumnMetadata()
         };
+
+        $scope.mytime = new Date();
     });
