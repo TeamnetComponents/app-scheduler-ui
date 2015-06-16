@@ -27,6 +27,10 @@ schedulerControllers
         $scope.showDetails = false;
         $scope.showGrid = true;
 
+        //$scope.mytime = new Date();
+
+        //$scope.schedule.startTime = new Date($scope.schedule.startTime +' ' + $scope.mytime);//new Date(date + ' ' + $scope.mytime);
+
         $scope.repetitionTypes = [
             {id: "0", name: "Intervale regulate"},
             {id: "1", name: "Custom fire times"}
@@ -135,6 +139,7 @@ schedulerControllers
         }
 
         function resetCustomFiresIntervals() {
+            $scope.checkDate = true;
             /* Resetare luni */
             $scope.allMonthsButton.pushed = false;
             for (var i = 0; i < $scope.monthsButtons.length; i++) {
@@ -612,8 +617,31 @@ schedulerControllers
         };
         /* -------------------------------------------------------------------- */
 
+        $scope.dateForChoose = null;
+        $scope.timeForChoose = null;
+
+        $scope.checkDate = true;
+        $scope.change = function() {
+            var date = new Date();
+            if($scope.timeForChoose.getHours() > date.getHours()) {
+
+                $scope.checkDate = false;
+            } else {
+
+                if($scope.timeForChoose.getMinutes() > date.getMinutes()) {
+                    $scope.checkDate = false;
+                } else {
+                    $scope.checkDate = true;
+                }
+            }
+        }
+
         $scope.createOrUpdate = function () {
+            $scope.dateForChoose = new Date($scope.schedule.startTime);
+            $scope.schedule.startTime = new Date($scope.dateForChoose.getFullYear(), $scope.dateForChoose.getMonth(), $scope.dateForChoose.getDate(),
+                $scope.timeForChoose.getHours(), $scope.timeForChoose.getMinutes(), $scope.timeForChoose.getSeconds());
             console.log($scope.schedule.startTime);
+
             $scope.showGrid = true;
 
             console.log("before: " + $scope.schedule.recurrentTimeUnits);
@@ -736,6 +764,4 @@ schedulerControllers
             title:'Schedule',
             columnMetadata:metadataBuilder.getColumnMetadata()
         };
-
-        $scope.mytime = new Date();
     });

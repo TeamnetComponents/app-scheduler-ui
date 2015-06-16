@@ -1,4 +1,4 @@
-var schedulerModule=angular.module('schedulerModule',['schedulerControllers','schedulerServices','schedulerDirectives','schedulerConstants','schedulerFilters']);
+var schedulerModule=angular.module('schedulerModule',['schedulerControllers','schedulerServices','schedulerDirectives','schedulerConstants','schedulerFilters', 'ui.bootstrap', 'ui.bootstrap.tpls']);
 schedulerModule
     .config(function ($routeProvider, $httpProvider, $translateProvider, tmhDynamicLocaleProvider,AUTH_BOOTSTRAP) {
         console.log('scheduler Module loading!!!');
