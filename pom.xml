@@ -7,7 +7,6 @@
         <groupId>ro.teamnet.bootstrap</groupId>
         <artifactId>bootstrap-dependencies</artifactId>
         <version>0.2-SNAPSHOT</version>
-        <relativePath />
     </parent>
 	
 	<groupId>ro.teamnet.scheduler</groupId>
