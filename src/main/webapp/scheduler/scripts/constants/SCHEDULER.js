@@ -1,3 +1,1 @@
-schedulerConstants.constant('SCHEDULER', {
-
-});
+schedulerConstants.constant('SCHEDULER', {});

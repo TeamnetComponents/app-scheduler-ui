@@ -12,6 +12,7 @@
         "scheduler/scripts/directives/schedulerMainDirective.js",
         "scheduler/scripts/constants/schedulerConstants.js",
         "scheduler/scripts/constants/SCHEDULER.js",
+        "scheduler/scripts/constants/MisfirePolicy.js",
         "scheduler/scripts/controllers/schedule/scheduleControllers.js",
         "scheduler/scripts/services/schedule/scheduleService.js",
         "scheduler/scripts/controllers/timeUnit/timeUnitControllers.js",

@@ -42,6 +42,14 @@
                 </md-checkbox>
             </md-input-container>
 
+            <div>
+                <span class="my-md-label"> In cazul neexecutarii: </span>
+
+                <select style="max-width:28%;" name="misfire_selector" ng-model="schedule.misfire" class="form-control"
+                        ng-options="misfirePolicy.code as misfirePolicy.description for misfirePolicy in misfirePolicies">
+                </select>
+            </div>
+
             <md-input-container>
                 <md-checkbox class="md-primary" type="checkbox" name="schedule_recurrent" ng-click="toggleRecurrent()" ng-model="schedule.recurrent">
                     Recurent
@@ -94,11 +102,13 @@
                    class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data curenta!</p>
 
                 <div class="form-inline">
-                    <span class="my-md-label"> Selecteaza tipul de repetitie : </span>
+                    <div>
+                        <span class="my-md-label"> Selecteaza tipul de repetitie : </span>
 
-                    <select name="repetition_selector" ng-change="changeRepetitionType()" ng-model="selectedRepetitionType" class="form-control"
-                            ng-options="repetitionType.name for repetitionType in repetitionTypes track by repetitionType.id">
-                    </select>
+                        <select name="repetition_selector" ng-change="changeRepetitionType()" ng-model="selectedRepetitionType" class="form-control"
+                                ng-options="repetitionType.name for repetitionType in repetitionTypes track by repetitionType.id">
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

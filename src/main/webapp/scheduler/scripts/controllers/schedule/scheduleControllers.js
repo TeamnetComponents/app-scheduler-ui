@@ -10,7 +10,7 @@ schedulerControllers
             return boolValues[boolCell];
         };
     })
-    .controller('ScheduleController', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit, AppGridMetadataBuilder) {
+    .controller('ScheduleController', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit, AppGridMetadataBuilder, MisfirePolicy) {
 
         $scope.timeUnits = TimeUnit.query();
         $scope.timeIntervals = TimeInterval.query();
@@ -27,11 +27,15 @@ schedulerControllers
         $scope.showDetails = false;
         $scope.showGrid = true;
 
+
+
         $scope.repetitionTypes = [
             {id: "0", name: "Intervale regulate"},
-            {id: "1", name: "Custom fire times"}
+            {id: "1", name: "Intervale neregulate"}
         ];
         $scope.selectedRepetitionType = $scope.repetitionTypes[0];
+
+        $scope.misfirePolicies = MisfirePolicy.misfirePolicies;
 
 
         $scope.toggleRecurrent = function() {
@@ -630,7 +634,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.schedule = {active: true, recurrent: false, cron: null, startTime: null, endTime: null, repetitions: null, recurrentTimeUnits: [], id: null};
+            $scope.schedule = {active: true, recurrent: false, cron: null, startTime: null, endTime: null, repetitions: null, misfire: null, recurrentTimeUnits: [], id: null};
             $scope.searchTerms = [];
             $scope.showDetails = false;
         };
@@ -736,6 +740,4 @@ schedulerControllers
             title:'Schedule',
             columnMetadata:metadataBuilder.getColumnMetadata()
         };
-
-        $scope.mytime = new Date();
     });
