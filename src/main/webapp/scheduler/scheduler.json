@@ -30,7 +30,6 @@
         "scheduler/scripts/services/scheduledJobExecution/scheduledJobExecutionService.js",
         "scheduler/scripts/filters/schedulerFilters.js",
         "scheduler/scripts/filters/schedule/boolean-friendly-format-filter.js",
-        "scheduler/scripts/filters/schedule/friendly-format-filter.js",
-        "scheduler/scripts/directives/schedule/scheduleDirectives.js"
+        "scheduler/scripts/filters/schedule/friendly-format-filter.js"
     ]
 }

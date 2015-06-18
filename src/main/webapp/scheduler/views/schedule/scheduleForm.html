@@ -5,30 +5,29 @@
                ng-model="schedule.id" readonly>
 
         <div ng-hide="hideScheduledJobsSelector">
-            <br>
+        <br>
+        <div class="form-inline">
+            <label class="my-md-label"> Selecteaza job : </label>
 
-            <div class="form-inline">
-                <label class="my-md-label"> Selecteaza job : </label>
+            <ui-select name="job_selector"
+                       ng-model="schedule.scheduledJob"
+                       theme="selectize"
+                       style="width: 300px;" >
 
-                <ui-select name="job_selector"
-                           ng-model="schedule.scheduledJob"
-                           theme="selectize"
-                           style="width: 300px;">
+                <ui-select-match placeholder="Job selectat">
+                    {{$select.selected.name}}
+                </ui-select-match>
 
-                    <ui-select-match placeholder="Job selectat">
-                        {{$select.selected.name}}
-                    </ui-select-match>
+                <ui-select-choices repeat="scheduledJob in scheduledJobs  | filter: $select.search">
+                    <div ng-bind-html="scheduledJob.name | highlight: $select.search"></div>
+                </ui-select-choices>
 
-                    <ui-select-choices repeat="scheduledJob in scheduledJobs  | filter: $select.search">
-                        <div ng-bind-html="scheduledJob.name | highlight: $select.search"></div>
-                    </ui-select-choices>
+            </ui-select>
+        </div>
 
-                </ui-select>
-            </div>
+        <br>
 
-            <br>
-
-            <hr class="divider"/>
+        <hr class="divider"/>
         </div>
 
         <br>
@@ -44,8 +43,7 @@
             </md-input-container>
 
             <md-input-container>
-                <md-checkbox class="md-primary" type="checkbox" name="schedule_recurrent" ng-click="toggleRecurrent()"
-                             ng-model="schedule.recurrent">
+                <md-checkbox class="md-primary" type="checkbox" name="schedule_recurrent" ng-click="toggleRecurrent()" ng-model="schedule.recurrent">
                     Recurent
                 </md-checkbox>
             </md-input-container>
@@ -58,31 +56,13 @@
         <div class="form-group">
             <div class="non-recurrent-job" ng-show="!schedule.recurrent">
                 <label class="my-md-label"> Optiuni de executie : </label>
-                <md-input-container style="width:50%" ng-if="!schedule.recurrent">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Timpul de inceput al executie</label>
-                        </div>
-                        <div class="col-md-6"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="date" name="schedule_startTime"
-                                   min="{{getCurrentDate() | date: 'yyyy-MM-dd'}}" ng-model="schedule.startTime" />
-                        </div>
-                        <div class="col-md-6"></div>
-                    </div>
+                <md-input-container style="width:30%" ng-if="!schedule.recurrent">
+                    <label>Timpul de inceput al executie</label>
+                    <input type="datetime-local" name="schedule_startTime"
+                           min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.startTime"
+                           ng-required="!schedule.recurrent">
                 </md-input-container>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <timepicker ng-model="timeForChoose" ng-change="change()" name="schedule_timeStart" hour-step="1" minute-step="1"
-                                    show-meridian="true" ></timepicker>
-                    </div>
-                    <div class="col-md-6"></div>
-                </div>
-
-                <p ng-show="formCreateOrEdit.schedule_timeStart.$invalide && formCreateOrEdit.schedule_startTime.$invalid && !formCreateOrEdit.schedule_startTime.$pristine"
+                <p ng-show="formCreateOrEdit.schedule_startTime.$invalid && !formCreateOrEdit.schedule_startTime.$pristine"
                    class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat data curenta!</p>
 
             </div>
@@ -116,8 +96,7 @@
                 <div class="form-inline">
                     <span class="my-md-label"> Selecteaza tipul de repetitie : </span>
 
-                    <select name="repetition_selector" ng-change="changeRepetitionType()"
-                            ng-model="selectedRepetitionType" class="form-control"
+                    <select name="repetition_selector" ng-change="changeRepetitionType()" ng-model="selectedRepetitionType" class="form-control"
                             ng-options="repetitionType.name for repetitionType in repetitionTypes track by repetitionType.id">
                     </select>
                 </div>
@@ -150,7 +129,7 @@
                 <div class="row" ng-show="customDefinedIntervals">
                     <div class="col-lg-4">
                         <md-whiteframe class="md-whiteframe-z2" layout="" layout-align="center center">
-                            <div ng-include="'scheduler/views/schedule/createIntervalForm.html'"></div>
+                                <div ng-include="'scheduler/views/schedule/createIntervalForm.html'"></div>
                         </md-whiteframe>
                     </div>
                 </div>
@@ -174,7 +153,7 @@
                 <span class="md-raised"></span>&nbsp;<span>Anuleaza</span>
             </button>
             <button type="submit"
-                    ng-disabled="checkDate || (formCreateOrEdit.$invalid || (!formCreateOrEdit.$invalid && schedule.recurrent && !regularIntervals && checkInputsByGroup()))"
+                    ng-disabled="formCreateOrEdit.$invalid || (!formCreateOrEdit.$invalid && schedule.recurrent && !regularIntervals && checkInputsByGroup())"
                     class="btn btn-default">
                 <span class="md-raised"></span>&nbsp;<span>Salveaza</span>
             </button>
