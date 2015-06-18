@@ -634,7 +634,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.schedule = {active: true, recurrent: false, cron: null, startTime: null, endTime: null, repetitions: null, misfire: null, recurrentTimeUnits: [], id: null};
+            $scope.schedule = {active: true, recurrent: false, cron: null, startTime: null, endTime: null, repetitions: null, misfirePolicy: null, recurrentTimeUnits: [], id: null};
             $scope.searchTerms = [];
             $scope.showDetails = false;
         };
