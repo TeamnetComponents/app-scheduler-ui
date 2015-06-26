@@ -21,3 +21,17 @@ schedulerServices
             }
         });
     }]);
+
+
+schedulerServices
+    .factory('ScheduledJobExecutionMod', ['$resource', function ($resource) {
+        return $resource('app/rest/scheduledJobExecution/getjob/:id', {}, {
+            'get': {
+                method: 'GET',
+                transformResponse: function (data) {
+                    data = angular.fromJson(data);
+                    return data;
+                }
+            }
+        });
+    }]);

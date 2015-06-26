@@ -1,6 +1,6 @@
 'use strict';
 schedulerControllers
-    .controller('ScheduledJobExecutionController', ['$scope','AppGridConstants', 'ScheduledJobExecution', 'ScheduledJob' ,function ($scope,AppGridConstants, ScheduledJobExecution, ScheduledJob) {
+    .controller('ScheduledJobExecutionController', ['$location', '$scope','AppGridConstants', 'ScheduledJobExecution', 'ScheduledJob' ,function ($location, $scope,AppGridConstants, ScheduledJobExecution, ScheduledJob) {
 
         
         $scope.scheduledJobs = ScheduledJob.query();
@@ -18,6 +18,10 @@ schedulerControllers
         $scope.$root.$on('scheduledJobExecutionGridSelection',function(data){
             $scope.showBtns = true;
         });
+
+        $scope.goToBusinessLog = function() {
+            $location.path("/businessLog/" + $scope.selected()[0].id);
+        }
 
         $scope.redrawGrid = function(grid) {
          
