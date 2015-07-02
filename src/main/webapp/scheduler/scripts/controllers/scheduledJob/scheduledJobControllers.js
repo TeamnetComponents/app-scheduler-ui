@@ -1,14 +1,12 @@
 'use strict';
 schedulerControllers
-    .controller('ScheduledJobController', ['$scope', 'AppGridConstants', 'ScheduledJob', 'Schedule' ,'Task' ,'ScheduledJobExecution', 'AppGridMetadataBuilder' ,
-        function ($scope, AppGridConstants, ScheduledJob, Schedule, Task, ScheduledJobExecution, AppGridMetadataBuilder) {
+    .controller('ScheduledJobController', ['$scope', 'AppGridConstants', 'ScheduledJob', 'Schedule' ,'ScheduledJobExecution', 'AppGridMetadataBuilder' ,
+        function ($scope, AppGridConstants, ScheduledJob, Schedule, ScheduledJobExecution, AppGridMetadataBuilder) {
 
-        
+
         $scope.schedules = Schedule.query();
-        $scope.tasks = Task.query();
         $scope.scheduledJobExecutions = ScheduledJobExecution.query();
         $scope.showSchedule = false;
-        $scope.showTask = false;
         $scope.showScheduledJobExecution = false;
         $scope.actionEvent="scheduledJobGrid";
         $scope.showEditBtn = true;
@@ -27,7 +25,7 @@ schedulerControllers
         });
 
         $scope.redrawGrid = function(grid) {
-         
+
             $scope.searchTerms=[];
             $scope.searchTerms.push(
                 {
@@ -37,19 +35,11 @@ schedulerControllers
                     negation: false
                 }
             );
-            
+
             if(grid == 'schedule'){
                 $scope.showScheduledJobDetails = true;
                 $scope.showSchedule = true;
-                
-                $scope.showTask = false;
-                $scope.showScheduledJobExecution = false;
-            }
-            if(grid == 'task'){
-                $scope.showTask = true;
 
-                $scope.showScheduledJobDetails = false;
-                $scope.showSchedule = false;
                 $scope.showScheduledJobExecution = false;
             }
             if(grid == 'scheduledJobExecution'){
@@ -57,7 +47,6 @@ schedulerControllers
 
                 $scope.showScheduledJobDetails = false;
                 $scope.showSchedule = false;
-                $scope.showTask = false;
             }
         };
 
@@ -72,7 +61,7 @@ schedulerControllers
         };
 
         $scope.clear = function () {
-            $scope.scheduledJob = {name: null, description: null, type: null, quartzJobClassName: null, version: null, created: null, lastUpdated: null, deleted: null, id: null};
+            $scope.scheduledJob = {name: null, description: null, version: null, created: null, lastUpdated: null, deleted: null, id: null};
             $scope.searchTerms = [];
             $scope.showDetails=false;
         };
@@ -143,22 +132,16 @@ schedulerControllers
                 metadataBuilder.addColumnFilter('id', AppGridConstants.searchFilterTypes.EQUAL, true, '!==');
                 metadataBuilder.enableColumnSorting('id', false);
                 metadataBuilder.addColumn('name');
+                metadataBuilder.addColumn('scheduledJobExecution.actualFireTime');
                 metadataBuilder.addColumn('scheduledJobExecution.nextFireTime');
-                metadataBuilder.addColumn('scheduledJobExecution.lastFireTime');
-                metadataBuilder.addColumn('scheduledJobExecution.state');
                 metadataBuilder.addColumn('scheduledJobExecution.status');
-                metadataBuilder.addColumn('ownerId');
-                metadataBuilder.addColumn('roles');
             }
 
             metadataBuilder.setColumnLabelKey('id', 'Id');
             metadataBuilder.setColumnLabelKey('name', 'Name');
+            metadataBuilder.setColumnLabelKey('scheduledJobExecution.actualFireTime', 'Fire time');
             metadataBuilder.setColumnLabelKey('scheduledJobExecution.nextFireTime', 'Next fire time');
-            metadataBuilder.setColumnLabelKey('scheduledJobExecution.lastFireTime', 'Last fire time');
-            metadataBuilder.setColumnLabelKey('scheduledJobExecution.state', 'Execution state');
             metadataBuilder.setColumnLabelKey('scheduledJobExecution.status', 'Status');
-            metadataBuilder.setColumnLabelKey('ownerId', 'Owner');
-            metadataBuilder.setColumnLabelKey('roles', 'Roles');
 
             $scope.appGrid = {
                 url:'app/rest/scheduledJob/list',

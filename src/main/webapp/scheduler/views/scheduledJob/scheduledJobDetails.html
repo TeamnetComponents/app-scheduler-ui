@@ -6,10 +6,6 @@
              <div ng-if="showSchedule" include-static='scheduler/views/schedule/scheduleCrud.html'></div>
         </md-tab>
         
-        <md-tab label="task" md-on-select="redrawGrid('task')">
-             <div ng-if="showTask" include-static='scheduler/views/task/taskCrud.html'></div>
-        </md-tab>
-        
         <md-tab label="scheduledJobExecution" md-on-select="redrawGrid('scheduledJobExecution')">
              <div ng-if="showScheduledJobExecution" include-static='scheduler/views/scheduledJobExecution/scheduledJobExecutionCrud.html'></div>
         </md-tab>
