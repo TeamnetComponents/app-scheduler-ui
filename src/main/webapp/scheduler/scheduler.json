@@ -21,8 +21,6 @@
         "scheduler/scripts/services/timeInterval/timeIntervalService.js",
         "scheduler/scripts/controllers/recurrentTimeUnit/recurrentTimeUnitControllers.js",
         "scheduler/scripts/services/recurrentTimeUnit/recurrentTimeUnitService.js",
-        "scheduler/scripts/controllers/task/taskControllers.js",
-        "scheduler/scripts/services/task/taskService.js",
         "scheduler/scripts/controllers/scheduledJob/scheduledJobControllers.js",
         "scheduler/scripts/services/scheduledJob/scheduledJobService.js",
         "scheduler/scripts/controllers/scheduledJob/scheduledJobControllers.js",
