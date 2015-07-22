@@ -5,45 +5,67 @@
         <input type="hidden" name="id"
                ng-model="scheduledJob.id" readonly>
 
-        <md-input-container>
-            <label>Name</label>
-            <input type="text" name="scheduledJob_name"
-                   ng-model="scheduledJob.name">
-        </md-input-container>
-        
-        <md-input-container>
-            <label>Description</label>
-            <input type="text" name="scheduledJob_description"
-                   ng-model="scheduledJob.description">
-        </md-input-container>
+        <div class="row m0">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="scheduledJob_name"
+                           ng-model="scheduledJob.name" class="form-control">
+                </div>
+            </div>
 
-        <div ng-show="showScheduledJobDetails">
-            <md-input-container>
-                <label>Next fire time</label>
-                <input type="text" name="scheduledJob_active"
-                       ng-model="scheduledJob.scheduledJobExecution.nextFireTime" ng-readonly="readOnlyData">
-            </md-input-container>
-
-            <md-input-container>
-                <label>Last fire time</label>
-                <input type="text" name="scheduledJob_startTime"
-                       ng-model="scheduledJob.scheduledJobExecution.lastFireTime" ng-readonly="readOnlyData">
-            </md-input-container>
-
-            <md-input-container>
-                <label>Status</label>
-                <input type="text" name="scheduledJob_endTime"
-                       ng-model="scheduledJob.scheduledJobExecution.status" ng-readonly="readOnlyData">
-            </md-input-container>
-
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" name="scheduledJob_description"
+                           ng-model="scheduledJob.description" class="form-control">
+                </div>
+            </div>
         </div>
 
-        <button type="button" class="btn btn-default" ng-click="back()">
-            <span class="md-raised"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="formCreateOrEdit.$invalid" class="btn btn-default">
-            <span class="md-raised"></span>&nbsp;<span>Save</span>
-        </button>
+        <div ng-show="showScheduledJobDetails">
+            <div class="row m0">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>Next fire time</label>
+                        <input type="text" name="scheduledJob_active" class="form-control"
+                               ng-model="scheduledJob.scheduledJobExecution.nextFireTime" ng-readonly="readOnlyData">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>Last fire time</label>
+                        <input type="text" name="scheduledJob_startTime" class="form-control"
+                               ng-model="scheduledJob.scheduledJobExecution.lastFireTime" ng-readonly="readOnlyData">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m0">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>Status</label>
+                        <input type="text" name="scheduledJob_endTime" class="form-control"
+                               ng-model="scheduledJob.scheduledJobExecution.status" ng-readonly="readOnlyData">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m0">
+            <div class="col-md-12 text-right mb15">
+                <button class="btn btn-primary"
+                        type="submit"
+                        ng-disabled="formCreateOrEdit.$invalid">
+                    Save
+                </button>
+                <button class="btn btn-info"
+                        ng-click="back()">
+                    Cancel
+                </button>
+            </div>
+        </div>
     </form>
 </div>
 <div>
@@ -60,12 +82,20 @@
                         <p>Are you sure you want to delete this row ?</p>
                     </div>
                     <div class="modal-footer">
-                        <section layout="row" layout-sm="column" layout-align="right">
-                            <md-button class="md-raised" data-dismiss="modal" ng-click="back()">Cancel
-                            </md-button>
-                            <md-button type="submit" class="md-raised" ng-disabled="form.$invalid">Delete
-                            </md-button>
-                        </section>
+                        <div class="row m0">
+                            <div class="col-md-12 text-right mb15">
+                                <button class="btn btn-primary"
+                                        data-dismiss="modal"
+                                        ng-click="back()">
+                                    Cancel
+                                </button>
+                                <button class="btn btn-danger"
+                                        type="submit"
+                                        ng-disabled="form.$invalid">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

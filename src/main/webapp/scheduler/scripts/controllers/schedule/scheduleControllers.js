@@ -34,6 +34,7 @@ schedulerControllers
             {id: "1", name: "Intervale neregulate"}
         ];
         $scope.selectedRepetitionType = $scope.repetitionTypes[0];
+        $scope.selectedRepetitionType.selected = $scope.repetitionTypes[0].name;
 
         $scope.misfirePolicies = MisfirePolicy.misfirePolicies;
 
@@ -45,7 +46,7 @@ schedulerControllers
         $scope.changeRepetitionType = function () {
             if ($scope.schedule != undefined) {
                 //Toggle Regular intervals
-                if ($scope.selectedRepetitionType.id == "0") {
+                if ($scope.selectedRepetitionType.selected == $scope.repetitionTypes[0].name) {
                     /* Setez prima valoare ca cea activa in selectorul de regular times */
                     if ($scope.timeIntervals !=null && $scope.timeIntervals != undefined) {
                         $scope.schedule.timeInterval = $scope.timeIntervals[0];
@@ -53,7 +54,7 @@ schedulerControllers
                     $scope.regularIntervals = true;
                 }
                 //Toggle Custom fire times
-                else if ($scope.selectedRepetitionType.id == "1") {
+                else if ($scope.selectedRepetitionType.selected == $scope.repetitionTypes[1].name) {
                     $scope.regularIntervals = false;
                     $scope.schedule.timeInterval = null;
                     setCustomFiresFromCTU();
@@ -68,6 +69,7 @@ schedulerControllers
 
         function resetRegularIntervals() {
             $scope.selectedRepetitionType = $scope.repetitionTypes[0];
+            $scope.selectedRepetitionType.selected = $scope.repetitionTypes[0].name;
             $scope.customDefinedIntervals = false;
             $scope.regularIntervals = true;
             $scope.changeRepetitionType();

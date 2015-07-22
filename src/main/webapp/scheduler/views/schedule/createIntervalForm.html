@@ -2,37 +2,50 @@
 
     <!--<form name="createIntervalForm" novalidate>-->
 
-        <input type="hidden" name="id"
-               ng-model="newTimeInterval.id" readonly>
+    <input type="hidden" name="id" class="form-control"
+           ng-model="newTimeInterval.id" readonly>
 
-        <md-input-container>
+    <div class="row m0">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <label>Nume</label>
-            <input type="text" name="newTimeInterval_name"
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <input type="text" name="newTimeInterval_name" class="form-control"
                    ng-model="newTimeInterval.name" ng-required>
-        </md-input-container>
+        </div>
+    </div>
 
-        <md-input-container>
+    <div class="row m0">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <label>Durata</label>
-            <input type="number" name="newTimeInterval_interval"
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <input type="number" name="newTimeInterval_interval" class="form-control"
                    ng-model="newTimeInterval.interval" ng-required>
-        </md-input-container>
+            <span ng-show="formCreateOrEdit.newTimeInterval_interval.$error.number">Valoarea introdusa nu reprezinta un numar!</span>
+        </div>
+    </div>
+    <div class="row m0">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <select class="form-control" ng-model="newTimeInterval.timeUnit.id"
+                    placeholder="timeUnit">
+                <option value="" disabled selected>Unitate de masura</option>
+                <option ng-value="timeUnit.id"
+                        ng-repeat="timeUnit in timeUnits">
+                    {{ timeUnit.name}}
+                </option>
+            </select>
+        </div>
+    </div>
 
-        <select class="form-control" ng-model="newTimeInterval.timeUnit.id"
-                   placeholder="timeUnit">
-            <option value="" disabled selected>Unitate de masura</option>
-            <option ng-value="timeUnit.id"
-                       ng-repeat="timeUnit in timeUnits">
-                {{ timeUnit.name}}
-            </option>
-        </select>
-
-        <br/><br/>
-
-        <div class="row" style="text-align: center">
-            <button type="button" ng-click="addCustomInterval()" ng-disabled="newTimeInterval.interval == null || newTimeInterval.name == null || newTimeInterval.timeUnit === undefined" class="btn btn-default">
-                <span class="md-raised"></span>&nbsp;<span>Adauga</span>
+    <div class="row m0">
+        <div class="col-md-12 text-center mb15">
+            <button ng-click="addCustomInterval()" class="btn btn-primary"
+                    ng-disabled="newTimeInterval.interval == null || newTimeInterval.name == null || newTimeInterval.timeUnit === undefined">
+                Adauga
             </button>
         </div>
+    </div>
 
     <!--</form>-->
 
