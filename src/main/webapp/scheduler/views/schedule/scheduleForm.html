@@ -1,61 +1,72 @@
+<div class="alert alert-success" ng-show="save.success" xmlns="http://www.w3.org/1999/html">
+    <strong>{{functionality}} saved!</strong>
+</div>
+<div class="alert alert-danger" ng-show="save.error">
+    <strong>An error has occurred!</strong> {{functionality}} could not be saved.
+</div>
 <div ng-show="showCreateOrEdit">
     <form name="formCreateOrEdit" role="form" ng-submit="createOrUpdate()" novalidate>
 
-        <input type="hidden" name="id"
-               ng-model="schedule.id" readonly>
+        <input type="hidden" name="id" ng-model="schedule.id" readonly>
+
 
         <div ng-hide="hideScheduledJobsSelector">
-        <br>
-        <div class="form-inline">
-            <label class="my-md-label"> Selecteaza job : </label>
+            <br>
 
-            <ui-select name="job_selector"
-                       ng-model="schedule.scheduledJob"
+
+            <div class="form-group" >
+                <label> Selecteaza job : </label>
+
+                <ui-select name="job_selector"
+                           ng-model="schedule.scheduledJob"
+                           theme="selectize"
+                           style="width: 300px;">
+                    <ui-select-match placeholder="Job selectat">
+                        {{$select.selected.name}}
+                    </ui-select-match>
+
+                    <ui-select-choices repeat="scheduledJob in scheduledJobs  | filter: $select.search">
+                        <div ng-bind-html="scheduledJob.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+
+                </ui-select>
+            </div>
+
+            <br>
+
+            <hr class="divider"/>
+        </div>
+
+
+        <div class="form-group">
+
+            <label> Optiuni job : </label>
+            <input type="checkbox" name="schedule_active" ng-model="schedule.active" checked>
+            Activ
+            <br>
+            <div>
+            <label> In cazul neexecutarii: </label>
+            <ui-select name="misfire_selector"
+                       ng-model="schedule.misfirePolicy"
                        theme="selectize"
-                       style="width: 300px;" >
-
-                <ui-select-match placeholder="Job selectat">
-                    {{$select.selected.name}}
+                       style="max-width:28%;">
+                <ui-select-match placeholder="Cazul selectat">
+                    {{$select.selected.description}}
                 </ui-select-match>
 
-                <ui-select-choices repeat="scheduledJob in scheduledJobs  | filter: $select.search">
-                    <div ng-bind-html="scheduledJob.name | highlight: $select.search"></div>
+                <ui-select-choices repeat="misfirePolicy.code as misfirePolicy in misfirePolicies | filter: $select.search">
+                    <div ng-bind-html="misfirePolicy.description | highlight: $select.search"></div>
                 </ui-select-choices>
 
             </ui-select>
-        </div>
-
-        <br>
-
-        <hr class="divider"/>
-        </div>
-
-        <br>
-
-        <div class="form-group">
-            <label class="my-md-label"> Optiuni job : </label>
-
-            <md-input-container>
-                <md-checkbox class="md-primary" type="checkbox" name="schedule_active" ng-model="schedule.active"
-                             checked>
-                    Activ
-                </md-checkbox>
-            </md-input-container>
-
-            <div>
-                <span class="my-md-label"> In cazul neexecutarii: </span>
-
-                <select style="max-width:28%;" name="misfire_selector" ng-model="schedule.misfirePolicy" class="form-control"
-                        ng-options="misfirePolicy.code as misfirePolicy.description for misfirePolicy in misfirePolicies">
-                </select>
             </div>
+            <br>
+            <input type="checkbox" name="schedule_recurrent" ng-click="toggleRecurrent()" ng-model="schedule.recurrent">
+            Recurent
 
-            <md-input-container>
-                <md-checkbox class="md-primary" type="checkbox" name="schedule_recurrent" ng-click="toggleRecurrent()" ng-model="schedule.recurrent">
-                    Recurent
-                </md-checkbox>
-            </md-input-container>
+
         </div>
+
 
         <hr class="divider"/>
 
@@ -63,53 +74,95 @@
 
         <div class="form-group">
             <div class="non-recurrent-job" ng-show="!schedule.recurrent">
-                <label class="my-md-label"> Optiuni de executie : </label>
-                <md-input-container style="width:30%" ng-if="!schedule.recurrent">
-                    <label>Timpul de inceput al executie</label>
-                    <input type="datetime-local" name="schedule_startTime"
-                           min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.startTime"
-                           ng-required="!schedule.recurrent">
-                </md-input-container>
+                <label> Optiuni de executie : </label>
+                <div style="width:30%" class="dropdown" ng-if="!schedule.recurrent">
+                    <label>Timpul de inceput al executiei:  </label>
+                    <a class="dropdown-toggle" id="schedule_startTime" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-group">
+                            <div   class="form-control" ng-required="!schedule.recurrent">{{schedule.startTime | date:"dd/MM/yyyy H:mm"}}</div>
+                            <span class = "input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="schedule.startTime"
+                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }"></datetimepicker>
+                    </ul>
+                </div>
+
                 <p ng-show="formCreateOrEdit.schedule_startTime.$invalid && !formCreateOrEdit.schedule_startTime.$pristine"
                    class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat data curenta!</p>
 
             </div>
 
             <div class="recurrent-job" ng-show="schedule.recurrent">
-                <label class="my-md-label"> Optiuni de repetitie : </label>
+                <label> Optiuni de repetitie : </label>
 
-                <div layout="" layout-sm="column">
+                <div class="form-group" ng-class="{'has-success':formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine,'has-error':formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine}">
 
-                    <md-input-container style="width:33%; margin:10px;" ng-if="schedule.recurrent">
+                    <div style="width:33%; margin:10px;"  class="dropdown" ng-if="schedule.recurrent">
                         <label>Timpul de inceput al executiei</label>
-                        <input type="datetime-local" name="schedule_startTime"
-                               ng-model="schedule.startTime" ng-required="schedule.recurrent">
-                    </md-input-container>
+                        <a class="dropdown-toggle" id="schedule_startTime2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-group">
+                                <div   class="form-control" ng-required="schedule.recurrent">{{schedule.startTime | date:"dd/MM/yyyy H:mm"}}</div>
+                                <span class = "input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="schedule.startTime"
+                                            data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }"></datetimepicker>
+                        </ul>
+                    </div>
 
-                    <md-input-container style="width:33%; margin:10px;">
+                    <br>
+
+                    <div style="width:33%; margin:10px;"  class="dropdown" ng-if="schedule.recurrent">
                         <label>Timpul de incheiere(optional) </label>
-                        <input type="datetime-local" name="schedule_endTime"
-                               min="{{getCurrentDate() | date: 'yyyy-MM-ddTHH:mm'}}" ng-model="schedule.endTime">
-                    </md-input-container>
+                        <a class="dropdown-toggle" id="schedule_endTime" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-group">
+                                <div   class="form-control" ng-required="schedule.recurrent">{{schedule.endTime | date:"dd/MM/yyyy H:mm"}}</div>
+                                <span class = "input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="schedule.endTime"
+                                            data-datetimepicker-config="{ dropdownSelector: '#schedule_endTime' }"></datetimepicker>
+                        </ul>
+                    </div>
 
-                    <md-input-container style="width:33%; margin:10px;">
+                    <br><br>
+
+                    <div>
                         <label>Numar de repetitii(optional)</label>
                         <input type="number" name="schedule_repetitions" min="0" ng-model="schedule.repetitions">
-                    </md-input-container>
+                    </div>
+
                 </div>
 
                 <p ng-show="formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine"
                    class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data curenta!</p>
 
+                <br>
                 <div class="form-inline">
                     <div>
-                        <span class="my-md-label"> Selecteaza tipul de repetitie : </span>
+                        <label> Selecteaza tipul de repetitie : </label>
 
-                        <select name="repetition_selector" ng-change="changeRepetitionType()" ng-model="selectedRepetitionType" class="form-control"
-                                ng-options="repetitionType.name for repetitionType in repetitionTypes track by repetitionType.id">
-                        </select>
+                        <ui-select name="repetition_selector"
+                                   ng-model="selectedRepetitionType"
+                                   theme="selectize"
+                                   ng-change="changeRepetitionType()"
+                                   style="max-width:28%;">
+                            <ui-select-match placeholder="Cazul selectat">
+                                {{$select.selected.name}}
+                            </ui-select-match>
+
+                            <ui-select-choices repeat="repetitionType.name as repetitionType in repetitionTypes | filter: $select.search">
+                                <div ng-bind-html="repetitionType.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+
+                        </ui-select>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -120,34 +173,48 @@
         <div class="form-group" ng-show="schedule.recurrent">
 
             <div class="regular-intervals" ng-show="regularIntervals">
-                <label class="my-md-label"> Optiuni intervale regulate : </label>
+                <label > Optiuni intervale regulate : </label>
                 <br><br>
 
                 <div class="form-inline">
-                    <span class="my-md-label"> Selecteaza interval : </span>
-                    <select ng-model="schedule.timeInterval" class="form-control"
-                            ng-options="timeInterval.name group by (timeInterval.custom ? 'Intervale personalizate' : false) for timeInterval in timeIntervals track by timeInterval.id">
-                    </select>
+                    <label> Selecteaza interval : </label>
+                    <!--<select ng-model="schedule.timeInterval" class="form-control"-->
+                            <!--ng-options="timeInterval.name group by (timeInterval.custom ? 'Intervale personalizate' : false) for timeInterval in timeIntervals track by timeInterval.id">-->
+                    <!--</select>-->
+                    <ui-select name="interval_selector"
+                               ng-model="schedule.timeInterval"
+                               theme="selectize"
+                               style="max-width:28%;">
+                        <ui-select-match placeholder="Cazul selectat">
+                            {{$select.selected.name}}
+                        </ui-select-match>
+
+                        <ui-select-choices grup-by="timeInterval.custom ? 'Intervale personalizate' : false" repeat="timeInterval.name as timeInterval in timeIntervals | filter: $select.search">
+                            <div ng-bind-html="timeInterval.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+
+                    </ui-select>
                 </div>
 
-                <md-switch class="md-primary" md-no-ink="" ng-model="customDefinedIntervals">
-                    Creaza interval de timp personalizat
-                </md-switch>
+                <br><br>
+
+                <input type="checkbox" ng-model="customDefinedIntervals">
+                Creaza interval de timp personalizat
 
                 <br>
 
                 <div class="row" ng-show="customDefinedIntervals">
                     <div class="col-lg-4">
-                        <md-whiteframe class="md-whiteframe-z2" layout="" layout-align="center center">
-                                <div ng-include="'scheduler/views/schedule/createIntervalForm.html'"></div>
-                        </md-whiteframe>
+                        <div  layout="" layout-align="center center">
+                            <div ng-include="'scheduler/views/schedule/createIntervalForm.html'"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
             <div class="custom-fire-times" ng-show="!regularIntervals">
-                <label class="my-md-label"> Custom fire times options : </label>
+                <label> Custom fire times options : </label>
                 <br><br>
 
                 <div class="custom_fire_times" ng-include="'scheduler/views/schedule/customFireTimes.html'"></div>
