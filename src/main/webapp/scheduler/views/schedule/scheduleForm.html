@@ -17,7 +17,7 @@
 
                         <ui-select name="job_selector"
                                    ng-model="schedule.scheduledJob"
-                                   theme="selectize" ng-required>
+                                   theme="selectize" required>
                             <ui-select-match placeholder="Job selectat">
                                 {{$select.selected.name}}
                             </ui-select-match>
@@ -43,7 +43,7 @@
 
                     <ui-select name="misfire_selector"
                                ng-model="schedule.misfirePolicy"
-                               theme="selectize">
+                               theme="selectize" required>
                         <ui-select-match placeholder="Cazul selectat">
                             {{$select.selected.description}}
                         </ui-select-match>
@@ -60,15 +60,17 @@
         <div class="row m0">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <input type="checkbox" name="schedule_active" ng-model="schedule.active" checked/>
-                        Activ
-                    </div>
+                    <div class="checkbox-container">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <input id="active" type="checkbox" value="activ" ng-model="schedule.active" checked>
+                            <label class="custom-select" for="active">Activ</label>
+                        </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <input type="checkbox" name="schedule_recurrent" ng-click="toggleRecurrent()"
-                               ng-model="schedule.recurrent">
-                        Recurent
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <input id="recursiv" type="checkbox" value="recursiv" ng-click="toggleRecurrent()"
+                                   ng-model="schedule.recurrent">
+                            <label class="custom-select" for="recursiv">Recursiv</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,27 +85,29 @@
             <div class="row m0">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
-
                         <div class="dropdown" ng-if="!schedule.recurrent">
-                            <label>Timpul de inceput al executiei: </label>
-                            <a class="dropdown-toggle" id="schedule_startTime" role="button" data-toggle="dropdown"
-                               data-target="#" href="#">
-                                <div class="input-group">
-                                    <div class="form-control" ng-required="!schedule.recurrent">{{schedule.startTime |
-                                        date:"dd/MM/yyyy H:mm"}}
+                            <div class="datepicker">
+                                <label>Timpul de inceput al executiei:</label>
+                                <a class="dropdown-toggle" id="schedule_startTime" role="button" data-toggle="dropdown"
+                                   data-target="#" href="#" required>
+                                    <div class="input-group">
+                                        <div class="form-control" ng-required="!schedule.recurrent">{{schedule.startTime
+                                            | date:"dd/MM/yyyy H:mm"}}
+                                        </div>
+                                        <span class="input-group-addon"><i
+                                                class="glyphicon glyphicon-calendar"></i> </span>
                                     </div>
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <datetimepicker data-ng-model="schedule.startTime"
-                                                data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }"></datetimepicker>
-                            </ul>
-                        </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="schedule.startTime"
+                                                    data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }" ng-required="true"></datetimepicker>
+                                </ul>
 
-                        <p ng-show="formCreateOrEdit.schedule_startTime.$invalid && !formCreateOrEdit.schedule_startTime.$pristine"
-                           class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat data
-                            curenta!</p>
+                                <p ng-show="formCreateOrEdit.schedule_startTime.$invalid && !formCreateOrEdit.schedule_startTime.$pristine"
+                                   class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat data
+                                    curenta!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,47 +126,56 @@
                     <div class="row m0">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="dropdown" ng-if="schedule.recurrent">
-                                <label>Timpul de inceput al executiei:</label>
-                                <a class="dropdown-toggle" id="schedule_startTime2" role="button" data-toggle="dropdown"
-                                   data-target="#" href="#">
-                                    <div class="input-group">
-                                        <div class="form-control" ng-required="schedule.recurrent">{{schedule.startTime
-                                            | date:"dd/MM/yyyy H:mm"}}
-                                        </div>
+                                <div class="datepicker">
+                                    <label>Timpul de inceput al executiei:</label>
+                                    <a class="dropdown-toggle" id="schedule_startTime2" role="button"
+                                       data-toggle="dropdown"
+                                       data-target="#" href="#">
+                                        <div class="input-group">
+                                            <div class="form-control" ng-required="schedule.recurrent">
+                                                {{schedule.startTime
+                                                | date:"dd/MM/yyyy H:mm"}}
+                                            </div>
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-calendar"></i> </span>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="schedule.startTime"
-                                                    data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }"></datetimepicker>
-                                </ul>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="schedule.startTime"
+                                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }" ng-required="true"></datetimepicker>
+                                    </ul>
+                                    <p ng-show="formCreateOrEdit.schedule_startTime2.$invalid && !formCreateOrEdit.schedule_startTime2.$pristine"
+                                       class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data
+                                        curenta!</p>
+                                </div>
                             </div>
-                            <p ng-show="formCreateOrEdit.schedule_startTime2.$invalid && !formCreateOrEdit.schedule_startTime2.$pristine"
-                               class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data curenta!</p>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="dropdown" ng-if="schedule.recurrent">
-                                <label>Timpul de incheiere(optional):</label>
-                                <a class="dropdown-toggle" id="schedule_endTime" role="button" data-toggle="dropdown"
-                                   data-target="#" href="#">
-                                    <div class="input-group">
-                                        <div class="form-control" ng-required="schedule.recurrent">{{schedule.endTime |
-                                            date:"dd/MM/yyyy H:mm"}}
-                                        </div>
+                                <div class="datepicker">
+                                    <label>Timpul de incheiere(optional):</label>
+                                    <a class="dropdown-toggle" id="schedule_endTime" role="button"
+                                       data-toggle="dropdown"
+                                       data-target="#" href="#">
+                                        <div class="input-group">
+                                            <div class="form-control" ng-required="schedule.recurrent">
+                                                {{schedule.endTime |
+                                                date:"dd/MM/yyyy H:mm"}}
+                                            </div>
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-calendar"></i> </span>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="schedule.endTime"
-                                                    data-datetimepicker-config="{ dropdownSelector: '#schedule_endTime' }"></datetimepicker>
-                                </ul>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="schedule.endTime"
+                                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_endTime' }"></datetimepicker>
+                                    </ul>
 
-                                <p ng-show="formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine"
-                                   class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data
-                                    curenta!</p>
+                                    <p ng-show="formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine"
+                                       class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data
+                                        curenta!</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -236,8 +249,12 @@
                 <div class="row m0">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
-                            <input type="checkbox" ng-model="customDefinedIntervals">
-                            Creaza interval de timp personalizat
+                            <div class="checkbox-container">
+                                <input id="createInterval" type="checkbox" value="creaza"
+                                       ng-model="customDefinedIntervals">
+                                <label class="custom-select" for="createInterval">Creaza interval de timp
+                                    personalizat</label>
+                            </div>
                         </div>
                     </div>
                 </div>
