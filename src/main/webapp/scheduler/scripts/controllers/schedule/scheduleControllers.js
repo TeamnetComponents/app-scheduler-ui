@@ -752,10 +752,10 @@ schedulerControllers
         metadataBuilder.resetGridMetadata();
         if (!metadataBuilder.gridExists()) {
             //metadataBuilder.addColumn('active');
-            metadataBuilder.formatCells('active', 'booleanCellFormatter');
-            metadataBuilder.formatCells('recurrent', 'booleanCellFormatter');
-            metadataBuilder.addColumn('startTime');
-            metadataBuilder.addColumn('endTime');
+            metadataBuilder.formatCells('active', 'yesNoBooleanFormatter');
+            metadataBuilder.formatCells('recurrent', 'yesNoBooleanFormatter');
+            metadataBuilder.formatCells('startTime', 'simpleDateTimeFormatter');
+            metadataBuilder.formatCells('endTime', 'simpleDateTimeFormatter');
             metadataBuilder.addColumn('repetitions');
         }
 
