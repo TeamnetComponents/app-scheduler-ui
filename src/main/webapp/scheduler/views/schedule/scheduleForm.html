@@ -178,8 +178,8 @@
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                         <datetimepicker data-ng-model="schedule.endTime"
                                                         data-on-set-time="checkStartTimeAndEndTime(newDate)"
-                                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_endTime' }"
-                                                        ng-required="schedule.recurrent"></datetimepicker>
+                                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_endTime' }">
+                                        </datetimepicker>
                                     </ul>
                                 </div>
                                 <p ng-show="checkIfEndDateIsAfterStartDate && !formCreateOrEdit.schedule_endTime.$pristine"

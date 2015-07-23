@@ -68,8 +68,10 @@ schedulerControllers
         $scope.regularIntervals = true;
 
         function resetRegularIntervals() {
-            $scope.schedule.startTime = null;
-            $scope.schedule.endTime = null;
+            if($scope.isShowEditPushed == false) {
+                $scope.schedule.startTime = null;
+                $scope.schedule.endTime = null;
+            }
             $scope.selectedRepetitionType = $scope.repetitionTypes[0];
             $scope.selectedRepetitionType.selected = $scope.repetitionTypes[0].name;
             $scope.customDefinedIntervals = false;
@@ -719,6 +721,7 @@ schedulerControllers
             }
         };
 
+        $scope.isShowEditPushed = false;
         $scope.showEdit = function () {
             if ((!_.isEmpty($scope.selected()))) {
                 var id = parseInt($scope.selected()[0].id);
@@ -739,7 +742,7 @@ schedulerControllers
                 $scope.showCreateOrEdit = true;
                 $scope.showDetails = true;
                 $scope.showGrid = false;
-
+                $scope.isShowEditPushed = true;
 
             }
         };
