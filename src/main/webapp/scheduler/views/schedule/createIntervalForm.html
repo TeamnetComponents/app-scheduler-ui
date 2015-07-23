@@ -1,7 +1,4 @@
 <div>
-
-    <!--<form name="createIntervalForm" novalidate>-->
-
     <input type="hidden" name="id" class="form-control"
            ng-model="newTimeInterval.id" readonly>
 
@@ -40,13 +37,10 @@
 
     <div class="row m0">
         <div class="col-md-12 text-center mb15">
-            <button ng-click="addCustomInterval()" class="btn btn-primary"
+            <button type="button" ng-click="addCustomInterval()" class="btn btn-primary"
                     ng-disabled="newTimeInterval.interval == null || newTimeInterval.name == null || newTimeInterval.timeUnit === undefined">
                 Adauga
             </button>
         </div>
     </div>
-
-    <!--</form>-->
-
 </div>

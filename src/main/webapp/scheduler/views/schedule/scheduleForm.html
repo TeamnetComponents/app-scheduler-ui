@@ -1,4 +1,5 @@
-<div class="alert alert-success" ng-show="save.success" xmlns="http://www.w3.org/1999/html">
+<div class="alert alert-success" ng-show="save.success" xmlns="http://www.w3.org/1999/html"
+     xmlns="http://www.w3.org/1999/html">
     <strong>{{functionality}} saved!</strong>
 </div>
 <div class="alert alert-danger" ng-show="save.error">
@@ -67,9 +68,9 @@
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <input id="recursiv" type="checkbox" value="recursiv" ng-click="toggleRecurrent()"
+                            <input id="recurent" type="checkbox" value="recurent" ng-click="toggleRecurrent()"
                                    ng-model="schedule.recurrent">
-                            <label class="custom-select" for="recursiv">Recursiv</label>
+                            <label class="custom-select" for="recurent">Recurent</label>
                         </div>
                     </div>
                 </div>
@@ -88,10 +89,11 @@
                         <div class="dropdown" ng-if="!schedule.recurrent">
                             <div class="datepicker">
                                 <label>Timpul de inceput al executiei:</label>
-                                <a class="dropdown-toggle" id="schedule_startTime" role="button" data-toggle="dropdown"
+                                <a id="schedule_startTime" class="dropdown-toggle" role="button" data-toggle="dropdown"
                                    data-target="#" href="#" required>
                                     <div class="input-group">
-                                        <div class="form-control" ng-required="!schedule.recurrent">{{schedule.startTime
+                                        <div class="form-control" data-ng-model="schedule.startTime"
+                                             ng-required="!schedule.recurrent">{{schedule.startTime
                                             | date:"dd/MM/yyyy H:mm"}}
                                         </div>
                                         <span class="input-group-addon"><i
@@ -100,10 +102,12 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                     <datetimepicker data-ng-model="schedule.startTime"
-                                                    data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }" ng-required="true"></datetimepicker>
+                                                    data-on-set-time="guardianOnSetTime(newDate)"
+                                                    data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }"
+                                                    ng-required="true"></datetimepicker>
                                 </ul>
 
-                                <p ng-show="formCreateOrEdit.schedule_startTime.$invalid && !formCreateOrEdit.schedule_startTime.$pristine"
+                                <p ng-show="!formCreateOrEdit.schedule_startTime.$pristine && checkIfDateIsCorrect"
                                    class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat data
                                     curenta!</p>
                             </div>
@@ -128,11 +132,12 @@
                             <div class="dropdown" ng-if="schedule.recurrent">
                                 <div class="datepicker">
                                     <label>Timpul de inceput al executiei:</label>
-                                    <a class="dropdown-toggle" id="schedule_startTime2" role="button"
+                                    <a id="schedule_startTime2" class="dropdown-toggle" role="button"
                                        data-toggle="dropdown"
                                        data-target="#" href="#">
                                         <div class="input-group">
-                                            <div class="form-control" ng-required="schedule.recurrent">
+                                            <div class="form-control" data-ng-model="schedule.startTime"
+                                                 ng-required="schedule.recurrent">
                                                 {{schedule.startTime
                                                 | date:"dd/MM/yyyy H:mm"}}
                                             </div>
@@ -142,10 +147,13 @@
                                     </a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                         <datetimepicker data-ng-model="schedule.startTime"
-                                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime' }" ng-required="true"></datetimepicker>
+                                                        data-on-set-time="guardianOnSetTime(newDate)"
+                                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_startTime2' }"
+                                                        ng-required="true"></datetimepicker>
                                     </ul>
-                                    <p ng-show="formCreateOrEdit.schedule_startTime2.$invalid && !formCreateOrEdit.schedule_startTime2.$pristine"
-                                       class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data
+                                    <p ng-show="checkIfDateIsCorrect && !formCreateOrEdit.schedule_startTime2.$pristine"
+                                       class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat
+                                        data
                                         curenta!</p>
                                 </div>
                             </div>
@@ -155,11 +163,11 @@
                             <div class="dropdown" ng-if="schedule.recurrent">
                                 <div class="datepicker">
                                     <label>Timpul de incheiere(optional):</label>
-                                    <a class="dropdown-toggle" id="schedule_endTime" role="button"
+                                    <a id="schedule_endTime" class="dropdown-toggle" role="button"
                                        data-toggle="dropdown"
                                        data-target="#" href="#">
                                         <div class="input-group">
-                                            <div class="form-control" ng-required="schedule.recurrent">
+                                            <div class="form-control">
                                                 {{schedule.endTime |
                                                 date:"dd/MM/yyyy H:mm"}}
                                             </div>
@@ -169,13 +177,14 @@
                                     </a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                         <datetimepicker data-ng-model="schedule.endTime"
-                                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_endTime' }"></datetimepicker>
+                                                        data-on-set-time="checkStartTimeAndEndTime(newDate)"
+                                                        data-datetimepicker-config="{ dropdownSelector: '#schedule_endTime' }"
+                                                        ng-required="schedule.recurrent"></datetimepicker>
                                     </ul>
-
-                                    <p ng-show="formCreateOrEdit.schedule_endTime.$invalid && !formCreateOrEdit.schedule_endTime.$pristine"
-                                       class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data
-                                        curenta!</p>
                                 </div>
+                                <p ng-show="checkIfEndDateIsAfterStartDate && !formCreateOrEdit.schedule_endTime.$pristine"
+                                   class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data
+                                    de inceput!</p>
                             </div>
                         </div>
                     </div>
@@ -224,9 +233,7 @@
                         <div class="regular-intervals" ng-show="regularIntervals">
                             <div class="form-group">
                                 <label>Selecteaza interval:</label>
-                                <!--<select ng-model="schedule.timeInterval" class="form-control"-->
-                                <!--ng-options="timeInterval.name group by (timeInterval.custom ? 'Intervale personalizate' : false) for timeInterval in timeIntervals track by timeInterval.id">-->
-                                <!--</select>-->
+
                                 <ui-select name="interval_selector"
                                            ng-model="schedule.timeInterval"
                                            theme="selectize">
@@ -267,7 +274,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="custom-fire-times" ng-show="!regularIntervals">
             <label>Custom fire times options</label>

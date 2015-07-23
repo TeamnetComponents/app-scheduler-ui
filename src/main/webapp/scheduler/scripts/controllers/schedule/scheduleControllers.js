@@ -68,6 +68,8 @@ schedulerControllers
         $scope.regularIntervals = true;
 
         function resetRegularIntervals() {
+            $scope.schedule.startTime = null;
+            $scope.schedule.endTime = null;
             $scope.selectedRepetitionType = $scope.repetitionTypes[0];
             $scope.selectedRepetitionType.selected = $scope.repetitionTypes[0].name;
             $scope.customDefinedIntervals = false;
@@ -466,6 +468,30 @@ schedulerControllers
         $scope.$root.$on('scheduleGridSelection', function (data) {
             $scope.showBtns = true;
         });
+
+        /*-----------------Validate startDate and endDate------------*/
+        $scope.checkIfDateIsCorrect = false;
+        $scope.guardianOnSetTime = function(newDate) {
+            var currentDate = moment().toDate();
+            if(newDate < currentDate) {
+                $scope.checkIfDateIsCorrect = true;
+                $scope.schedule.startTime = null;
+            } else {
+                $scope.checkIfDateIsCorrect = false;
+            }
+        };
+
+        $scope.checkIfEndDateIsAfterStartDate = false;
+        $scope.checkStartTimeAndEndTime = function(newDate) {
+            if($scope.schedule.startTime != null) {
+                if(newDate < $scope.schedule.startTime) {
+                    $scope.checkIfEndDateIsAfterStartDate = true;
+                    $scope.schedule.endTime = null;
+                } else {
+                    $scope.checkIfEndDateIsAfterStartDate = false;
+                }
+            }
+        };
 
         $scope.getCurrentDate = function () {
             //return new Date();
