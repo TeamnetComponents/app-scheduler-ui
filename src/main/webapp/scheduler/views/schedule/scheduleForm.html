@@ -30,8 +30,8 @@
                     </div>
                 </div>
             </div>
+            <hr class="divider"/>
         </div>
-        <hr class="divider"/>
 
         <div class="row m0">
             <label> Optiuni job </label>
@@ -108,8 +108,8 @@
                                 </ul>
 
                                 <p ng-show="!formCreateOrEdit.schedule_startTime.$pristine && checkIfDateIsCorrect"
-                                   class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat data
-                                    curenta!</p>
+                                   class="alert-danger" style="text-align: center;"> Data de inceput a executiei trebuie
+                                    sa fie mai mare decat data curenta!</p>
                             </div>
                         </div>
                     </div>
@@ -152,9 +152,8 @@
                                                         ng-required="true"></datetimepicker>
                                     </ul>
                                     <p ng-show="checkIfDateIsCorrect && !formCreateOrEdit.schedule_startTime2.$pristine"
-                                       class="alert-danger"> Data de inceput a executiei trebuie sa fie mai mare decat
-                                        data
-                                        curenta!</p>
+                                       class="alert-danger" style="text-align: center;"> Data de inceput a executiei
+                                        trebuie sa fie mai mare decat data curenta!</p>
                                 </div>
                             </div>
                         </div>
@@ -183,19 +182,20 @@
                                     </ul>
                                 </div>
                                 <p ng-show="checkIfEndDateIsAfterStartDate && !formCreateOrEdit.schedule_endTime.$pristine"
-                                   class="alert-danger"> Data de incheiere trebuie sa fie mai mare decat data
-                                    de inceput!</p>
+                                   class="alert-danger" style="text-align: center;"> Data de incheiere trebuie sa fie
+                                    mai mare decat data de inceput!</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="row m0">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{'has-success': formCreateOrEdit.schedule_repetitions.$dirty && formCreateOrEdit.schedule_repetitions.$valid ,
+                                'has-error': formCreateOrEdit.schedule_repetitions.$dirty && formCreateOrEdit.schedule_repetitions.$invalid }">
                                 <label>Numar de repetitii(optional):</label>
-                                <input type="number" name="schedule_repetitions" min="0" class="form-control"
+                                <input type="number" id="schedule_repetitions" name="schedule_repetitions" min="0"
+                                       class="form-control"
                                        ng-model="schedule.repetitions"/>
-                                <span ng-show="formCreateOrEdit.schedule_repetitions.$error.number">Valoarea introdusa nu reprezinta un numar!</span>
                             </div>
                         </div>
                     </div>
