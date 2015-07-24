@@ -242,7 +242,7 @@
                                     </ui-select-match>
 
                                     <ui-select-choices grup-by="timeInterval.custom ? 'Intervale personalizate' : false"
-                                                       repeat="timeInterval.name as timeInterval in timeIntervals | filter: $select.search">
+                                                       repeat="timeInterval in timeIntervals | filter: $select.search">
                                         <div ng-bind-html="timeInterval.name | highlight: $select.search"></div>
                                     </ui-select-choices>
                                 </ui-select>
