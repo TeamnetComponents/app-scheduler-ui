@@ -758,19 +758,14 @@ schedulerControllers
         var newGridId = 'schedule';
         var metadataBuilder = new AppGridMetadataBuilder(newGridId);
         metadataBuilder.resetGridMetadata();
-        if (!metadataBuilder.gridExists()) {
-            //metadataBuilder.addColumn('active');
-            metadataBuilder.formatCells('active', 'yesNoBooleanFormatter');
-            metadataBuilder.formatCells('recurrent', 'yesNoBooleanFormatter');
-            metadataBuilder.formatCells('startTime', 'simpleDateTimeFormatter');
-            metadataBuilder.formatCells('endTime', 'simpleDateTimeFormatter');
-            metadataBuilder.addColumn('repetitions');
-        }
-
         metadataBuilder.setColumnLabelKey('active', 'Activ');
+        metadataBuilder.formatCells('active', 'yesNoBooleanFormatter');
         metadataBuilder.setColumnLabelKey('recurrent', 'Recurent');
+        metadataBuilder.formatCells('recurrent', 'yesNoBooleanFormatter');
         metadataBuilder.setColumnLabelKey('startTime', 'Timpul de inceput');
+        metadataBuilder.formatCells('startTime', 'simpleDateTimeFormatter');
         metadataBuilder.setColumnLabelKey('endTime', 'Timpul de incheiere');
+        metadataBuilder.formatCells('endTime', 'simpleDateTimeFormatter');
         metadataBuilder.setColumnLabelKey('repetitions', 'Repetitii');
 
         $scope.appGrid = {

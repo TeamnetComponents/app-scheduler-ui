@@ -129,7 +129,6 @@ schedulerControllers
             var metadataBuilder = new AppGridMetadataBuilder(newGridId);
             metadataBuilder.resetGridMetadata();
             if (!metadataBuilder.gridExists()) {
-                metadataBuilder.addColumnFilter('id', AppGridConstants.searchFilterTypes.EQUAL, true, '!==');
                 metadataBuilder.enableColumnSorting('id', false);
                 metadataBuilder.addColumn('name');
                 metadataBuilder.addColumn('scheduledJobExecution.actualFireTime');
@@ -138,10 +137,18 @@ schedulerControllers
             }
 
             metadataBuilder.setColumnLabelKey('id', 'Id');
+            metadataBuilder.addColumnFilter('id', AppGridConstants.searchFilterTypes.LIKE);
+
             metadataBuilder.setColumnLabelKey('name', 'Name');
+            metadataBuilder.addColumnFilter('name', AppGridConstants.searchFilterTypes.LIKE);
+
             metadataBuilder.setColumnLabelKey('scheduledJobExecution.actualFireTime', 'Fire time');
+
             metadataBuilder.setColumnLabelKey('scheduledJobExecution.nextFireTime', 'Next fire time');
+
             metadataBuilder.setColumnLabelKey('scheduledJobExecution.status', 'Status');
+            metadataBuilder.addColumnFilter('scheduledJobExecution.status', AppGridConstants.searchFilterTypes.LIKE);
+
 
             $scope.appGrid = {
                 url:'app/rest/scheduledJob/list',
