@@ -40,6 +40,7 @@ schedulerControllers
 
 
         $scope.toggleRecurrent = function() {
+            $scope.timeIntervalToRemember = $scope.schedule.timeInterval;
             resetRegularIntervals();
         };
 
@@ -48,8 +49,12 @@ schedulerControllers
                 //Toggle Regular intervals
                 if ($scope.selectedRepetitionType.selected == $scope.repetitionTypes[0].name) {
                     /* Setez prima valoare ca cea activa in selectorul de regular times */
-                    if ($scope.timeIntervals !=null && $scope.timeIntervals != undefined) {
-                        $scope.schedule.timeInterval = $scope.timeIntervals[0];
+                    if ($scope.timeIntervals != null && $scope.timeIntervals != undefined) {
+                        if($scope.timeIntervalToRemember == null) {
+                            $scope.schedule.timeInterval = $scope.timeIntervals[0];
+                        } else {
+                            $scope.schedule.timeInterval = $scope.timeIntervalToRemember;
+                        }
                     }
                     $scope.regularIntervals = true;
                 }
@@ -731,12 +736,14 @@ schedulerControllers
                     //Daca este CUSTOM FIRED (adica time_interval == null, dar recurrent)
                     if ($scope.schedule.recurrent == true && $scope.schedule.timeInterval == null) {
                         $scope.selectedRepetitionType = $scope.repetitionTypes[1];
+                        $scope.selectedRepetitionType.selected = $scope.repetitionTypes[1].name;
                         $scope.regularIntervals = false;
                         setCustomFiresFromCTU();
                     }
                     //Daca este REGULAR INTERVAL (adica recurrent == true, dar time_interval != null)
                     else if ($scope.schedule.recurrent == true) {
                         $scope.selectedRepetitionType = $scope.repetitionTypes[0];
+                        $scope.selectedRepetitionType.selected = $scope.repetitionTypes[0].name;
                     }
                 });
                 $scope.showCreateOrEdit = true;
