@@ -716,6 +716,7 @@ schedulerControllers
 
         $scope.showAdd = function () {
             $scope.clear();
+            resetRegularIntervals();
             $scope.showCreateOrEdit = true;
             $scope.showGrid = false;
             if ($scope.timeInterval != null) {
