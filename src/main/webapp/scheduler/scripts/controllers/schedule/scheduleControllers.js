@@ -81,6 +81,10 @@ schedulerControllers
             $scope.selectedRepetitionType.selected = $scope.repetitionTypes[0].name;
             $scope.customDefinedIntervals = false;
             $scope.regularIntervals = true;
+            if($scope.schedule.recurrent == true && $scope.schedule.recurrentTimeUnits.length != 0) {
+                $scope.selectedRepetitionType = $scope.repetitionTypes[1];
+                $scope.selectedRepetitionType.selected == $scope.repetitionTypes[1].name;
+            }
             $scope.changeRepetitionType();
         }
         /* ------------------------------------------------- */
@@ -661,6 +665,12 @@ schedulerControllers
                 $scope.schedule.recurrentTimeUnits = buildRecurrentTimeUnits();
                 console.log("after: " + $scope.schedule.recurrentTimeUnits);
             }
+            if($scope.schedule.recurrent == false) {
+                $scope.schedule.endTime = null;
+                $scope.schedule.repetitions = null;
+                $scope.schedule.timeInterval = null;
+                $scope.schedule.recurrentTimeUnits = [];
+            }
             Schedule.save($scope.schedule,
                 function () {
                     $scope.showCreateOrEdit = false;
@@ -745,6 +755,12 @@ schedulerControllers
                     else if ($scope.schedule.recurrent == true) {
                         $scope.selectedRepetitionType = $scope.repetitionTypes[0];
                         $scope.selectedRepetitionType.selected = $scope.repetitionTypes[0].name;
+                        $scope.regularIntervals = true;
+                    }
+                    //Daca nu este RECURENT (adica recurrent == false)
+                    else if($scope.schedule.recurrent == false) {
+                        $scope.regularIntervals = true;
+                        $scope.customDefinedIntervals = false;
                     }
                 });
                 $scope.showCreateOrEdit = true;
