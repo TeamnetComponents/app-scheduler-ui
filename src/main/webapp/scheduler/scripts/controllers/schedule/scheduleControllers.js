@@ -790,4 +790,16 @@ schedulerControllers
             title:'Schedule',
             columnMetadata:metadataBuilder.getColumnMetadata()
         };
+
+        $scope.$watch(
+            function( $scope ) {
+                return($scope.selected());
+            },
+            function(newValue, oldValue) {
+                if (newValue == undefined || typeof(newValue[0])!='object') {
+                    $scope.showBtns = false;
+                }
+            },
+            true
+        );
     });
