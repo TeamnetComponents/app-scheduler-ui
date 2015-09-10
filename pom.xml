@@ -35,16 +35,6 @@
         </repository>
     </repositories>
 
-    <dependencies>
-		<!-- Project dependencies -->
-        <dependency>
-            <groupId>ro.teamnet.scheduler</groupId>
-            <artifactId>app-scheduler-java</artifactId>
-            <type>jar</type>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
-	
     <scm>
         <url>http://git-components.teamnet.ro/summary/components%2Fjava%2Fapp-scheduler-ui.git</url>
         <connection>scm:git:http://component-publisher@git-components.teamnet.ro/r/components/java/platform-extensions/app-scheduler-ui.git</connection>
