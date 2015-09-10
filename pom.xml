@@ -47,7 +47,7 @@
 	
     <scm>
         <url>http://git-components.teamnet.ro/summary/components%2Fjava%2Fapp-scheduler-ui.git</url>
-        <connection>scm:git:http://component-publisher@git-components.teamnet.ro/r/components/java/app-scheduler-ui.git</connection>
+        <connection>scm:git:http://component-publisher@git-components.teamnet.ro/r/components/java/platform-extensions/app-scheduler-ui.git</connection>
         <tag>HEAD</tag>
     </scm>
 	
