@@ -10,7 +10,7 @@
 	
 	<groupId>ro.teamnet.scheduler</groupId>
     <artifactId>app-scheduler-ui</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
     <packaging>war</packaging>
 
     <distributionManagement>
@@ -36,7 +36,7 @@
     <scm>
         <url>http://git-components.teamnet.ro/summary/components%2Fjava%2Fapp-scheduler-ui.git</url>
         <connection>scm:git:http://component-publisher@git-components.teamnet.ro/r/components/java/platform-extensions/app-scheduler-ui.git</connection>
-        <tag>HEAD</tag>
+        <tag>v0.0.4</tag>
     </scm>
 	
     <build>
