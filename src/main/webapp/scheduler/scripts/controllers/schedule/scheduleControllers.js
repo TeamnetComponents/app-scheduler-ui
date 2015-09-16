@@ -10,7 +10,7 @@ schedulerControllers
             return boolValues[boolCell];
         };
     })
-    .controller('ScheduleController', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit, AppGridMetadataBuilder, MisfirePolicy) {
+    .controller('ScheduleController', function ($timeout, $scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit, AppGridMetadataBuilder, MisfirePolicy) {
 
         (function (timer, delay) {
             $scope.delayedGridRefresh = function () {
