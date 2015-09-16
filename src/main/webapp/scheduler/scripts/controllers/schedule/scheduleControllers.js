@@ -12,6 +12,17 @@ schedulerControllers
     })
     .controller('ScheduleController', function ($scope, AppGridConstants, Schedule, TimeInterval, RecurrentTimeUnit, ScheduledJob, CustomFireTimes, TimeUnit, AppGridMetadataBuilder, MisfirePolicy) {
 
+        (function (timer, delay) {
+            $scope.delayedGridRefresh = function () {
+                if (timer) {
+                    $timeout.cancel(timer)
+                }
+                timer = $timeout(function () {
+                    $scope.$broadcast("refreshEvent");
+                }, delay)
+            };
+        })(false, 50);
+
         $scope.timeUnits = TimeUnit.query();
         $scope.timeIntervals = TimeInterval.query();
         //$scope.recurrentTimeUnits = RecurrentTimeUnit.query();
@@ -722,6 +733,7 @@ schedulerControllers
             $scope.showCreateOrEdit = false;
             $scope.searchTerms = [];
             $scope.showGrid = true;
+            $scope.delayedGridRefresh();
         };
 
         $scope.showAdd = function () {
